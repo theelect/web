@@ -3,7 +3,7 @@
   <v-navigation-drawer class="primary" width="200" dark :clipped="$vuetify.breakpoint.lgAndUp" v-model="drawer" fixed app>
     <v-list>
       <template>
-        <v-list-tile class="mt-4 mb-2" to="#">
+        <v-list-tile class="mt-4 mb-2" to="/dashboard">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
@@ -18,6 +18,33 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>CONTACTS</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile class="mb-2" to="/all-voters">
+          <v-list-tile-action>
+            <v-icon>group</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>VOTERS</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile class="mb-2" to="/realtime-voters">
+          <v-list-tile-action>
+            <v-icon>group</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>REAL TIME VOTERS</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile class="mb-2" to="#">
+          <v-list-tile-action>
+            <v-icon>how_to_vote</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>POLLING</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 

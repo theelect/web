@@ -9,3 +9,20 @@
 .form-wrapper {
   padding: 13px 23px;
 }
+
+.v-navigation-drawer>.v-list .v-list__tile--active .v-list__tile__title {
+  color: #f9ea48;
+}
+
+.v-list__tile--active .v-list__tile__action:first-of-type .v-icon {
+  color: #f9ea48;
+}
+
+.v-badge__badge {
+  height: 15px;
+  width: 15px;
+}
+
+.smallest {
+  font-size: 10px;
+}

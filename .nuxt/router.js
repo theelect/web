@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
+const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
+const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
 const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
+const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -64,13 +66,21 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
-      path: "/contacts",
-      component: _3dc2ee5e,
-      name: "contacts"
+      path: "/all-voters",
+      component: _7b0ed3a2,
+      name: "all-voters"
+    }, {
+      path: "/dashboard",
+      component: _0d66d6ce,
+      name: "dashboard"
     }, {
       path: "/forgot-password",
       component: _2de435ca,
       name: "forgot-password"
+    }, {
+      path: "/realtime-voters",
+      component: _e1af65dc,
+      name: "realtime-voters"
     }, {
       path: "/",
       component: _98197b52,

@@ -5,9 +5,11 @@
       <img class="logo mt-4" src="/logo.png">
 
       <v-card class="form-wrapper mt-5">
-        <v-text-field type="email">
-          <div class="caption" slot="label">EMAIL</div>
-        </v-text-field>
+        <v-form>
+          <v-text-field type="email">
+            <div class="caption" slot="label">EMAIL</div>
+          </v-text-field>
+        </v-form>
       </v-card>
 
       <div class="white--text mt-1">We will send you an email with further instructions on how to reset your password</div>

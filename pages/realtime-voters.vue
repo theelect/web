@@ -11,7 +11,7 @@
   </v-flex>
   
   <v-layout row wrap>
-    <v-flex xs12 sm6 lg4 v-for="n in 6" :key="n" mb-4>
+    <v-flex xs12 sm6 lg4 xl3 v-for="n in 3" :key="n" mb-4>
       <v-hover>
         <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="290">
           <v-layout class="justify-end">

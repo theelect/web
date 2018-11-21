@@ -3,8 +3,10 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 
 const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
+const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
 const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
 const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
+const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -70,6 +72,10 @@ export function createRouter() {
       component: _7b0ed3a2,
       name: "all-voters"
     }, {
+      path: "/contacts",
+      component: _3dc2ee5e,
+      name: "contacts"
+    }, {
       path: "/dashboard",
       component: _0d66d6ce,
       name: "dashboard"
@@ -77,6 +83,10 @@ export function createRouter() {
       path: "/forgot-password",
       component: _2de435ca,
       name: "forgot-password"
+    }, {
+      path: "/new-contact",
+      component: _7e40cc38,
+      name: "new-contact"
     }, {
       path: "/realtime-voters",
       component: _e1af65dc,

@@ -12,7 +12,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile class="mb-2" to="#">
+        <v-list-tile class="mb-2" to="/contacts">
           <v-list-tile-action>
             <v-icon>contacts</v-icon>
           </v-list-tile-action>
@@ -85,8 +85,8 @@
   </v-toolbar>
 
   <v-content>
-    <v-container fluid fill-height>
-      <nuxt></nuxt>
+    <v-container fluid>
+      <nuxt class="my-container"></nuxt>
     </v-container>
   </v-content>
 

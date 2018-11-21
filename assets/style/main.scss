@@ -18,6 +18,10 @@
   color: #f9ea48;
 }
 
+.v-btn {
+  margin: unset !important;
+}
+
 .v-badge__badge {
   height: 15px;
   width: 15px;
@@ -25,4 +29,9 @@
 
 .smallest {
   font-size: 10px;
+}
+
+.my-container {
+  max-width: 1160px;
+  margin: auto;
 }

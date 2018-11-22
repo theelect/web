@@ -48,7 +48,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile class="mb-2" to="#">
+        <v-list-tile class="mb-2" to="/messages">
           <v-list-tile-action>
             <v-icon>mail</v-icon>
           </v-list-tile-action>

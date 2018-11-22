@@ -43,7 +43,7 @@
       </v-flex>
 
       <v-layout row wrap justify-end mt-5>
-        <v-btn xs12 sm6 class="primary caption">CREATE CONTACT</v-btn>
+        <v-btn xs12 sm6 class="primary caption">EDIT MESSAGE</v-btn>
       </v-layout>
     </v-container>
   </v-card>

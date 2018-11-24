@@ -21,18 +21,8 @@
     </v-btn>
   </v-btn-toggle>
 
-  <v-card flat>
+  <v-card>
     <v-card-title>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-text-field solo v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
     </v-card-title>
     <v-data-table :headers="headers" :items="messages" :search="search">
       <template slot="items" slot-scope="props">

@@ -9,6 +9,7 @@ const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* 
 const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
 const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
 const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
+const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -97,6 +98,10 @@ export function createRouter() {
       path: "/new-contact",
       component: _7e40cc38,
       name: "new-contact"
+    }, {
+      path: "/new-message",
+      component: _47c65c9f,
+      name: "new-message"
     }, {
       path: "/realtime-voters",
       component: _e1af65dc,

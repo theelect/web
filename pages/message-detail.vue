@@ -9,18 +9,14 @@
     </div>
   </v-flex>
 
-  <v-card flat class="pa-4">
+  <v-card class="pa-4">
     <v-container grid-list-md>
       <v-layout row wrap>
-        <v-flex xs12 md4>
-          <div class="caption blue-grey--text mb-2">REWARD</div>
-          <div class="font-weight-bold title">N200</div>
-        </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md6>
           <div class="caption blue-grey--text mb-2">RECIPIENTS</div>
           <div class="font-weight-bold title">500,000</div>
         </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md6>
           <div class="caption blue-grey--text mb-2">SCHEDULED DATE</div>
           <div class="font-weight-bold title">13 November, 2018</div>
         </v-flex>

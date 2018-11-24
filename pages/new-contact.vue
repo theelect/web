@@ -87,11 +87,6 @@
 .create-btn {
   margin-bottom: 5px !important;
 }
-
-.cancel-btn {
-  margin-left: 10px !important;
-  width: 132px;
-}
 </style>
 
 <script>

@@ -8,10 +8,8 @@
   <v-stepper-content step="1">
     <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
     <v-container grid-list-md>
-      <v-layout row wrap justify-end>
-        <v-btn @click="step = 2" xs12 sm6 class="primary caption">CONTINUE</v-btn>
+      <v-btn @click="step = 2" xs12 sm6 class="primary caption">CONTINUE</v-btn>
         <v-btn xs12 sm6 dark class="red caption">CANCEL</v-btn>
-      </v-layout>
     </v-container>
   </v-stepper-content>
 
@@ -59,10 +57,8 @@
 
     </v-card>
     <v-container grid-list-md>
-      <v-layout row wrap justify-end>
-        <v-btn xs12 sm6 class="primary caption">SEND MESSAGE</v-btn>
-        <v-btn @click="step = 1" xs12 sm6 dark class="red caption cancel-btn">BACK</v-btn>
-      </v-layout>
+      <v-btn xs12 sm6 class="primary caption">SEND MESSAGE</v-btn>
+      <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
     </v-container>
   </v-stepper-content>
 </v-stepper>

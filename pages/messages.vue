@@ -3,7 +3,7 @@
   <v-layout mb-5>
     <div class="headline">Messages</div> &nbsp;&nbsp;&nbsp;&nbsp; <div class="headline primary--text">6</div>
     <v-layout class="justify-end">
-      <v-btn to="/new-contact" class="primary caption">
+      <v-btn to="/new-message" class="primary caption">
         <v-icon>add</v-icon> NEW MESSAGE
       </v-btn>
     </v-layout>

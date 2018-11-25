@@ -1,51 +1,53 @@
 <template>
 <section>
-  <v-layout mb-5>
-    <div class="headline">Messages</div> &nbsp;&nbsp;&nbsp;&nbsp; <div class="headline primary--text">6</div>
-    <v-layout class="justify-end">
-      <v-btn to="/new-message" class="primary caption">
-        <v-icon>add</v-icon> NEW MESSAGE
-      </v-btn>
+  <v-container fluid>
+    <v-layout mb-5>
+      <div class="headline">Messages</div> &nbsp;&nbsp;&nbsp;&nbsp; <div class="headline primary--text">6</div>
+      <v-layout class="justify-end">
+        <v-btn to="/new-message" class="primary caption">
+          <v-icon>add</v-icon> NEW MESSAGE
+        </v-btn>
+      </v-layout>
     </v-layout>
-  </v-layout>
 
-  <v-btn-toggle v-model="text" class="mb-2">
-    <v-btn flat value="day" class="caption multiple-btn">
-      DAY
-    </v-btn>
-    <v-btn flat value="month" class="caption multiple-btn">
-      MONTH
-    </v-btn>
-    <v-btn flat value="year" class="caption multiple-btn">
-      YEAR
-    </v-btn>
-  </v-btn-toggle>
+    <v-btn-toggle v-model="text" class="mb-2">
+      <v-btn flat value="day" class="caption multiple-btn">
+        DAY
+      </v-btn>
+      <v-btn flat value="month" class="caption multiple-btn">
+        MONTH
+      </v-btn>
+      <v-btn flat value="year" class="caption multiple-btn">
+        YEAR
+      </v-btn>
+    </v-btn-toggle>
 
-  <v-card>
-    <v-card-title>
-    </v-card-title>
-    <v-data-table :headers="headers" :items="messages" :search="search">
-      <template slot="items" slot-scope="props">
-        <tr>
-          <td>{{ props.item.status }}</td>
-          <td>{{ props.item.recipients }}</td>
-          <td>{{ props.item.reward }}</td>
-          <td>{{ props.item.message }}</td>
-          <td>{{ props.item.date }}</td>
-          <td class="justify-center layout px-0">
-            <v-flex mt-2 class="text-xs-center">
-              <v-btn icon to="/message-detail">
-                <v-icon small class="green--text">visibility</v-icon>
-              </v-btn>
-            </v-flex>
-          </td>
-        </tr>
-      </template>
-      <v-alert slot="no-results" :value="true" color="error" icon="warning">
-        Your search for "{{ search }}" found no results.
-      </v-alert>
-    </v-data-table>
-  </v-card>
+    <v-card>
+      <v-card-title>
+      </v-card-title>
+      <v-data-table :headers="headers" :items="messages" :search="search">
+        <template slot="items" slot-scope="props">
+          <tr>
+            <td>{{ props.item.status }}</td>
+            <td>{{ props.item.recipients }}</td>
+            <td>{{ props.item.reward }}</td>
+            <td>{{ props.item.message }}</td>
+            <td>{{ props.item.date }}</td>
+            <td class="justify-center layout px-0">
+              <v-flex mt-2 class="text-xs-center">
+                <v-btn icon to="/message-detail">
+                  <v-icon small class="green--text">visibility</v-icon>
+                </v-btn>
+              </v-flex>
+            </td>
+          </tr>
+        </template>
+        <v-alert slot="no-results" :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </v-data-table>
+    </v-card>
+  </v-container>
 </section>
 </template>
 

@@ -1,67 +1,66 @@
 <template>
-<v-stepper v-model="step" vertical>
-  <v-stepper-step editable :complete="step > 1" step="1">
-    Recipients
-    <small>Who are you sending this message to?</small>
-  </v-stepper-step>
+<v-container fluid>
+  <v-stepper v-model="step" vertical>
+    <v-stepper-step editable :complete="step > 1" step="1">
+      Recipients
+      <small>Who are you sending this message to?</small>
+    </v-stepper-step>
 
-  <v-stepper-content step="1">
-    <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
-    <v-container grid-list-md>
-      <v-btn @click="step = 2" xs12 sm6 class="primary caption">CONTINUE</v-btn>
-        <v-btn xs12 sm6 dark class="red caption">CANCEL</v-btn>
-    </v-container>
-  </v-stepper-content>
-
-  <v-stepper-step :complete="step > 2" step="2">Content</v-stepper-step>
-
-  <v-stepper-content step="2">
-    <v-card flat class="mb-5">
+    <v-stepper-content step="1">
+      <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
       <v-container grid-list-md>
-        <v-layout row wrap>
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">REWARD</div>
-            <v-text-field disabled v-model="reward"></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">GROUP</div>
-            <v-text-field disabled v-model="group"></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">SCHEDULED DATE</div>
-            <v-text-field disabled append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">SENDER'S NAME</div>
-            <v-text-field disabled v-model="senderName"></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">CONTACT NAME</div>
-            <v-text-field disabled v-model="contactName"></v-text-field>
-          </v-flex>
-
-          <v-flex xs12 sm4>
-            <div class="caption blue-grey--text">RECIPIENTS</div>
-            <v-text-field disabled v-model="recipients"></v-text-field>
-          </v-flex>
-        </v-layout>
+        <v-btn @click="step = 2" xs12 sm6 class="primary caption">CONTINUE</v-btn>
+        <v-btn xs12 sm6 dark class="red caption">CANCEL</v-btn>
       </v-container>
+    </v-stepper-content>
 
-      <v-container>
-        <v-textarea v-model="messageBody" auto-grow box color="primary" label="Message" rows="4" counter></v-textarea>
+    <v-stepper-step :complete="step > 2" step="2">Content</v-stepper-step>
+
+    <v-stepper-content step="2">
+      <v-card flat class="mb-5">
+        <v-container grid-list-md>
+          <v-layout row wrap>
+            <v-flex xs12 sm8>
+              <div class="caption blue-grey--text">GROUP</div>
+              <v-text-field disabled v-model="group"></v-text-field>
+            </v-flex>
+
+            <v-flex xs12 sm4>
+              <div class="caption blue-grey--text">SCHEDULED DATE</div>
+              <v-text-field disabled append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
+            </v-flex>
+
+            <v-flex xs12 sm4>
+              <div class="caption blue-grey--text">SENDER'S NAME</div>
+              <v-text-field disabled v-model="senderName"></v-text-field>
+            </v-flex>
+
+            <v-flex xs12 sm4>
+              <div class="caption blue-grey--text">CONTACT NAME</div>
+              <v-text-field disabled v-model="contactName"></v-text-field>
+            </v-flex>
+
+            <v-flex xs12 sm4>
+              <div class="caption blue-grey--text">RECIPIENTS</div>
+              <v-text-field disabled v-model="recipients"></v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-container>
+
+        <v-container>
+          <v-textarea v-model="messageBody" auto-grow box color="primary" rows="8" counter>
+            <div class="caption" slot="label">Message</div>
+          </v-textarea>
+        </v-container>
+
+      </v-card>
+      <v-container grid-list-md>
+        <v-btn xs12 sm6 class="primary caption">SEND MESSAGE</v-btn>
+        <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
       </v-container>
-
-    </v-card>
-    <v-container grid-list-md>
-      <v-btn xs12 sm6 class="primary caption">SEND MESSAGE</v-btn>
-      <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
-    </v-container>
-  </v-stepper-content>
-</v-stepper>
+    </v-stepper-content>
+  </v-stepper>
+</v-container>
 </template>
 
 <script>

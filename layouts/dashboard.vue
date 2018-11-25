@@ -76,9 +76,7 @@
   </v-toolbar>
 
   <v-content>
-    <v-container fluid>
       <nuxt class="my-container"></nuxt>
-    </v-container>
   </v-content>
 
 </v-app>

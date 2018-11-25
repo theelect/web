@@ -1,6 +1,6 @@
 <template>
 <section>
-  <v-container fluid grid-list-md>
+  <v-container grid-list-md fluid>
     <v-layout row wrap>
       <v-flex xs12 md2>
         <v-img :src="`/tonye.png`" max-height="240"></v-img>
@@ -18,11 +18,12 @@
             </v-card>
           </v-flex>
           <v-flex>
-            <v-card max-height="116" class="px-5 py-4">
-              <v-layout>
-                <v-flex class="body-2">Total Verified Voters</v-flex>
-                <v-flex class="body-2 primary--text layout justify-end">More</v-flex>
-              </v-layout>
+            <v-card max-height="116" class="px-4 pb-3 pt-2">
+              <nuxt-link to="#">
+                <div class="primary--text text-xs-right">More</div>
+              </nuxt-link>
+
+              <div class="body-2">Total Verified Voters</div>
               <div class="display-2 primary--text mt-2">2,895,684</div>
             </v-card>
           </v-flex>
@@ -41,11 +42,11 @@
             </v-card>
           </v-flex>
           <v-flex>
-            <v-card max-height="116" class="px-5 py-4">
-              <v-layout>
-                <v-flex class="body-2">Total Voters</v-flex>
-                <v-flex class="body-2 primary--text layout justify-end">More</v-flex>
-              </v-layout>
+            <v-card max-height="116" class="px-4 pb-3 pt-2">
+              <nuxt-link to="#">
+                <div class="primary--text text-xs-right">More</div>
+              </nuxt-link>
+              <div class="body-2">Total Voters</div>
               <div class="display-2 primary--text mt-2">3,000,000</div>
             </v-card>
           </v-flex>
@@ -56,9 +57,10 @@
     <v-layout row wrap mt-4>
       <v-flex xs12 md6>
         <v-card class="pa-4" height="400">
-          <v-layout justify-end>
-            <div class="body-2 primary--text">Expand</div>
-          </v-layout>
+          <nuxt-link to="#">
+            <div class="primary--text text-xs-right">Expand</div>
+          </nuxt-link>
+
           <v-responsive class="pa-3">
             <v-img height="300" contain :src="`/map-placeholder.png`"></v-img>
           </v-responsive>
@@ -67,9 +69,9 @@
 
       <v-flex xs12 md6>
         <v-card height="400">
-          <v-layout justify-end>
-            <div class="body-2 primary--text pr-4 pt-4">Expand</div>
-          </v-layout>
+          <nuxt-link to="#">
+            <div class="primary--text pr-4 pt-4 text-xs-right">Expand</div>
+          </nuxt-link>
 
           <div class="pl-4 pt-4">TOP 5 LOCAL GOVERNMENT AREAS</div>
 
@@ -89,12 +91,42 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <v-layout row wrap mt-4>
+      <v-flex md6 xs12>
+        <v-card height="440" class="pa-3">
+          <nuxt-link to="#">
+            <div class="primary--text text-xs-right">Expand</div>
+          </nuxt-link>
+
+          <div class="pt-4 pb-4">AGE DISTRIBUTION</div>
+          <bar-chart :height="250"></bar-chart>
+        </v-card>
+      </v-flex>
+      <v-flex md6 xs12 class="">
+        <v-card height="440" class="pa-3">
+          <nuxt-link to="#">
+            <div class="primary--text text-xs-right">Expand</div>
+          </nuxt-link>
+
+          <div class="pt-4 pb-4">PROFESSION</div>
+          <doughnut-chart :height="300"></doughnut-chart>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </section>
 </template>
 
 <script>
+import BarChart from '~/components/charts/BarChart'
+import DoughnutChart from '~/components/charts/DoughnutChart'
 export default {
-  layout: 'dashboard'
+  layout: 'dashboard',
+  name: 'charts',
+  components: {
+    BarChart,
+    DoughnutChart
+  }
 }
 </script>

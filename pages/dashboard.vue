@@ -95,7 +95,7 @@
     <v-layout row wrap mt-4>
       <v-flex md6 xs12>
         <v-card height="440" class="pa-3">
-          <nuxt-link to="#">
+          <nuxt-link to="/age">
             <div class="primary--text text-xs-right">Expand</div>
           </nuxt-link>
 
@@ -105,7 +105,7 @@
       </v-flex>
       <v-flex md6 xs12 class="">
         <v-card height="440" class="pa-3">
-          <nuxt-link to="#">
+          <nuxt-link to="/profession">
             <div class="primary--text text-xs-right">Expand</div>
           </nuxt-link>
 

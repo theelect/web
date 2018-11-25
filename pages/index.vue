@@ -19,7 +19,7 @@
       </v-card>
 
       <v-flex class="mt-4">
-        <v-btn to="/all-voters" block large class="white primary--text">Log in</v-btn>
+        <v-btn to="/dashboard" block large class="white primary--text">Log in</v-btn>
         <v-checkbox color="white" dark label="Remember me" v-model="rememberMe"></v-checkbox>
       </v-flex>
     </div>

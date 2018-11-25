@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
+const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
 const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
 const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
 const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
@@ -10,6 +11,7 @@ const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* w
 const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
 const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
 const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
+const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -71,6 +73,10 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
+      path: "/age",
+      component: _e4866978,
+      name: "age"
+    }, {
       path: "/all-voters",
       component: _7b0ed3a2,
       name: "all-voters"
@@ -102,6 +108,10 @@ export function createRouter() {
       path: "/new-message",
       component: _47c65c9f,
       name: "new-message"
+    }, {
+      path: "/profession",
+      component: _0aa481c7,
+      name: "profession"
     }, {
       path: "/realtime-voters",
       component: _e1af65dc,

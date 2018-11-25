@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
+const _353ad358 = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
 const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
 const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
 const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
@@ -73,6 +74,10 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
+      path: "/admin",
+      component: _353ad358,
+      name: "admin"
+    }, {
       path: "/age",
       component: _e4866978,
       name: "age"

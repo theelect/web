@@ -3,7 +3,7 @@
   <v-container grid-list-md fluid>
     <v-layout row wrap>
       <v-flex xs12 md2>
-        <v-img :src="`/tonye.png`" max-height="240"></v-img>
+        <v-img :src="`/tonye.jpg`" max-height="240"></v-img>
       </v-flex>
 
       <v-flex xs12 md5>
@@ -122,6 +122,7 @@
 import BarChart from '~/components/charts/BarChart'
 import DoughnutChart from '~/components/charts/DoughnutChart'
 export default {
+  // middleware: 'auth',
   layout: 'dashboard',
   name: 'charts',
   components: {

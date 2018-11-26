@@ -16,7 +16,7 @@
           <v-text-field type="email" name="email" v-model="email">
             <div class="caption" slot="label">EMAIL</div>
           </v-text-field>
-          <v-text-field type="password" v-model="password">
+          <v-text-field type="password" name="password" v-model="password">
             <div class="caption" slot="label">PASSWORD</div>
           </v-text-field>
         </v-card>

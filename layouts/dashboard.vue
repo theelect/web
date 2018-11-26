@@ -12,14 +12,14 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile class="mb-2" to="/contacts">
+        <!-- <v-list-tile class="mb-2" to="/contacts">
           <v-list-tile-action>
             <v-icon>contacts</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>CONTACTS</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile> -->
 
         <v-list-tile class="mb-2" to="/all-voters">
           <v-list-tile-action>
@@ -30,14 +30,14 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile class="mb-2" to="#">
+        <!-- <v-list-tile class="mb-2" to="#">
           <v-list-tile-action>
             <v-icon>how_to_vote</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>POLLING</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile> -->
 
         <v-list-tile class="mb-2" to="/messages">
           <v-list-tile-action>

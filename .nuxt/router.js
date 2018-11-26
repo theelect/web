@@ -7,13 +7,18 @@ const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunk
 const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
 const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
 const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _014962b3 = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
 const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
+const _c53c6d10 = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
 const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
 const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
 const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
 const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
+const _e936a93a = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
 const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
+const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
+const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -94,9 +99,17 @@ export function createRouter() {
       component: _0d66d6ce,
       name: "dashboard"
     }, {
+      path: "/edit-user",
+      component: _014962b3,
+      name: "edit-user"
+    }, {
       path: "/forgot-password",
       component: _2de435ca,
       name: "forgot-password"
+    }, {
+      path: "/lgas",
+      component: _c53c6d10,
+      name: "lgas"
     }, {
       path: "/message-detail",
       component: _2db8a6a2,
@@ -114,13 +127,25 @@ export function createRouter() {
       component: _47c65c9f,
       name: "new-message"
     }, {
+      path: "/new-user",
+      component: _e936a93a,
+      name: "new-user"
+    }, {
       path: "/profession",
       component: _0aa481c7,
       name: "profession"
     }, {
+      path: "/profile",
+      component: _7da4186e,
+      name: "profile"
+    }, {
       path: "/realtime-voters",
       component: _e1af65dc,
       name: "realtime-voters"
+    }, {
+      path: "/settings",
+      component: _1065e22e,
+      name: "settings"
     }, {
       path: "/",
       component: _98197b52,

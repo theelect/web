@@ -50,7 +50,7 @@
 
         <v-divider class="grey"></v-divider>
 
-        <v-list-tile class="mt-2" to="#">
+        <v-list-tile class="mt-2" to="/settings">
           <v-list-tile-action>
             <v-icon>settings</v-icon>
           </v-list-tile-action>
@@ -60,6 +60,11 @@
         </v-list-tile>
       </template>
     </v-list>
+
+    <v-footer class="justify-center transparent" fixed>
+        <small class="pa-2">Powered By The-Elect</small>
+      
+      </v-footer>
   </v-navigation-drawer>
 
   <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="white" light app fixed>
@@ -70,13 +75,31 @@
       <v-toolbar-side-icon class="hidden-lg-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon large>account_circle</v-icon>
-    </v-btn>
+
+    <div class="text-xs-center">
+      <v-menu offset-y>
+        <v-btn icon slot="activator">
+          <v-avatar size="35">
+            <v-img :src="`/tonye.jpg`"></v-img>
+          </v-avatar>
+        </v-btn>
+        <v-card class="pa-3">
+          <nuxt-link to="/profile">
+            <div>Profile</div>
+          </nuxt-link>
+
+          <v-divider class="my-2"></v-divider>
+
+          <nuxt-link to="#">
+            <div>Logout</div>
+          </nuxt-link>
+        </v-card>
+      </v-menu>
+    </div>
   </v-toolbar>
 
   <v-content>
-      <nuxt class="my-container"></nuxt>
+    <nuxt class="my-container"></nuxt>
   </v-content>
 
 </v-app>

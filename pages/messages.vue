@@ -10,17 +10,35 @@
       </v-layout>
     </v-layout>
 
-    <v-btn-toggle v-model="text" class="mb-2">
-      <v-btn flat value="day" class="caption multiple-btn">
-        DAY
-      </v-btn>
-      <v-btn flat value="month" class="caption multiple-btn">
-        MONTH
-      </v-btn>
-      <v-btn flat value="year" class="caption multiple-btn">
-        YEAR
-      </v-btn>
-    </v-btn-toggle>
+    <v-layout row wrap pl-5>
+      <v-flex md8>
+        <v-btn-toggle v-model="timeSort" class="mb-2">
+          <v-btn flat value="day" class="caption multiple-btn">
+            DAY
+          </v-btn>
+          <v-btn flat value="month" class="caption multiple-btn">
+            MONTH
+          </v-btn>
+          <v-btn flat value="year" class="caption multiple-btn">
+            YEAR
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+
+      <v-flex md4>
+        <v-btn-toggle v-model="statusSort" class="mb-2">
+          <v-btn flat value="all" class="caption multiple-btn">
+            ALL
+          </v-btn>
+          <v-btn flat value="sent" class="caption multiple-btn">
+            SENT
+          </v-btn>
+          <v-btn flat value="scheduled" class="caption multiple-btn">
+            SCHEDULED
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+    </v-layout>
 
     <v-card>
       <v-card-title>
@@ -56,7 +74,8 @@ export default {
   layout: 'dashboard',
   data() {
     return {
-      text: 'day',
+      timeSort: 'day',
+      statusSort: 'sent',
       search: '',
       headers: [{
           text: 'Status',

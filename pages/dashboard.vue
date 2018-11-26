@@ -43,7 +43,7 @@
           </v-flex>
           <v-flex>
             <v-card max-height="116" class="px-4 pb-3 pt-2">
-              <nuxt-link to="#">
+              <nuxt-link to="/all-voters">
                 <div class="primary--text text-xs-right">More</div>
               </nuxt-link>
               <div class="body-2">Total Voters</div>
@@ -69,7 +69,7 @@
 
       <v-flex xs12 md6>
         <v-card height="400">
-          <nuxt-link to="#">
+          <nuxt-link to="/lgas">
             <div class="primary--text pr-4 pt-4 text-xs-right">Expand</div>
           </nuxt-link>
 

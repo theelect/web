@@ -2,7 +2,7 @@
 <section>
   <v-container fluid>
     <v-flex mb-5>
-      <v-btn class="primary my-btn" dark>
+      <v-btn class="primary my-btn" to="/dashboard" dark>
         <v-icon large>arrow_left</v-icon>
       </v-btn>
         <div class="headline d-inline ml-2">Age Distribution</div>

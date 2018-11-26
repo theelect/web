@@ -45,6 +45,10 @@ async function createApp(ssrContext) {
   // Add this.$router into store actions/mutations
   store.$router = router
 
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  const registerModule = store.registerModule
+  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
+
   // Create Root instance
 
   // here we inject the router and store to all child components,

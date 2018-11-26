@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: "spa",
+  mode: "ssr",
 
   /*
   ** Headers of the page
@@ -58,7 +58,7 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          login: { url: 'login', method: 'post', propertyName: 'token' },
           user: { url: 'user', method: 'get', propertyName: 'data' },
           logout: false
         }

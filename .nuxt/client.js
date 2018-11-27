@@ -29,7 +29,7 @@ let store
 // Try to rehydrate SSR data from window
 const NUXT = window.__NUXT__ || {}
 
-Object.assign(Vue.config, {"silent":false,"performance":true})
+Object.assign(Vue.config, {"silent":false,"performance":true})// eslint-disable-line
 
 // Setup global Vue error handler
 if (!Vue.config.$nuxt) {
@@ -171,7 +171,7 @@ function resolveComponents(router) {
 }
 
 function callMiddleware(Components, context, layout) {
-  let midd = []
+  let midd = []// eslint-disable-line
   let unknownMiddleware = false
 
   // If layout is undefined, only call global middleware

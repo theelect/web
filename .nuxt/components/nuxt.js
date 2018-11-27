@@ -1,4 +1,4 @@
-
+// @vue/component
 import Vue from 'vue'
 import { compile } from '../utils'
 

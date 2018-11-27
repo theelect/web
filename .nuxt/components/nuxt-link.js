@@ -1,4 +1,4 @@
-
+// @vue/component
 export default {
   name: 'nuxt-link',
   functional: true,

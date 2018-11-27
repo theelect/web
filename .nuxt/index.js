@@ -11,10 +11,12 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 import { createStore } from './store.js'
 
 /* Plugins */
-
-import nuxt_plugin_axios_05fe9a67 from 'nuxt_plugin_axios_05fe9a67' // Source: ./axios.js
+/* eslint-disable camelcase */
+import nuxt_plugin_axios_8e27437e from 'nuxt_plugin_axios_8e27437e' // Source: ./axios.js
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
-import nuxt_plugin_plugin_d7e8033a from 'nuxt_plugin_plugin_d7e8033a' // Source: ./auth/plugin.js
+import nuxt_plugin_plugin_0c69f6bd from 'nuxt_plugin_plugin_0c69f6bd' // Source: ./auth/plugin.js
+
+/* eslint-enable camelcase */
 
 // Component: <no-ssr>
 Vue.component(NoSSR.name, NoSSR)
@@ -36,7 +38,7 @@ Vue.use(Meta, {
   tagIDKeyName: 'hid' // the property name that vue-meta uses to determine whether to overwrite or append a tag
 })
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}// eslint-disable-line
 
 async function createApp(ssrContext) {
   const router = await createRouter(ssrContext)
@@ -148,10 +150,13 @@ async function createApp(ssrContext) {
   }
 
   // Plugin execution
+  /* eslint-disable camelcase */
 
-  if (typeof nuxt_plugin_axios_05fe9a67 === 'function') await nuxt_plugin_axios_05fe9a67(app.context, inject)
+  if (typeof nuxt_plugin_axios_8e27437e === 'function') await nuxt_plugin_axios_8e27437e(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
-  if (typeof nuxt_plugin_plugin_d7e8033a === 'function') await nuxt_plugin_plugin_d7e8033a(app.context, inject)
+  if (typeof nuxt_plugin_plugin_0c69f6bd === 'function') await nuxt_plugin_plugin_0c69f6bd(app.context, inject)
+
+  /* eslint-enable camelcase */
 
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {

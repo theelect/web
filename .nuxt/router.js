@@ -2,24 +2,24 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _353ad358 = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
-const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
-const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
-const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
-const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
-const _014962b3 = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
-const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
-const _c53c6d10 = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
-const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
-const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
-const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
-const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
-const _e936a93a = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
-const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
-const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
-const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
-const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _dfa5648c = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
+const _727a242a = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
+const _19266808 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
+const _7a173538 = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
+const _478128ff = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _4f7df719 = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
+const _331565b0 = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
+const _504f8d52 = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
+const _78f66f74 = () => interopDefault(import('../pages/messages/index.vue' /* webpackChunkName: "pages/messages/index" */))
+const _11a1df1e = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
+const _49b120f6 = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
+const _708e1b86 = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
+const _f9fb0bbe = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
+const _bec2e358 = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
+const _d74d0610 = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
+const _4cba2908 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _3afc8248 = () => interopDefault(import('../pages/messages/_id.vue' /* webpackChunkName: "pages/messages/_id" */))
+const _5ebdf9bd = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -77,80 +77,81 @@ export function createRouter() {
     linkActiveClass: 'nuxt-link-active',
     linkExactActiveClass: 'nuxt-link-exact-active',
     scrollBehavior,
-
+    /* eslint-disable quotes */
     routes: [{
       path: "/admin",
-      component: _353ad358,
+      component: _dfa5648c,
       name: "admin"
     }, {
       path: "/age",
-      component: _e4866978,
+      component: _727a242a,
       name: "age"
     }, {
       path: "/all-voters",
-      component: _7b0ed3a2,
+      component: _19266808,
       name: "all-voters"
     }, {
       path: "/contacts",
-      component: _3dc2ee5e,
+      component: _7a173538,
       name: "contacts"
     }, {
       path: "/dashboard",
-      component: _0d66d6ce,
+      component: _478128ff,
       name: "dashboard"
     }, {
       path: "/edit-user",
-      component: _014962b3,
+      component: _4f7df719,
       name: "edit-user"
     }, {
       path: "/forgot-password",
-      component: _2de435ca,
+      component: _331565b0,
       name: "forgot-password"
     }, {
       path: "/lgas",
-      component: _c53c6d10,
+      component: _504f8d52,
       name: "lgas"
     }, {
-      path: "/message-detail",
-      component: _2db8a6a2,
-      name: "message-detail"
-    }, {
       path: "/messages",
-      component: _b6212a52,
+      component: _78f66f74,
       name: "messages"
     }, {
       path: "/new-contact",
-      component: _7e40cc38,
+      component: _11a1df1e,
       name: "new-contact"
     }, {
       path: "/new-message",
-      component: _47c65c9f,
+      component: _49b120f6,
       name: "new-message"
     }, {
       path: "/new-user",
-      component: _e936a93a,
+      component: _708e1b86,
       name: "new-user"
     }, {
       path: "/profession",
-      component: _0aa481c7,
+      component: _f9fb0bbe,
       name: "profession"
     }, {
       path: "/profile",
-      component: _7da4186e,
+      component: _bec2e358,
       name: "profile"
     }, {
       path: "/realtime-voters",
-      component: _e1af65dc,
+      component: _d74d0610,
       name: "realtime-voters"
     }, {
       path: "/settings",
-      component: _1065e22e,
+      component: _4cba2908,
       name: "settings"
     }, {
+      path: "/messages/:id",
+      component: _3afc8248,
+      name: "messages-id"
+    }, {
       path: "/",
-      component: _98197b52,
+      component: _5ebdf9bd,
       name: "index"
     }],
+    /* eslint-enable quotes */
 
     fallback: false
   })

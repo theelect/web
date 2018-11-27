@@ -1,4 +1,4 @@
-/*
+/* @vue/component
 ** From https://github.com/egoist/vue-no-ssr
 ** With the authorization of @egoist
 */

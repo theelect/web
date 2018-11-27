@@ -65,6 +65,9 @@ module.exports = {
       }
     }
   },
+  test: {
+    another: 'luck'
+  },
 
   /*
   ** Build configuration
@@ -73,6 +76,6 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 };

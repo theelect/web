@@ -122,7 +122,7 @@
 import BarChart from '~/components/charts/BarChart'
 import DoughnutChart from '~/components/charts/DoughnutChart'
 export default {
-  // middleware: 'auth',
+  middleware: 'guest',
   layout: 'dashboard',
   name: 'charts',
   components: {

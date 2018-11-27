@@ -4,15 +4,11 @@
     <div class="text-xs-center login-wrapper">
       <img class="logo mt-4" src="/logo.png">
 
-
       <nuxt-link to="/forgot-password">
         <div class="text-xs-right mt-5 mb-2 body-2 white--text">Forgot Password?</div>
       </nuxt-link>
       <v-form method="post" @submit.prevent="login">
         <v-card class="form-wrapper">
-      <v-alert v-if="error" :value="true" type="error">
-        {{error}}
-      </v-alert>
           <v-text-field type="email" name="email" v-model="email">
             <div class="caption" slot="label">EMAIL</div>
           </v-text-field>
@@ -38,13 +34,15 @@ export default {
       rememberMe: false,
       email: '',
       password: '',
-      device: 'web',
-      error: null
+      device: 'web'
     }
   },
   methods: {
     async login() {
       try {
+        this.$toast.show('Logging in...', {
+          icon: "fingerprint"
+        });
         await this.$auth.loginWith('local', {
           data: {
             email: this.email,
@@ -52,10 +50,14 @@ export default {
             device: this.device
           }
         })
-
+        this.$toast.success('Successfully Logged In', {
+          icon: "done"
+        })
         this.$router.push('/dashboard')
       } catch (e) {
-        this.error = e.response.data.message
+        this.$toast.error(e.response.data.message, {
+          icon: "error_outline"
+        });
       }
     }
   }

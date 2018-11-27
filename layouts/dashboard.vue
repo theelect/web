@@ -62,9 +62,9 @@
     </v-list>
 
     <v-footer class="justify-center transparent" fixed>
-        <small class="pa-2">Powered By The-Elect</small>
-      
-      </v-footer>
+      <small class="pa-2">Powered By The-Elect</small>
+
+    </v-footer>
   </v-navigation-drawer>
 
   <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="white" light app fixed>
@@ -84,15 +84,11 @@
           </v-avatar>
         </v-btn>
         <v-card class="pa-3">
-          <nuxt-link to="/profile">
-            <div>Profile</div>
-          </nuxt-link>
+          <v-btn to="/profile" flat small color="primary">Profile</v-btn>
 
           <v-divider class="my-2"></v-divider>
 
-          <nuxt-link to="#">
-            <div>Logout</div>
-          </nuxt-link>
+          <v-btn @click="logout" flat small color="primary">Log Out</v-btn>
         </v-card>
       </v-menu>
     </div>
@@ -105,10 +101,25 @@
 </v-app>
 </template>
 
+<style lang="scss" scoped>
+.v-btn {
+  text-transform: unset;
+}
+</style>
+
+
 <script>
 export default {
+  // middleware: 'auth',
   data: () => ({
     drawer: null
-  })
+  }),
+  methods: {
+    logout() {
+      this.$toast.show('Logging out...', {icon: "fingerprint"});
+      this.$auth.logout()
+      this.$router.push('/')
+    },
+  }
 };
 </script>

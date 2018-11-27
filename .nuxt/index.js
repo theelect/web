@@ -12,6 +12,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
+import nuxt_plugin_toast_5ba231d4 from 'nuxt_plugin_toast_5ba231d4' // Source: ./toast.js (ssr: false)
 import nuxt_plugin_axios_05fe9a67 from 'nuxt_plugin_axios_05fe9a67' // Source: ./axios.js
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
 import nuxt_plugin_plugin_d7e8033a from 'nuxt_plugin_plugin_d7e8033a' // Source: ./auth/plugin.js
@@ -152,6 +153,10 @@ async function createApp(ssrContext) {
   if (typeof nuxt_plugin_axios_05fe9a67 === 'function') await nuxt_plugin_axios_05fe9a67(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
   if (typeof nuxt_plugin_plugin_d7e8033a === 'function') await nuxt_plugin_plugin_d7e8033a(app.context, inject)
+
+  if (process.client) {
+    if (typeof nuxt_plugin_toast_5ba231d4 === 'function') await nuxt_plugin_toast_5ba231d4(app.context, inject)
+  }
 
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {

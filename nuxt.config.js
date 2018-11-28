@@ -1,4 +1,4 @@
-const pkg = require('./package')
+const pkg = require("./package");
 
 module.exports = {
   mode: "spa",
@@ -38,7 +38,11 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ["@/plugins/vuetify"],
+  plugins: [
+    "@/plugins/vuetify",
+    { src: "~/plugins/localstorage.js", ssr: false },
+    { src: "~/plugins/axios", ssr: false }
+  ],
 
   /*
   ** Nuxt.js modules
@@ -46,7 +50,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     "@nuxtjs/axios",
-    "@nuxtjs/auth",
+    // "@nuxtjs/auth",
     "@nuxtjs/toast"
   ],
   /*
@@ -55,31 +59,6 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: "https://theelect.herokuapp.com/api/v1"
-  },
-
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: "login", method: "post", propertyName: "token" },
-          user: { url: "user", method: "get", propertyName: "Authorization" },
-          // logout: {
-          //   url: "logout",
-          //   method: "post",
-          //   propertyName: "Authorization"
-          // }
-          logout: false
-        },
-        tokenRequired: true,
-        tokenType: "Bearer"
-      }
-    }
-    // redirect: {
-    //   login: "/",
-    //   logout: "/",
-    //   user: "/profile",
-    //   callback: "/"
-    // }
   },
 
   toast: {

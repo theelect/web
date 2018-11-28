@@ -19,6 +19,8 @@ const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpa
 const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _24b34550 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
+const _4a6d8f8a = () => interopDefault(import('../pages/users/_id/index.vue' /* webpackChunkName: "pages/users/_id/index" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -146,6 +148,14 @@ export function createRouter() {
       path: "/settings",
       component: _1065e22e,
       name: "settings"
+    }, {
+      path: "/users",
+      component: _24b34550,
+      name: "users"
+    }, {
+      path: "/users/:id",
+      component: _4a6d8f8a,
+      name: "users-id"
     }, {
       path: "/",
       component: _98197b52,

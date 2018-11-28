@@ -110,14 +110,14 @@
 
 <script>
 export default {
-  // middleware: 'auth',
+  middleware: 'authenticated',
   data: () => ({
     drawer: null
   }),
   methods: {
     logout() {
       this.$toast.show('Logging out...', {icon: "fingerprint"});
-      this.$auth.logout()
+      this.$store.dispatch('logout')
       this.$router.push('/')
     },
   }

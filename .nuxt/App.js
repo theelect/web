@@ -27,6 +27,14 @@ export default {
       props: {
         name: 'layout',
         mode: 'out-in'
+      },
+      on: {
+        beforeEnter(el) {
+          // Ensure to trigger scroll event after calling scrollBehavior
+          window.$nuxt.$nextTick(() => {
+            window.$nuxt.$emit('triggerScroll')
+          })
+        }
       }
     }, [ templateEl ])
 

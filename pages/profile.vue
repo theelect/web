@@ -12,7 +12,7 @@
         <v-flex xs12 md9 mt-2>
           <v-layout>
             <v-flex>
-              <div>ToneyCole@TC.com</div>
+              <div>{{ email }}</div>
             </v-flex>
             <nuxt-link to="#">
               <v-flex class="text-xs-right">
@@ -57,6 +57,12 @@
 
 <script>
 export default {
-  layout: "dashboard"
+  layout: "dashboard",
+
+  computed: {
+    email() {
+      return this.$store.getters.email
+    }
+  }
 }
 </script>

@@ -240,7 +240,7 @@ export function getLocation(base, mode) {
   if (base && path.indexOf(base) === 0) {
     path = path.slice(base.length)
   }
-  return (path || '/') + window.location.search + window.location.hash
+  return decodeURI(path || '/') + window.location.search + window.location.hash
 }
 
 export function urlJoin() {
@@ -432,7 +432,7 @@ function tokensToFunction(tokens) {
         continue
       }
 
-      const value = data[token.name]
+      const value = data[token.name || 'pathMatch']
       let segment
 
       if (value == null) {

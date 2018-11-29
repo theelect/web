@@ -1,6 +1,8 @@
 <template>
 <section>
-  <div id="map"></div>
+  <div class="constraint">
+    <div id="map"></div>
+  </div>
   
 <script src="/mapdata.js"></script>
   <script src="/countrymap.js"></script>

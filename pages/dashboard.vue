@@ -9,22 +9,23 @@
         <v-flex xs12 md5>
           <v-layout column wrap>
             <v-flex>
-              <v-card max-height="116" class="px-5 py-4">
-                <div class="body-2">Sent</div>
-                <v-layout row mt-4>
-                  <v-flex xs6 sm3 class="title primary--text">6</v-flex>
-                  <v-flex class="grey--text">This Month</v-flex>
-                </v-layout>
-              </v-card>
-            </v-flex>
-            <v-flex>
-              <v-card max-height="116" class="px-4 pb-3 pt-2">
-                <nuxt-link to="#">
-                  <div class="primary--text text-xs-right">More</div>
-                </nuxt-link>
+              <v-card max-height="116" class="primary white--text px-4 pb-3 pt-2">
+                <!-- <nuxt-link to="/all-voters"> -->
+                  <div class="text-xs-right primary--text">More</div>
+                <!-- </nuxt-link> -->
 
                 <div class="body-2">Total Verified Voters</div>
-                <div class="display-2 primary--text mt-2">2,895,684</div>
+                <div class="display-2 mt-2">2,895,684</div>
+              </v-card>
+            </v-flex>
+
+            <v-flex>
+              <v-card max-height="116" class="px-4 py-4">
+                <div class="body-2">Scheduled Messages</div>
+                <div class="mt-2">
+                  <span class="display-2 primary--text d-inline">100</span>
+                  <span class="grey--text d-inline ml-5">This Month</span>
+                </div>
               </v-card>
             </v-flex>
           </v-layout>
@@ -33,36 +34,37 @@
         <v-flex xs12 md5>
           <v-layout column wrap>
             <v-flex>
-              <v-card max-height="116" class="px-5 py-4">
-                <div class="body-2">Scheduled Messages</div>
-                <v-layout row mt-4>
-                  <v-flex xs6 sm3 class="title primary--text">100</v-flex>
-                  <v-flex class="grey--text">This Month</v-flex>
-                </v-layout>
-              </v-card>
-            </v-flex>
-            <v-flex>
-              <v-card max-height="116" class="px-4 pb-3 pt-2">
+              <v-card max-height="116" class="primary white--text px-4 pb-3 pt-2">
                 <nuxt-link to="/all-voters">
-                  <div class="primary--text text-xs-right">More</div>
+                  <div class="text-xs-right white--text">More</div>
                 </nuxt-link>
                 <div class="body-2">Total Voters</div>
-                <div class="display-2 primary--text mt-2">{{ pvc.total }}</div>
+                <div class="display-2 mt-2">{{ pvc.total }}</div>
               </v-card>
             </v-flex>
+
+            <v-flex>
+              <v-card max-height="116" class="px-4 py-4">
+                <div class="body-2">Sent</div>
+                <div class="mt-2">
+                  <span class="display-2 primary--text d-inline">6</span>
+                  <span class="grey--text d-inline ml-5">This Month</span>
+                </div>
+              </v-card>
+            </v-flex>
+            
           </v-layout>
         </v-flex>
       </v-layout>
 
       <v-layout row wrap mt-4>
         <v-flex xs12 md6>
-          <v-card class="pa-4" height="400">
+          <v-card class="pa-4" height="480">
             <nuxt-link to="/test">
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
 
             <div class="pa-3">
-              <!-- <v-img height="300" contain :src="`/map-placeholder.png`"></v-img> -->
               <div id="map"></div>
   
               <script src="/mapdata.js"></script>
@@ -72,7 +74,7 @@
         </v-flex>
 
         <v-flex xs12 md6>
-          <v-card height="400">
+          <v-card height="480">
             <nuxt-link to="/lgas">
               <div class="primary--text pr-4 pt-4 text-xs-right">Expand</div>
             </nuxt-link>
@@ -113,7 +115,7 @@
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
 
-            <div class="pt-4 pb-4">TOP 5 PROFESSION</div>
+            <div class="pt-4 pb-4">TOP PROFESSIONS</div>
             <doughnut-chart :height="300"></doughnut-chart>
           </v-card>
         </v-flex>

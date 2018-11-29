@@ -113,7 +113,7 @@
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
 
-            <div class="pt-4 pb-4">PROFESSION</div>
+            <div class="pt-4 pb-4">TOP 5 PROFESSION</div>
             <doughnut-chart :height="300"></doughnut-chart>
           </v-card>
         </v-flex>
@@ -125,15 +125,13 @@
 <script>
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
-import map from "~/components/map";
 export default {
   middleware: "authenticated",
   layout: "dashboard",
   name: "charts",
   components: {
     BarChart,
-    DoughnutChart,
-    map
+    DoughnutChart
   },
   computed: {
     pvc() {

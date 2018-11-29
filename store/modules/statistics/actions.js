@@ -8,5 +8,13 @@ export const actions = {
       }
     });
     commit("SET_LGA", response);
+  },
+  async occupationDetails({ commit }) {
+    const response = await this.$axios.$get(URLS.occupation, {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    });
+    commit("SET_OCCUPATION", response);
   }
 };

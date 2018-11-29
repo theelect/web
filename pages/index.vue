@@ -63,6 +63,7 @@ export default {
         await this.$store.dispatch('userDetails')
         await this.$store.dispatch('voterDetails')
         await this.$store.dispatch('lgaDetails')
+        await this.$store.dispatch('occupationDetails')
         this.$toast.success('Successfully Logged In', {
           icon: "check"
         });

@@ -23,7 +23,7 @@
               <v-card max-height="116" class="px-4 py-4">
                 <div class="body-2">Scheduled Messages</div>
                 <div class="mt-2">
-                  <span class="display-2 primary--text d-inline">100</span>
+                  <span class="display-2 primary--text d-inline">{{scheduled_messages_count}}</span>
                   <span class="grey--text d-inline ml-5">This Month</span>
                 </div>
               </v-card>
@@ -47,7 +47,7 @@
               <v-card max-height="116" class="px-4 py-4">
                 <div class="body-2">Sent</div>
                 <div class="mt-2">
-                  <span class="display-2 primary--text d-inline">6</span>
+                  <span class="display-2 primary--text d-inline">{{sent_messages_count}}</span>
                   <span class="grey--text d-inline ml-5">This Month</span>
                 </div>
               </v-card>
@@ -127,10 +127,35 @@
 <script>
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
+import axios from 'axios';
+
 export default {
   middleware: "authenticated",
   layout: "dashboard",
   name: "charts",
+  	data() {
+		
+		return {
+      scheduled_messages_count : 0,
+      sent_messages_count : 0,
+		}
+	},
+	created : async function(){
+			try{
+				let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686be77a3eff684cead289fabe873c8032dfaf8a3fc8c13b4a6dd26c2b89'} }
+        let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
+				
+        let {status, data} = response.data;
+
+				if(status != false){
+          this.scheduled_messages_count = data.scheduled;
+          this.sent_messages_count = data.sent;
+        }
+
+			}catch(ex){
+				console.error(ex);
+			}
+	},
   components: {
     BarChart,
     DoughnutChart

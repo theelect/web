@@ -119,7 +119,7 @@ export default {
       this.$toast.show('Logging out...', {icon: "fingerprint"});
       this.$store.dispatch('logout')
       this.$router.push('/')
-    },
+    }
   }
 };
 </script>

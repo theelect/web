@@ -47,7 +47,7 @@
                   <div class="primary--text text-xs-right">More</div>
                 </nuxt-link>
                 <div class="body-2">Total Voters</div>
-                <div class="display-2 primary--text mt-2">3,000,000</div>
+                <div class="display-2 primary--text mt-2">{{ pvc.total }}</div>
               </v-card>
             </v-flex>
           </v-layout>
@@ -57,13 +57,17 @@
       <v-layout row wrap mt-4>
         <v-flex xs12 md6>
           <v-card class="pa-4" height="400">
-            <nuxt-link to="#">
+            <nuxt-link to="/test">
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
 
-            <v-responsive class="pa-3">
-              <v-img height="300" contain :src="`/map-placeholder.png`"></v-img>
-            </v-responsive>
+            <div class="pa-3">
+              <!-- <v-img height="300" contain :src="`/map-placeholder.png`"></v-img> -->
+              <div id="map"></div>
+  
+              <script src="/mapdata.js"></script>
+              <script src="/countrymap.js"></script>
+            </div>
           </v-card>
         </v-flex>
 
@@ -83,9 +87,9 @@
             <v-divider></v-divider>
 
             <v-list dense>
-              <v-layout row wrap px-4 py-2 v-for="n in 5" :key="n">
-                <v-flex md8 class>Port Harcourt</v-flex>
-                <v-flex md4 class>50,000</v-flex>
+              <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
+                <v-flex md8 class>{{ lga._id }}</v-flex>
+                <v-flex md4 class>{{ lga.count }}</v-flex>
               </v-layout>
             </v-list>
           </v-card>
@@ -121,13 +125,23 @@
 <script>
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
+import map from "~/components/map";
 export default {
   middleware: "authenticated",
   layout: "dashboard",
   name: "charts",
   components: {
     BarChart,
-    DoughnutChart
+    DoughnutChart,
+    map
+  },
+  computed: {
+    pvc() {
+      return this.$store.getters.pvc
+    },
+    lgas() {
+      return this.$store.getters.lga
+    }
   }
 };
 </script>

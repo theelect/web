@@ -7,7 +7,7 @@
       </v-btn>
       <div class="d-inline">
         <div class="title d-inline ml-2">All Voters</div>
-        <div class="title d-inline grey--text ml-3">3,000,000</div>
+        <div class="title d-inline grey--text ml-3">{{ pvc.total }}</div>
       </div>
       <div class="mt-2">
         <div class="title d-inline ml-2">Verified Voters</div>
@@ -16,7 +16,7 @@
     </v-flex>
 
     <v-layout row wrap>
-      <v-flex xs12 sm6 lg4 xl3 v-for="n in 9" :key="n" mb-4>
+      <v-flex v-if="voter.is_verified" xs12 sm6 lg4 xl3 v-for="(voter, index) in voters" :key="index" mb-4>
         <v-hover>
           <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="290">
             <v-layout class="justify-end">
@@ -28,13 +28,13 @@
               </v-badge>
             </v-layout>
             <v-card-title class="d-block px-4">
-              <div class="title">Sam Ogunjumbi</div>
-              <div class="primary--text mt-2">080 125 8956</div>
-              <div class="grey--text mt-2">Nov 10, 1990 / Trader</div>
+              <div class="title">{{ capitalizeFirst(voter.voter_info.Voter.first_name) + ' ' + capitalizeFirst(voter.voter_info.Voter.last_name) }}</div>
+              <div class="primary--text mt-2">{{ voter.phone }}</div>
+              <div class="grey--text mt-2">Nov 10, 1990 / {{ voter.voter_info.Voter.occupation }}</div>
             </v-card-title>
             <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Sam Dunno</div>
             <v-card-text class="blue-grey lighten-4 px-4">
-              Lagos State - Victoria Island
+              {{ capitalizeFirst(voter.voter_info.Pu.lga) }} - {{ voter.voter_info.Pu.ward }}
             </v-card-text>
           </v-card>
         </v-hover>
@@ -59,6 +59,20 @@ export default {
   layout: 'dashboard',
   data: () => ({
     isOnline: true
-  })
+  }),
+  computed: {
+    pvc() {
+      return this.$store.getters.pvc
+    },
+    voters() {
+      const voters = this.pvc.docs
+      return voters
+    }
+  },
+  methods: {
+    capitalizeFirst: function (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  }
 }
 </script>

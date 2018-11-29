@@ -19,6 +19,7 @@ export default function({ $axios, store, app }) {
       app.$toast.error(error.response.data.message, {
         icon: "error_outline"
       });
+      console.log(error.response.data.message);
     }
   });
 }

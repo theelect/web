@@ -6,7 +6,7 @@ export const getters = {
     return false;
   },
 
-  email(state) {
-    return state.user.email
+  user(state) {
+    return state.user
   }
 };

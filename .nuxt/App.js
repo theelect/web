@@ -7,8 +7,9 @@ import '../assets/style/main.scss'
 
 import _5fa3735e from '../layouts/dashboard.vue'
 import _6f6c098b from '../layouts/default.vue'
+import _1a3b0da6 from '../layouts/map.vue'
 
-const layouts = { "_dashboard": _5fa3735e,"_default": _6f6c098b }
+const layouts = { "_dashboard": _5fa3735e,"_default": _6f6c098b,"_map": _1a3b0da6 }
 
 export default {
   head: {"title":"Tonye Cole","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"The-Elect App"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:300,400,500,700|Material+Icons"}],"style":[],"script":[]},

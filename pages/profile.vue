@@ -12,11 +12,22 @@
         <v-flex xs12 md9 mt-2>
           <v-layout>
             <v-flex>
-              <div>{{ email }}</div>
+              <div>{{ user.email }}</div>
             </v-flex>
             <nuxt-link to="#">
               <v-flex class="text-xs-right">
                 Change email
+              </v-flex>
+            </nuxt-link>
+          </v-layout>
+
+          <v-layout>
+            <v-flex>
+              <div class="grey--text">Name: <span>{{ user.first_name + ' ' + user.last_name}}</span></div>
+            </v-flex>
+            <nuxt-link to="#">
+              <v-flex class="text-xs-right primary--text">
+                Change Name
               </v-flex>
             </nuxt-link>
           </v-layout>
@@ -34,7 +45,7 @@
 
           <v-layout>
             <v-flex>
-              <div class="grey--text">Phone: <span>080 123 12345</span></div>
+              <div class="grey--text">Phone: <span>{{ user.phone }}</span></div>
             </v-flex>
             <nuxt-link to="#">
               <v-flex class="text-xs-right primary--text">
@@ -60,8 +71,8 @@ export default {
   layout: "dashboard",
 
   computed: {
-    email() {
-      return this.$store.getters.email
+    user() {
+      return this.$store.getters.user
     }
   }
 }

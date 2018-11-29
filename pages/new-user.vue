@@ -49,7 +49,7 @@
       <v-container grid-list-md>
         <v-layout row wrap justify-end mt-4>
           <v-btn xs12 sm6 class="primary caption"  @click="create">SAVE</v-btn>
-          <v-btn xs12 sm6 dark class="red caption spaced-btn">CANCEL</v-btn>
+          <v-btn to="/settings" xs12 sm6 dark class="red caption spaced-btn">CANCEL</v-btn>
         </v-layout>
       </v-container>
       </v-flex>
@@ -102,7 +102,7 @@ export default {
           this.$toast.success('Successfully Created User', {
             icon: "check"
           });
-          this.$router.push(`/se`);
+          this.$router.push(`/settings`);
         }).catch(e => {
           console.log(e);
         })

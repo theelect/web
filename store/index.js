@@ -1,9 +1,13 @@
-export const getters = {
-  isAuthenticated(state) {
-    return state.auth.loggedIn;
-  },
+import { Store } from 'vuex'
+import auth from './modules/auth/index'
+import voters from "./modules/voters/index"
+import statistics from "./modules/statistics/index";
 
-  loggedInUser(state) {
-    return state.auth.user;
-  }
-};
+export default () =>
+  new Store({
+    modules: {
+      auth,
+      voters,
+      statistics
+    }
+  });

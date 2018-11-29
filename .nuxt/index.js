@@ -12,9 +12,11 @@ import { createStore } from './store.js'
 
 /* Plugins */
 /* eslint-disable camelcase */
+import nuxt_plugin_toast_f5c6aa20 from 'nuxt_plugin_toast_f5c6aa20' // Source: ./toast.js (ssr: false)
 import nuxt_plugin_axios_8e27437e from 'nuxt_plugin_axios_8e27437e' // Source: ./axios.js
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
-import nuxt_plugin_plugin_0c69f6bd from 'nuxt_plugin_plugin_0c69f6bd' // Source: ./auth/plugin.js
+import nuxt_plugin_localstorage_47a6c111 from 'nuxt_plugin_localstorage_47a6c111' // Source: ../plugins/localstorage.js (ssr: false)
+import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ../plugins/axios (ssr: false)
 
 /* eslint-enable camelcase */
 
@@ -154,8 +156,12 @@ async function createApp(ssrContext) {
 
   if (typeof nuxt_plugin_axios_8e27437e === 'function') await nuxt_plugin_axios_8e27437e(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
-  if (typeof nuxt_plugin_plugin_0c69f6bd === 'function') await nuxt_plugin_plugin_0c69f6bd(app.context, inject)
 
+  if (process.client) {
+    if (typeof nuxt_plugin_toast_f5c6aa20 === 'function') await nuxt_plugin_toast_f5c6aa20(app.context, inject)
+    if (typeof nuxt_plugin_localstorage_47a6c111 === 'function') await nuxt_plugin_localstorage_47a6c111(app.context, inject)
+    if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)
+  }
   /* eslint-enable camelcase */
 
   // If server-side, wait for async component to be resolved first

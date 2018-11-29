@@ -17,9 +17,9 @@
       <v-divider class="my-4"></v-divider>
 
       <v-list dense>
-        <v-layout row wrap px-4 py-3 v-for="n in 5" :key="n">
-          <v-flex md8 class="">Port Harcourt</v-flex>
-          <v-flex md4 class="">50,000</v-flex>
+        <v-layout row wrap px-4 py-3 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
+          <v-flex md8 class="">{{ lga._id }}</v-flex>
+          <v-flex md4 class="">{{ lga.count }}</v-flex>
         </v-layout>
       </v-list>
 
@@ -44,6 +44,11 @@
 
 <script>
 export default {
-  layout: 'dashboard'
+  layout: 'dashboard',
+  computed: {
+    lgas() {
+      return this.$store.getters.lga
+    }
+  }
 }
 </script>

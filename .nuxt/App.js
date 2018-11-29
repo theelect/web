@@ -7,8 +7,9 @@ import '../assets/style/main.scss'
 
 import _5fa3735e from '../layouts/dashboard.vue'
 import _6f6c098b from '../layouts/default.vue'
+import _1a3b0da6 from '../layouts/map.vue'
 
-const layouts = { "_dashboard": _5fa3735e,"_default": _6f6c098b }// eslint-disable-line
+const layouts = { "_dashboard": _5fa3735e,"_default": _6f6c098b,"_map": _1a3b0da6 }// eslint-disable-line
 
 export default {
   /* eslint-disable quotes, semi, indent, comma-spacing, key-spacing, object-curly-spacing, object-property-newline, arrow-parens */

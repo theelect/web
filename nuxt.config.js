@@ -1,4 +1,4 @@
-const pkg = require('./package')
+const pkg = require("./package");
 
 module.exports = {
   mode: "spa",
@@ -26,7 +26,9 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: "#4881F9" },
+  loading: {
+    color: "#4881F9"
+  },
 
   /*
   ** Global CSS
@@ -36,7 +38,11 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ["@/plugins/vuetify"],
+  plugins: [
+    "@/plugins/vuetify",
+    { src: "~/plugins/localstorage.js", ssr: false },
+    { src: "~/plugins/axios", ssr: false }
+  ],
 
   /*
   ** Nuxt.js modules
@@ -44,7 +50,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     "@nuxtjs/axios",
-    "@nuxtjs/auth"
+    // "@nuxtjs/auth",
+    "@nuxtjs/toast"
   ],
   /*
   ** Axios module configuration
@@ -54,16 +61,9 @@ module.exports = {
     baseURL: "https://theelect.herokuapp.com/api/v1"
   },
 
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'token' },
-          user: { url: 'user', method: 'get', propertyName: 'data' },
-          logout: false
-        }
-      }
-    }
+  toast: {
+    position: "top-right",
+    duration: 2000
   },
   test: {
     another: 'luck'

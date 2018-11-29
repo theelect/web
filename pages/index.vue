@@ -7,19 +7,35 @@
         <nuxt-link to="/forgot-password">
           <div class="text-xs-right mt-5 mb-2 body-2 white--text">Forgot Password?</div>
         </nuxt-link>
-        <v-form method="post" @submit.prevent="login">
+        
+        <v-form ref="authForm" v-model="authValid" lazy-validation>
           <v-card class="form-wrapper">
-            <v-alert v-if="error" :value="true" type="error">{{error}}</v-alert>
-            <v-text-field type="email" name="email" v-model="email">
+            <v-text-field :rules="emailRules" type="email" name="email" v-model="email">
               <div class="caption" slot="label">EMAIL</div>
             </v-text-field>
-            <v-text-field type="password" name="password" v-model="password">
+            <v-text-field
+              :append-icon="e3 ? 'visibility' : 'visibility_off'"
+              @click:append="() => (e3 = !e3)"
+              @keyup.enter="login"
+              class="mt-1"
+              :type="e3 ? 'password' : 'text'"
+              name="password"
+              :rules="passwordRules"
+              v-model="password"
+              required
+            >
               <div class="caption" slot="label">PASSWORD</div>
             </v-text-field>
           </v-card>
 
           <v-flex class="mt-4">
-            <v-btn type="submit" block large class="white primary--text">Log in</v-btn>
+            <v-btn
+              :disabled="!authValid"
+              @click="login"
+              block
+              large
+              class="white primary--text"
+            >Log in</v-btn>
             <v-checkbox color="white" dark label="Remember me" v-model="rememberMe"></v-checkbox>
           </v-flex>
         </v-form>
@@ -33,28 +49,46 @@ export default {
   data() {
     return {
       rememberMe: false,
-      email: '',
-      password: '',
-      device: 'web',
-      error: null
-    }
+      email: "",
+      password: "",
+      device: "web",
+      authValid: false,
+      e3: true,
+      e1: true,
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v =>
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "E-mail must be valid"
+      ],
+      passwordRules: [
+        v => !!v || "Password is required",
+        v => v.length > 1 || "Must be at least 2 characters"
+      ]
+    };
   },
   methods: {
     async login() {
-      try {
-        await this.$auth.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password,
-            device: this.device
-          }
-        })
-
-        this.$router.push('/dashboard')
-      } catch (e) {
-        this.error = e.response.data.message
+      this.$toast.show("Logging in...", {
+        icon: "fingerprint"
+      });
+      if (this.$refs.authForm.validate()) {
+        const data = {
+          email: this.email,
+          password: this.password,
+          device: this.device
+        };
+        await this.$store.dispatch("login", data);
+        await this.$store.dispatch("userDetails");
+        await this.$store.dispatch("voterDetails");
+        await this.$store.dispatch("lgaDetails");
+        await this.$store.dispatch("occupationDetails");
+        this.$toast.success("Successfully Logged In", {
+          icon: "check"
+        });
+        this.$router.push(`/dashboard`);
       }
     }
   }
-}
+};
 </script>

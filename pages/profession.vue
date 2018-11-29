@@ -22,9 +22,9 @@
       <v-divider class="my-4"></v-divider>
 
       <v-list dense>
-        <v-layout row wrap px-4 py-3 v-for="n in 5" :key="n">
-          <v-flex md8 class="">Engineer</v-flex>
-          <v-flex md4 class="">50,000</v-flex>
+        <v-layout row wrap px-4 py-3 v-for="(occupation, index) in occupations.slice(0, 5)" :key="index">
+          <v-flex md8 class="">{{ occupation._id }}</v-flex>
+          <v-flex md4 class="">{{ occupation.count }}</v-flex>
         </v-layout>
       </v-list>
 
@@ -54,6 +54,11 @@ export default {
   name: 'charts',
   components: {
     DoughnutChart
+  },
+  computed: {
+    occupations() {
+      return this.$store.getters.occupation
+    }
   }
 }
 </script>

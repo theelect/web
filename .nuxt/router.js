@@ -18,7 +18,10 @@ const _f9fb0bbe = () => interopDefault(import('../pages/profession.vue' /* webpa
 const _bec2e358 = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _d74d0610 = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _4cba2908 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _4451d077 = () => interopDefault(import('../pages/test.vue' /* webpackChunkName: "pages/test" */))
+const _8fd74f94 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
 const _3afc8248 = () => interopDefault(import('../pages/messages/_id.vue' /* webpackChunkName: "pages/messages/_id" */))
+const _400b2fbe = () => interopDefault(import('../pages/users/_id/index.vue' /* webpackChunkName: "pages/users/_id/index" */))
 const _5ebdf9bd = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -143,9 +146,21 @@ export function createRouter() {
       component: _4cba2908,
       name: "settings"
     }, {
+      path: "/test",
+      component: _4451d077,
+      name: "test"
+    }, {
+      path: "/users",
+      component: _8fd74f94,
+      name: "users"
+    }, {
       path: "/messages/:id",
       component: _3afc8248,
       name: "messages-id"
+    }, {
+      path: "/users/:id",
+      component: _400b2fbe,
+      name: "users-id"
     }, {
       path: "/",
       component: _5ebdf9bd,

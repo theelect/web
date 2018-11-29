@@ -20,7 +20,6 @@
             <tr>
               <td>{{ props.item.status }}</td>
               <td>{{ props.item.recipients }}</td>
-              <td>{{ props.item.reward }}</td>
               <td>{{ props.item.body }}</td>
               <td style="width:12%">{{ props.item.date }}</td>
             </tr>
@@ -33,35 +32,6 @@
           >Your search for "{{ search }}" found no results.</v-alert>
         </v-data-table>
       </v-card>
-
-  <v-expansion-panel>
-      <v-expansion-panel-content
-        v-for="(x, i) in messagesMonth"
-        :key="i"
-      >
-        <div slot="header">{{x}}</div>
-        <v-card>
-          <v-data-table :headers="headers" :items="messages" :search="search">
-            <template slot="no-data" class="text-xs-center">Loading...</template>
-            <template slot="items" slot-scope="props">
-              <tr>
-                <td>{{ props.item.status }}</td>
-                <td>{{ props.item.recipients }}</td>
-                <td>{{ props.item.reward }}</td>
-                <td>{{ props.item.body }}</td>
-                <td style="width:12%">{{ props.item.date }}</td>
-              </tr>
-            </template>
-            <v-alert
-              slot="no-results"
-              :value="true"
-              color="error"
-              icon="warning"
-            >Your search for "{{ search }}" found no results.</v-alert>
-          </v-data-table>
-        </v-card>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
 
     </v-container>
   </section>
@@ -85,7 +55,6 @@ export default {
 			headers: [
 				{text: 'Status', align: 'left', value: 'status' },
 				{text: 'Recipients', value: 'recipients' },
-				{text: 'Reward', value: 'reward'},
 				{text: 'Message', value: 'message' },
 				{text: 'Date', value: 'date' }
 			],

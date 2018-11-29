@@ -16,12 +16,12 @@
           <template slot="items" slot-scope="props">
             <tr>
               <td>{{ props.item.role }}</td>
-              <td>{{ props.item.firstName }}</td>
-              <td>{{ props.item.lastName }}</td>
-              <td>{{ props.item.username }}</td>
+              <td>{{ props.item.first_name }}</td>
+              <td>{{ props.item.last_name }}</td>
+              <td>{{ props.item.email }}</td>
               <td class="justify-center layout px-0">
                 <v-flex mt-2 class="text-xs-center">
-                  <v-btn icon to="/edit-user">
+                  <v-btn icon to= "/edit-user">
                     <v-icon small class="primary--text">edit</v-icon>
                   </v-btn>
                 </v-flex>
@@ -62,8 +62,8 @@ export default {
           value: "lastName"
         },
         {
-          text: "Username",
-          value: "username"
+          text: "Email",
+          value: "email"
         },
         {
           text: "Actions",
@@ -72,30 +72,18 @@ export default {
           align: "center"
         }
       ],
-      users: [
-        {
-          value: false,
-          role: "Admin",
-          firstName: "Edo",
-          lastName: "Williams",
-          username: "edoman"
-        },
-        {
-          value: false,
-          role: "View",
-          firstName: "Sam",
-          lastName: "Ogunjumbi",
-          username: "samHunter"
-        },
-        {
-          value: false,
-          role: "Admin",
-          firstName: "Ismail",
-          lastName: "Olasunkanmi",
-          username: "Abbey"
-        }
-      ]
+      users: [ ]
     };
+  },
+  mounted() {
+    this.$axios.get('https://theelect.herokuapp.com/api/v1/users', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    .then(response => {
+      this.users = response.data;
+    })
   }
 };
 </script>

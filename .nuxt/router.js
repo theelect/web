@@ -2,27 +2,28 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _afe7dda4 = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
-const _034996c4 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
-const _c57bddf0 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
-const _46524d44 = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
-const _02a91273 = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
-const _0aa5e08d = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
-const _393d6824 = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
-const _40908b5e = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
-const _5fa2c108 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
-const _a5026c86 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
-const _bb1588dc = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
-const _6bfacbf9 = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
-const _d817eb6e = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
-const _2cd7bf2d = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
-const _3bda44c8 = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
-const _cafd0128 = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
-const _18f54114 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _3492ce83 = () => interopDefault(import('../pages/test.vue' /* webpackChunkName: "pages/test" */))
-const _48e7b4aa = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
-const _33bb2ad6 = () => interopDefault(import('../pages/users/_id/index.vue' /* webpackChunkName: "pages/users/_id/index" */))
-const _769cbd31 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _353ad358 = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
+const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
+const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
+const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
+const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _014962b3 = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
+const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
+const _c53c6d10 = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
+const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
+const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
+const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
+const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
+const _e936a93a = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
+const _1184030e = () => interopDefault(import('../pages/old-new-message.vue' /* webpackChunkName: "pages/old-new-message" */))
+const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
+const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
+const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
+const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _dd37e6c6 = () => interopDefault(import('../pages/test.vue' /* webpackChunkName: "pages/test" */))
+const _24b34550 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
+const _4a6d8f8a = () => interopDefault(import('../pages/users/_id/index.vue' /* webpackChunkName: "pages/users/_id/index" */))
+const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -83,87 +84,91 @@ export function createRouter() {
 
     routes: [{
       path: "/admin",
-      component: _afe7dda4,
+      component: _353ad358,
       name: "admin"
     }, {
       path: "/age",
-      component: _034996c4,
+      component: _e4866978,
       name: "age"
     }, {
       path: "/all-voters",
-      component: _c57bddf0,
+      component: _7b0ed3a2,
       name: "all-voters"
     }, {
       path: "/contacts",
-      component: _46524d44,
+      component: _3dc2ee5e,
       name: "contacts"
     }, {
       path: "/dashboard",
-      component: _02a91273,
+      component: _0d66d6ce,
       name: "dashboard"
     }, {
       path: "/edit-user",
-      component: _0aa5e08d,
+      component: _014962b3,
       name: "edit-user"
     }, {
       path: "/forgot-password",
-      component: _393d6824,
+      component: _2de435ca,
       name: "forgot-password"
     }, {
       path: "/lgas",
-      component: _40908b5e,
+      component: _c53c6d10,
       name: "lgas"
     }, {
       path: "/message-detail",
-      component: _5fa2c108,
+      component: _2db8a6a2,
       name: "message-detail"
     }, {
       path: "/messages",
-      component: _a5026c86,
+      component: _b6212a52,
       name: "messages"
     }, {
       path: "/new-contact",
-      component: _bb1588dc,
+      component: _7e40cc38,
       name: "new-contact"
     }, {
       path: "/new-message",
-      component: _6bfacbf9,
+      component: _47c65c9f,
       name: "new-message"
     }, {
       path: "/new-user",
-      component: _d817eb6e,
+      component: _e936a93a,
       name: "new-user"
     }, {
+      path: "/old-new-message",
+      component: _1184030e,
+      name: "old-new-message"
+    }, {
       path: "/profession",
-      component: _2cd7bf2d,
+      component: _0aa481c7,
       name: "profession"
     }, {
       path: "/profile",
-      component: _3bda44c8,
+      component: _7da4186e,
       name: "profile"
     }, {
       path: "/realtime-voters",
-      component: _cafd0128,
+      component: _e1af65dc,
       name: "realtime-voters"
     }, {
       path: "/settings",
-      component: _18f54114,
+      component: _1065e22e,
       name: "settings"
     }, {
       path: "/test",
-      component: _3492ce83,
+      component: _dd37e6c6,
       name: "test"
     }, {
       path: "/users",
-      component: _48e7b4aa,
+      component: _24b34550,
       name: "users"
     }, {
       path: "/users/:id",
-      component: _33bb2ad6,
+      component: _4a6d8f8a,
       name: "users-id"
     }, {
       path: "/",
-      component: _769cbd31,
+      component: _98197b52,
       name: "index"
     }],
 

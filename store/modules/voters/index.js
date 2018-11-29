@@ -3,7 +3,8 @@ import { mutations } from "./mutations";
 import { actions } from "./actions";
 
 const state = {
-  pvc: null
+  pvc: null,
+  pvcCount: null
 };
 
 export default {

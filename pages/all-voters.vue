@@ -11,7 +11,7 @@
       </div>
       <div class="mt-2">
         <div class="title d-inline ml-2">Verified Voters</div>
-        <div class="title d-inline green--text ml-3">2,895,152</div>
+        <div class="title d-inline green--text ml-3">{{ pvcCount.total_verified }}</div>
       </div>
     </v-flex>
 
@@ -30,7 +30,7 @@
             <v-card-title class="d-block px-4">
               <div class="title">{{ capitalizeFirst(voter.first_name) + ' ' + capitalizeFirst(voter.last_name) }}</div>
               <div class="primary--text mt-2">{{ voter.phone }}</div>
-              <div class="grey--text mt-2"> {{ filteredDob }} / {{ voter.profession }}</div>
+              <div class="grey--text mt-2"> {{ filteredDob }}  {{ voter.profession }}</div>
             </v-card-title>
             <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Sam Dunno</div>
             <v-card-text class="blue-grey lighten-4 px-4">
@@ -65,6 +65,9 @@ export default {
     voters() {
       const voters = this.pvc.docs
       return voters
+    },
+    pvcCount() {
+      return this.$store.getters.pvcCount
     },
     dob() {
       const dob = this.voters.dob

@@ -15,7 +15,7 @@
                 <!-- </nuxt-link> -->
 
                 <div class="body-2">Total Verified Voters</div>
-                <div class="display-2 mt-2">2,895,684</div>
+                <div class="display-2 mt-2">{{ pvcCount.total_verified }}</div>
               </v-card>
             </v-flex>
 
@@ -141,6 +141,9 @@ export default {
     },
     lgas() {
       return this.$store.getters.lga
+    },
+    pvcCount() {
+      return this.$store.getters.pvcCount
     }
   }
 };

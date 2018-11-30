@@ -28,13 +28,23 @@
               </v-badge>
             </v-layout>
             <v-card-title class="d-block px-4">
+              <v-layout row wrap align-center align-content-center>
+                <v-flex md2>
+                  <v-icon class="black--text">
+                    account_circle
+                  </v-icon>
+                </v-flex>
+                <v-flex md10>
+
               <div class="title">{{ capitalizeFirst(voter.first_name) + ' ' + capitalizeFirst(voter.last_name) }}</div>
+                </v-flex>
+              </v-layout>
               <div class="primary--text mt-2">{{ voter.phone }}</div>
-              <div class="grey--text mt-2"> {{ filteredDob }}  {{ voter.profession }}</div>
+              <div class="grey--text mt-2"> {{ (voter.dob).substring(0, 10) }} / {{ capitalizeFirst(voter.profession) }}</div>
             </v-card-title>
-            <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Sam Dunno</div>
+            <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Vincent Hope</div>
             <v-card-text class="blue-grey lighten-4 px-4">
-              {{ capitalizeFirst(voter.lga) }} - {{ voter.ward }}
+              {{ capitalizeFirst(voter.lga) }} - {{ capitalizeFirst(voter.ward) }}
             </v-card-text>
           </v-card>
         </v-hover>
@@ -68,13 +78,6 @@ export default {
     },
     pvcCount() {
       return this.$store.getters.pvcCount
-    },
-    dob() {
-      const dob = this.voters.dob
-      return dob
-    },
-    filteredDob() {
-      return this.dob ? moment(this.dob).format('MMMM Do YYYY') : ''
     }
   },
   methods: {

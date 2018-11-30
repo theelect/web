@@ -59,7 +59,7 @@
 
       <v-layout row wrap mt-4>
         <v-flex xs12 md6>
-          <v-card class="pa-4" height="480">
+          <v-card class="pa-4" max-height="480">
             <nuxt-link to="/test">
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
@@ -90,7 +90,7 @@
 
             <v-list dense>
               <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
-                <v-flex md8 class>{{ lga._id }}</v-flex>
+                <v-flex md8 class>{{ capitalizeFirst(lga._id) }}</v-flex>
                 <v-flex md4 class>{{ lga.count }}</v-flex>
               </v-layout>
             </v-list>
@@ -134,6 +134,11 @@ export default {
   components: {
     BarChart,
     DoughnutChart
+  },
+  methods: {
+    capitalizeFirst: function (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
   },
   computed: {
     pvc() {

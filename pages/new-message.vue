@@ -21,7 +21,7 @@
     </v-textarea>
 
     <v-btn xs12 sm6 @click="sendMessage" class="primary caption ">SEND MESSAGE</v-btn>
-    <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
+    <v-btn to="/messages" xs12 sm6 dark class="red caption">BACK</v-btn>
   </v-card>
 </v-container>
 </template>

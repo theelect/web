@@ -58,6 +58,7 @@
 <script>
 
 import axios from 'axios';
+let sms_url = 'http://theelect-smsapi.herokuapp.com/index.php/api';
 
 export default {
 	
@@ -87,7 +88,7 @@ export default {
 
 			try{
 
-				let response = await axios.get('http://localhost:8000/api/messages/all?api_token=2f66686b');
+				let response = await axios.get(`${sms_url}/messages/all?api_token=2f66686b`);
 				
 				let {status, data} = response.data;
 				

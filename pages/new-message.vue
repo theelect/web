@@ -199,7 +199,7 @@
 
 <script>
 import moment from "moment";
-let sms_url = "http://localhost:8000/api";
+let sms_url = "http://theelect-smsapi.herokuapp.com/index.php/api";
 import axios from "axios";
 
 export default {

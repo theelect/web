@@ -276,6 +276,8 @@ export default {
 
 			try{
 
+				this.error = this.success = false;
+				
 				let body = {
 
 					body : this.body,
@@ -287,7 +289,7 @@ export default {
 					gender : this.gender,
 					locals : this.local,
 					wards : this.ward,
-					groups : this.occupation,
+					occupations : this.occupation,
 					months : this.month
 				}
 
@@ -306,7 +308,8 @@ export default {
 					this.success = true;
 					this.step = 1;
 					this.success_message = 'Message has been queued successfully.'
-				
+
+					setTimeout(() => this.$router.push(`/messages`), 2000)
 				}
 				
 			}catch(ex){

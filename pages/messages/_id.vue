@@ -15,34 +15,32 @@
           <v-layout row wrap>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">RECIPIENTS</div>
-              <div class="font-weight-bold title">500,000</div>
+              <div class="font-weight-bold title">{{recipients}}</div>
             </v-flex>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SCHEDULED DATE</div>
-              <div class="font-weight-bold title">13 November, 2018</div>
+              <div class="font-weight-bold title">{{date}}</div>
             </v-flex>
           </v-layout>
 
           <v-layout row wrap mt-5>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SENDER'S NAME</div>
-              <div class="font-weight-bold title">Tonye Cole</div>
+              <div class="font-weight-bold title">{{sender}}</div>
             </v-flex>
             <v-flex xs12 md6>
-              <div class="caption blue-grey--text mb-2">CONTACT NAME</div>
-              <div class="font-weight-bold title">Edo Williams</div>
+              <div class="caption blue-grey--text mb-2">STATUS</div>
+              <div class="font-weight-bold title">{{status}}</div>
             </v-flex>
           </v-layout>
 
           <v-flex mt-5>
             <div class="caption blue-grey--text mb-2">MESSAGE</div>
-            <div
-              class
-            >Hi Edo Williams. My name is Tonye Cole. Could you go out and vote. Press 1 for N200 reward.</div>
+            <div class>{{message}}</div>
           </v-flex>
 
           <v-layout row wrap justify-end mt-5>
-            <v-btn xs12 sm6 class="primary caption">EDIT MESSAGE</v-btn>
+            <v-btn xs12 sm6 class="primary caption" to="/messages">BACK</v-btn>
           </v-layout>
         </v-container>
       </v-card>
@@ -61,7 +59,49 @@
 </style>
 
 <script>
+let sms_url = "http://localhost:8000/api";
+import axios from "axios";
+
 export default {
-  layout: 'dashboard'
+  layout: 'dashboard',
+  data() {
+		
+		return {
+			
+      recipients : '',
+      date : '',
+      sender : '',
+      status : '',
+      message: ''
+		}
+	},
+
+  created : async function(){
+
+			try{
+
+        let id = this.$route.params.id;
+        
+        let response = await axios.get(`${sms_url}/message/${id}?api_token=2f66686b`);
+
+        console.log(response);
+
+				let {status, data} = response.data;
+				
+				if(status != false){
+					
+          this.recipients = data.recipients;
+          this.date = data.date;
+          this.sender = data.sender;
+          this.status = data.status;
+          this.message = data.body;
+          
+				}
+
+			}catch(ex){
+
+				console.error(ex);
+			}
+	}
 }
 </script>

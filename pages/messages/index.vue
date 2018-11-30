@@ -41,19 +41,14 @@
               <td style="width:12%">{{ props.item.date }}</td>
               <td class="justify-center layout px-0">
                 <v-flex mt-2 class="text-xs-center">
-                  <v-btn icon to="/useres/1">
+                  <v-btn icon to="/messages/1">
                     <v-icon small class="green--text">visibility</v-icon>
                   </v-btn>
                 </v-flex>
               </td>
             </tr>
           </template>
-          <v-alert
-            slot="no-results"
-            :value="true"
-            color="error"
-            icon="warning"
-          >Your search for "{{ search }}" found no results.</v-alert>
+          <v-alert slot="no-results" :value="true" color="error" icon="warning">Your search for "{{ search }}" found no results.</v-alert>
         </v-data-table>
       </v-card>
     </v-container>
@@ -92,7 +87,7 @@ export default {
 
 			try{
 
-				let response = await axios.get('http://localhost:8000/api/messages?api_token=2f66686b');
+				let response = await axios.get('http://localhost:8000/api/messages/all?api_token=2f66686b');
 				
 				let {status, data} = response.data;
 				

@@ -5,7 +5,7 @@
       <v-btn class="primary my-btn" to="/dashboard" dark>
         <v-icon large>arrow_left</v-icon>
       </v-btn>
-        <div class="headline d-inline ml-2">Age Distribution</div>
+      <div class="headline d-inline ml-2">Age Distribution</div>
     </v-flex>
 
     <v-card height="440" class="pa-5">
@@ -22,17 +22,17 @@
       <v-divider class="my-4"></v-divider>
 
       <v-list dense>
-        <v-layout row wrap px-4 py-3 v-for="n in 5" :key="n">
-          <v-flex md8 class="">20-30</v-flex>
-          <v-flex md4 class="">50,000</v-flex>
+        <v-layout row wrap px-4 py-3 v-for="(age, index) in age" :key="index">
+          <v-flex md8 class="">{{ age[0] }}</v-flex>
+          <v-flex md4 class="">{{ age[1] }}</v-flex>
         </v-layout>
       </v-list>
 
       <v-container grid-list-md>
         <v-layout justify-end>
-        <v-btn xs12 sm6 flat class="primary--text caption">Prev</v-btn>
-        <v-divider vertical></v-divider>
-        <v-btn xs12 sm6 flat class="primary--text caption">Next</v-btn>
+          <v-btn xs12 sm6 flat class="primary--text caption">Prev</v-btn>
+          <v-divider vertical></v-divider>
+          <v-btn xs12 sm6 flat class="primary--text caption">Next</v-btn>
         </v-layout>
       </v-container>
     </v-card>
@@ -46,12 +46,22 @@
 }
 </style>
 
-
 <script>
 import BarChart from '~/components/charts/BarChart'
 export default {
   layout: 'dashboard',
   name: 'charts',
+  computed: {
+    age() {
+      // return this.$store.getters.age
+      var storedAge = this.$store.getters.age
+      var age = Object.keys(storedAge).map(function (key) {
+        return [(key), storedAge[key]];
+      });
+
+      return age
+    }
+  },
   components: {
     BarChart
   }

@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _353ad358 = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
 const _e4866978 = () => interopDefault(import('../pages/age.vue' /* webpackChunkName: "pages/age" */))
 const _7b0ed3a2 = () => interopDefault(import('../pages/all-voters.vue' /* webpackChunkName: "pages/all-voters" */))
 const _3dc2ee5e = () => interopDefault(import('../pages/contacts.vue' /* webpackChunkName: "pages/contacts" */))
 const _0d66d6ce = () => interopDefault(import('../pages/dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
 const _014962b3 = () => interopDefault(import('../pages/edit-user.vue' /* webpackChunkName: "pages/edit-user" */))
+const _0e41fd0c = () => interopDefault(import('../pages/enlarged-map.vue' /* webpackChunkName: "pages/enlarged-map" */))
 const _2de435ca = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
 const _c53c6d10 = () => interopDefault(import('../pages/lgas.vue' /* webpackChunkName: "pages/lgas" */))
 const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* webpackChunkName: "pages/message-detail" */))
@@ -20,9 +20,6 @@ const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpa
 const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _dd37e6c6 = () => interopDefault(import('../pages/test.vue' /* webpackChunkName: "pages/test" */))
-const _24b34550 = () => interopDefault(import('../pages/users/index.vue' /* webpackChunkName: "pages/users/index" */))
-const _4a6d8f8a = () => interopDefault(import('../pages/users/_id/index.vue' /* webpackChunkName: "pages/users/_id/index" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -83,10 +80,6 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
-      path: "/admin",
-      component: _353ad358,
-      name: "admin"
-    }, {
       path: "/age",
       component: _e4866978,
       name: "age"
@@ -106,6 +99,10 @@ export function createRouter() {
       path: "/edit-user",
       component: _014962b3,
       name: "edit-user"
+    }, {
+      path: "/enlarged-map",
+      component: _0e41fd0c,
+      name: "enlarged-map"
     }, {
       path: "/forgot-password",
       component: _2de435ca,
@@ -154,18 +151,6 @@ export function createRouter() {
       path: "/settings",
       component: _1065e22e,
       name: "settings"
-    }, {
-      path: "/test",
-      component: _dd37e6c6,
-      name: "test"
-    }, {
-      path: "/users",
-      component: _24b34550,
-      name: "users"
-    }, {
-      path: "/users/:id",
-      component: _4a6d8f8a,
-      name: "users-id"
     }, {
       path: "/",
       component: _98197b52,

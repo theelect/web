@@ -4,5 +4,8 @@ export const mutations = {
   },
   SET_OCCUPATION: (state, payload) => {
     state.occupation = payload;
+  },
+  SET_AGE: (state, payload) => {
+    state.age = payload;
   }
 };

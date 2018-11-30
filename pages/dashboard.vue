@@ -60,7 +60,7 @@
       <v-layout row wrap mt-4>
         <v-flex xs12 md6>
           <v-card class="pa-4" max-height="480">
-            <nuxt-link to="/test">
+            <nuxt-link to="/enlarged-map">
               <div class="primary--text text-xs-right">Expand</div>
             </nuxt-link>
 

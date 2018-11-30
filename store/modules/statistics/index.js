@@ -4,7 +4,8 @@ import { actions } from "./actions";
 
 const state = {
   lga: null,
-  occupation: null
+  occupation: null,
+  age: null
 };
 
 export default {

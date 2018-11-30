@@ -4,5 +4,8 @@ export const getters = {
   },
   occupation(state) {
     return state.occupation;
+  },
+  age(state) {
+    return state.age;
   }
 };

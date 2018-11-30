@@ -16,5 +16,13 @@ export const actions = {
       }
     });
     commit("SET_OCCUPATION", response);
+  },
+  async ageDetails({ commit }) {
+    const response = await this.$axios.$get(URLS.age, {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    });
+    commit("SET_AGE", response);
   }
 };

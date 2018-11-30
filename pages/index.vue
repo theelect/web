@@ -4,10 +4,10 @@
     <div class="text-xs-center login-wrapper">
       <img class="logo mt-4" src="/logo.png">
 
-      <nuxt-link to="/forgot-password">
+      <!-- <nuxt-link to="/forgot-password">
         <div class="text-xs-right mt-5 mb-2 body-2 white--text">Forgot Password?</div>
-      </nuxt-link>
-      <v-form ref="authForm" v-model="authValid" lazy-validation>
+      </nuxt-link> -->
+      <v-form class="mt-5" ref="authForm" v-model="authValid" lazy-validation>
         <v-card class="form-wrapper">
           <v-text-field :rules="emailRules" type="email" name="email" v-model="email">
             <div class="caption" slot="label">EMAIL</div>
@@ -19,7 +19,7 @@
 
         <v-flex class="mt-4">
           <v-btn :disabled="!authValid" @click="login" block large class="white primary--text">Log in</v-btn>
-          <v-checkbox color="white" dark label="Remember me" v-model="rememberMe"></v-checkbox>
+          <!-- <v-checkbox color="white" dark label="Remember me" v-model="rememberMe"></v-checkbox> -->
         </v-flex>
       </v-form>
     </div>

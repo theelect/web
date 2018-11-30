@@ -43,7 +43,7 @@
 
         <v-radio-group v-model="role" row class="mt-5">
           <v-radio color="primary" label="Admin" value="admin"></v-radio>
-          <v-radio color="primary" label="View" value="view"></v-radio>
+          <!-- <v-radio color="primary" label="View" value="view"></v-radio> -->
         </v-radio-group>
 
         <v-container grid-list-md>
@@ -68,7 +68,7 @@ export default {
       last_name: '',
       role: '',
       password: '',
-      is_active: false,
+      is_active: true,
       e3: true,
       e1: true,
       emailRules: [

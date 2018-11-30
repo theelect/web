@@ -92,8 +92,7 @@ export default {
 
 			try{
 
-				let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686be77a3eff684cead289fabe873c8032dfaf8a3fc8c13b4a6dd26c2b89'} }
-				let response = await axios.get('http://localhost/streetcapital/api/messages', payload);
+				let response = await axios.get('http://localhost:8000/api/messages?api_token=2f66686b');
 				
 				let {status, data} = response.data;
 				

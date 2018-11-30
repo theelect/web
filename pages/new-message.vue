@@ -19,6 +19,12 @@
         <v-card flat class="mb-5">
           <v-container grid-list-md>
             <v-layout row wrap>
+							<v-flex xs12 sm12 v-if="error">
+								<v-alert :value="true" type="error">{{error_message}}</v-alert>
+							</v-flex>
+							<v-flex xs12 sm12 v-if="success">
+								<v-alert :value="true" type="success">{{success_message}}</v-alert>
+							</v-flex>
               <v-flex xs12 sm6>
                 <v-autocomplete v-model="local" :disabled="isUpdating" :items="locals" box chips color="blue-grey lighten-2" label="Select LGA(s)" item-text="name" item-value="name" multiple>
                   <template slot="selection" slot-scope="data">
@@ -67,8 +73,8 @@
                     </v-card>
                     <v-card flat class="py-2 px-3" height="120">
                       <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in ages" :key="row">
-                          <v-checkbox color="red" v-model="age" v-bind:label="row" v-bind:value="row"></v-checkbox>
+                        <v-flex xs6 sm4 v-for="row in ages" :key="row.id">
+                          <v-checkbox color="red" v-model="age" v-bind:label="row.name" v-bind:value="row.id"></v-checkbox>
                         </v-flex>
                       </v-layout>
                     </v-card>
@@ -103,9 +109,8 @@
                     </v-card>
                     <v-card flat class="py-2 px-3" height="120">
                       <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in months" :key="row">
-                          <v-checkbox color="green" v-model="month" v-bind:label="row" v-bind:value="row"
-                          ></v-checkbox>
+                        <v-flex xs6 sm4 v-for="row in months" :key="row.id">
+                          <v-checkbox color="green" v-model="month" v-bind:label="row.name" v-bind:value="row.id"></v-checkbox>
                         </v-flex>
                       </v-layout>
                     </v-card>
@@ -121,9 +126,8 @@
                     </v-card>
                     <v-card flat class="py-2 px-3" height="120">
                       <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in occupations" :key="row">
-                          <v-checkbox color="pink" v-model="occupation" v-bind:label="row" v-bind:value="row"
-                          ></v-checkbox>
+                        <v-flex xs6 sm4 v-for="row in occupations" :key="row.id">
+                          <v-checkbox color="pink" v-model="occupation" v-bind:label="row.name" v-bind:value="row.id"></v-checkbox>
                         </v-flex>
                       </v-layout>
                     </v-card>
@@ -146,7 +150,7 @@
         <v-card flat class="mb-5">
           <v-container grid-list-md>
             <v-layout row wrap>
-              <v-flex xs12 sm8>
+              <v-flex xs12 sm12>
                 <div class="caption blue-grey--text">GROUP</div>
                 <v-text-field disabled v-model="group"></v-text-field>
               </v-flex>
@@ -161,12 +165,7 @@
 
               <v-flex xs12 sm4>
                 <div class="caption blue-grey--text">SENDER'S NAME</div>
-                <v-text-field disabled v-model="senderName"></v-text-field>
-              </v-flex>
-
-              <v-flex xs12 sm4>
-                <div class="caption blue-grey--text">CONTACT NAME</div>
-                <v-text-field disabled v-model="contactName"></v-text-field>
+                <v-text-field v-model="sender"></v-text-field>
               </v-flex>
 
               <v-flex xs12 sm4>
@@ -177,14 +176,14 @@
           </v-container>
 
           <v-container>
-            <v-textarea v-model="messageBody" auto-grow box color="primary" rows="8" counter>
+            <v-textarea v-model="body" auto-grow box color="primary" rows="8" counter>
               <div class="caption" slot="label">Message</div>
             </v-textarea>
           </v-container>
         </v-card>
 
         <v-container grid-list-md>
-          <v-btn xs12 sm6 class="primary caption">SEND MESSAGE</v-btn>
+          <v-btn xs12 sm6 class="primary caption" @click="sendMessage">SEND MESSAGE</v-btn>
           <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
         </v-container>
       </v-stepper-content>
@@ -202,21 +201,20 @@
 import moment from "moment";
 let sms_url = "http://localhost:8000/api";
 import axios from "axios";
+
 export default {
   layout: "dashboard",
   data() {
+
     return {
+
       step: 1,
-      reward: "N200",
-      group: "Age 20-30, Male, Trader",
-      senderName: "Tonye Cole",
-      contactName: "Edo Williams",
-      recipients: "500,000",
+      sender: "Tonye Cole",
+      recipients: "",
       date: new Date().toISOString().substr(0, 10),
       dateMenu: false,
-      messageBody: "",
+      body: "",
       autoUpdate: true,
-
       age: [],
       gender: [],
       month: [],
@@ -225,43 +223,28 @@ export default {
       locals: [],
       ward: [],
       wards: [],
-      ages: ["20-30", "30-40", "50-60", "60-70", "70-100"],
+      ages: [],
       genders: ["Male", "Female"],
-      months: [
-        "JAN",
-        "FEB",
-        "MAR",
-        "APR",
-        "MAY",
-        "JUN",
-        "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
-      ],
-      occupations: [
-        "Teacher",
-        "Lawyer",
-        "Mechanic",
-        "Engineer",
-        "Doctor",
-        "Artist",
-        "Painter",
-        "Driver",
-        "Geologist"
-      ],
-      items: [],
-      isUpdating: false
-    };
+      months: [],
+			occupations: [],
+			
+			isUpdating: false,
+			group : "",
+			error : false,
+			error_message : '',
+			success : false,
+			success_message : ''
+		
+		};
   },
   created: async function() {
-    let locals = await axios.get(`${sms_url}/locals`);
-    this.locals = locals.data.data;
-
-    let wards = await axios.get(`${sms_url}/wards`);
-    this.wards = wards.data.data;
+		let defaults = await axios.get(`${sms_url}/contacts-defaults`);
+		
+		this.locals = defaults.data.data.locals;
+		this.wards = defaults.data.data.wards;
+		this.ages = defaults.data.data.ages;
+		this.months = defaults.data.data.months;
+		this.occupations = defaults.data.data.occupations;
   },
   computed: {
     sendDate() {
@@ -282,18 +265,59 @@ export default {
       if (index >= 0) this.friends.splice(index, 1);
     },
 
-    submit() {
-      let payload = {
-        local: this.local,
-        wards: this.wards,
-        ages: this.age,
-        genders: this.gender,
-        months: this.month,
-        profession: this.occupation
-      };
+    async submit() {
+
+			this.group = `Ages ${this.age.join(', ')}, Genders ${this.genders.join(', ')}, Professions ${this.occupation.join(', ')}`;
 			this.step = 2;
-      console.log(payload);
-    }
+      
+		},
+
+		async sendMessage(){
+
+			try{
+
+				let body = {
+
+					body : this.body,
+					recipients_type : 'customize',
+					scheduled : 1,
+					schedule_date : this.date,
+					sender : this.sender,
+					ages : this.age,
+					gender : this.gender,
+					locals : this.local,
+					wards : this.ward,
+					groups : this.occupation,
+					months : this.month
+				}
+
+				let response = await axios.post(`${sms_url}/message?api_token=2f66686b`, body);
+				
+				let {status, data} = response.data;
+				
+				if(status == false){
+
+					this.error = true;
+					this.step = 1;
+					this.error_message = data;
+				
+				}else{
+
+					this.success = true;
+					this.step = 1;
+					this.success_message = 'Message has been queued successfully.'
+				
+				}
+				
+			}catch(ex){
+
+				this.error = true;
+				this.step = 1;
+				this.error_message = ex.message.toString()
+			}
+
+		}
+	
   }
 };
 </script>

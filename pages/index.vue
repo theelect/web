@@ -60,10 +60,10 @@ export default {
           device: this.device
         }
         await this.$store.dispatch('login', data)
+        this.$router.push(`/dashboard`)
         this.$toast.success('Successfully Logged In', {
           icon: "check"
         });
-        this.$router.push(`/dashboard`)
       }
     }
   }

@@ -66,9 +66,7 @@
 
           <div class="pa-3">
             <div id="map"></div>
-
-            
-<script src="/mapdata.js"></script>
+            <script src="/mapdata.js"></script>
             <script src="/countrymap.js"></script>
           </div>
         </v-card>
@@ -91,7 +89,7 @@
 
           <v-list dense>
             <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
-              <v-flex md8 class>{{ capitalizeFirst(lga._id) }}</v-flex>
+              <v-flex md8 class>{{ lga._id }}</v-flex>
               <v-flex md4 class>{{ lga.count }}</v-flex>
             </v-layout>
           </v-list>
@@ -128,6 +126,7 @@
 <script>
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
+import axios from 'axios';
 export default {
   middleware: "authenticated",
   layout: "dashboard",
@@ -142,23 +141,19 @@ return {
   },
   created : async function(){
 
-try{
+    try{
 
-let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686be77a3eff684cead289fabe873c8032dfaf8a3fc8c13b4a6dd26c2b89'} }
+      let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
         let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
 
         let {status, data} = response.data;
 
-if(status != false){
-          this.scheduled_messages_count = data.scheduled;
-          this.sent_messages_count = data.sent;
-        }
+      if(status != false){
+        this.scheduled_messages_count = data.scheduled;
+        this.sent_messages_count = data.sent;
+      }
 
-}catch(ex){
-
-console.error(ex);
-
-}
+    }catch(ex){}
 	},
   components: {
     BarChart,

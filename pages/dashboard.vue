@@ -132,15 +132,12 @@ export default {
   layout: "dashboard",
   name: "charts",
   data() {
-
-return {
+    return {
       scheduled_messages_count : 0,
-      sent_messages_count : 0,
-
-}
+      sent_messages_count : 0
+    }
   },
   created : async function(){
-
     try{
 
       let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
@@ -176,10 +173,7 @@ return {
     }
   },
   mounted() {
-    this.$store.dispatch('lgaDetails')
-    this.$store.dispatch('occupationDetails')
-    this.$store.dispatch('ageDetails')
-    this.$store.dispatch('pvcCount')
+    
   }
 };
 </script>

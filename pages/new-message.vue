@@ -41,18 +41,6 @@ export default {
       dateMenu: false,
       body: "",
       autoUpdate: true,
-      age: [],
-      gender: [],
-      month: [],
-      occupation: [],
-      local: [],
-      locals: [],
-      ward: [],
-      wards: [],
-      ages: [],
-      genders: [],
-      months: [],
-      occupations: [],
 
       isUpdating: false,
       group: "",
@@ -76,15 +64,6 @@ export default {
     }
   },
   methods: {
-    remove(item) {
-      const index = this.friends.indexOf(item.name);
-      if (index >= 0) this.friends.splice(index, 1);
-    },
-    async submit() {
-      this.group = `Ages ${this.age.join(', ')}, Genders ${this.genders.join(', ')}, Professions ${this.occupation.join(', ')}`;
-      this.step = 2;
-
-    },
     async sendMessage() {
       try {
         this.$toast.show('Sending...', {
@@ -96,14 +75,7 @@ export default {
           body: this.body,
           recipients_type: 'custom',
           scheduled: 0,
-          schedule_date: this.date,
           sender: this.sender,
-          ages: this.age,
-          gender: this.gender,
-          locals: this.local,
-          wards: this.ward,
-          occupations: this.occupation,
-          months: this.month,
           recipients: this.recipients.split(',')
         }
         let response = await axios.post(`${sms_url}/message?api_token=2f66686b`, body);

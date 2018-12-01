@@ -179,6 +179,12 @@ console.error(ex);
     pvcCount() {
       return this.$store.getters.pvcCount
     }
+  },
+  mounted() {
+    this.$store.dispatch('lgaDetails')
+    this.$store.dispatch('occupationDetails')
+    this.$store.dispatch('ageDetails')
+    this.$store.dispatch('pvcCount')
   }
 };
 </script>

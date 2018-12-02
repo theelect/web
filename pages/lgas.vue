@@ -18,7 +18,7 @@
 
       <v-list dense>
         <v-layout row wrap px-4 py-3 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
-          <v-flex md8 class="">{{ lga._id }}</v-flex>
+          <v-flex md8 class="">{{ lga._id | capitalize }}</v-flex>
           <v-flex md4 class="">{{ lga.count }}</v-flex>
         </v-layout>
       </v-list>
@@ -48,6 +48,13 @@ export default {
   computed: {
     lgas() {
       return this.$store.getters.lga
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }

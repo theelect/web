@@ -1,18 +1,10 @@
 <template>
 <v-container fluid>
-  <v-flex mb-5>
-    <v-btn class="primary my-btn" to="/messages" dark>
-      <v-icon large>arrow_left</v-icon>
-    </v-btn>
-    <div class="d-inline">
-      <div class="title d-inline ml-2">New Message</div>
-    </div>
-  </v-flex>
-
   <v-card class="pa-5">
-    <div class="mb-5">
-      <div class="caption blue-grey--text">RECIPIENTS</div>
-    </div>
+    <div class="caption blue-grey--text">RECIPIENTS</div>
+    <v-text-field type="tel" solo v-model="recipients">
+      <div class="caption" slot="label">Enter the phone numbers of the recipients separated by comma</div>
+    </v-text-field>
 
     <div class="caption blue-grey--text mt-2">MESSAGE BODY</div>
     <v-textarea class="mb-4" v-model="body" auto-grow box color="primary" rows="8" counter>
@@ -20,7 +12,6 @@
     </v-textarea>
 
     <v-btn xs12 sm6 @click="sendMessage" class="primary caption ">SEND MESSAGE</v-btn>
-    <v-btn to="/messages" xs12 sm6 dark class="red caption">BACK</v-btn>
   </v-card>
 </v-container>
 </template>
@@ -63,10 +54,6 @@ export default {
     }
   },
   methods: {
-    remove(item) {
-      const index = this.friends.indexOf(item.name);
-      if (index >= 0) this.friends.splice(index, 1);
-    },
     async sendMessage() {
       try {
         this.$toast.show('Sending...', {
@@ -76,9 +63,10 @@ export default {
 
         let body = {
           body: this.body,
-          recipients_type: 'all',
+          recipients_type: 'custom',
           scheduled: 0,
-          sender: this.sender
+          sender: this.sender,
+          recipients: this.recipients.split(',')
         }
         let response = await axios.post(`${sms_url}/message?api_token=2f66686b`, body);
 

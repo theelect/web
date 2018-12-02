@@ -24,5 +24,13 @@ export const actions = {
       }
     });
     commit("SET_AGE", response);
+  },
+  async reach({ commit }) {
+    const response = await this.$axios.$get(URLS.reach, {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    });
+    commit("SET_REACH", response);
   }
 };

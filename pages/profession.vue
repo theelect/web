@@ -23,7 +23,7 @@
 
       <v-list dense>
         <v-layout row wrap px-4 py-3 v-for="(occupation, index) in occupations.slice(0, 5)" :key="index">
-          <v-flex md8 class="">{{ occupation._id }}</v-flex>
+          <v-flex md8 class="">{{ occupation._id | capitalize }}</v-flex>
           <v-flex md4 class="">{{ occupation.count }}</v-flex>
         </v-layout>
       </v-list>
@@ -58,6 +58,13 @@ export default {
   computed: {
     occupations() {
       return this.$store.getters.occupation
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }

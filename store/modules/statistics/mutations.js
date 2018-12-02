@@ -7,5 +7,8 @@ export const mutations = {
   },
   SET_AGE: (state, payload) => {
     state.age = payload;
+  },
+  SET_REACH: (state, payload) => {
+    state.reach = payload;
   }
 };

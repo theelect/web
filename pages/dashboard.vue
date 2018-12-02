@@ -89,7 +89,7 @@
 
           <v-list dense>
             <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
-              <v-flex md8 class>{{ lga._id }}</v-flex>
+              <v-flex md8 class>{{ lga._id | capitalize }}</v-flex>
               <v-flex md4 class>{{ lga.count }}</v-flex>
             </v-layout>
           </v-list>
@@ -156,9 +156,11 @@ export default {
     BarChart,
     DoughnutChart
   },
-  methods: {
-    capitalizeFirst: function (string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   },
   computed: {
@@ -171,9 +173,6 @@ export default {
     pvcCount() {
       return this.$store.getters.pvcCount
     }
-  },
-  mounted() {
-    
   }
 };
 </script>

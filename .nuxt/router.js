@@ -14,9 +14,7 @@ const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* w
 const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
 const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
 const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
-const _4052a573 = () => interopDefault(import('../pages/new-message-all.vue' /* webpackChunkName: "pages/new-message-all" */))
 const _e936a93a = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
-const _1184030e = () => interopDefault(import('../pages/old-new-message.vue' /* webpackChunkName: "pages/old-new-message" */))
 const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
 const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
@@ -129,17 +127,9 @@ export function createRouter() {
       component: _47c65c9f,
       name: "new-message"
     }, {
-      path: "/new-message-all",
-      component: _4052a573,
-      name: "new-message-all"
-    }, {
       path: "/new-user",
       component: _e936a93a,
       name: "new-user"
-    }, {
-      path: "/old-new-message",
-      component: _1184030e,
-      name: "old-new-message"
     }, {
       path: "/profession",
       component: _0aa481c7,

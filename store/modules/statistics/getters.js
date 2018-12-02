@@ -7,5 +7,8 @@ export const getters = {
   },
   age(state) {
     return state.age;
+  },
+  reach(state) {
+    return state.reach;
   }
 };

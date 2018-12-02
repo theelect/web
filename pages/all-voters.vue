@@ -36,15 +36,15 @@
                 </v-flex>
                 <v-flex md10>
 
-              <div class="title">{{ voter.first_name + ' ' + voter.last_name }}</div>
+                  <div class="title">{{ voter.first_name | capitalize }}  {{ voter.last_name | capitalize }}</div>
                 </v-flex>
               </v-layout>
               <div class="primary--text mt-2">{{ voter.phone }}</div>
-              <div class="grey--text mt-2"> {{ voter.profession }}</div>
+              <div class="grey--text mt-2"> {{ voter.dob | formatDate }} / {{ voter.profession | capitalize }}</div>
             </v-card-title>
             <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Vincent Hope</div>
             <v-card-text class="blue-grey lighten-4 px-4">
-              {{ voter.lga }} - {{ voter.ward }}
+              {{ voter.lga | capitalize }} - {{ voter.ward | capitalize }}
             </v-card-text>
           </v-card>
         </v-hover>
@@ -80,13 +80,17 @@ export default {
       return this.$store.getters.pvcCount
     }
   },
-  methods: {
-    capitalizeFirst: function (string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+    formatDate: function (date) {
+      if (!date) return ''
+      date = date.substr(0, 10)
+      return date ? moment(date).format('DD-MM-YYYY') : ''
     }
-  },
-  mounted() {
-    
   }
 }
 </script>

@@ -9,110 +9,59 @@
     </div>
   </v-flex>
 
-  <v-card class="pa-5">
-    <div class="caption blue-grey--text">RECIPIENTS</div>
-    <v-text-field type="tel" solo v-model="recipients">
-      <div class="caption" slot="label">Enter the phone numbers of the recipients separated by comma</div>
-    </v-text-field>
+  <v-tabs height="60" grow color="primary" dark slider-color="yellow">
+    <v-tab ripple href="#all">
+      ALL CONTACTS
+    </v-tab>
+    <v-tab ripple href="#cus">
+      CUSTOMIZED RECIPIENTS
+    </v-tab>
+    <v-tab ripple href="#ent">
+      ENTER RECIPIENTS
+    </v-tab>
 
-    <div class="caption blue-grey--text mt-2">MESSAGE BODY</div>
-    <v-textarea class="mb-4" v-model="body" auto-grow box color="primary" rows="8" counter>
-      <div class="caption" slot="label">Message</div>
-    </v-textarea>
+    <v-tab-item value="all">
+      <v-card flat class="pa-4">
+        <allContacts></allContacts>
+      </v-card>
+    </v-tab-item>
 
-    <v-btn xs12 sm6 @click="sendMessage" class="primary caption ">SEND MESSAGE</v-btn>
-    <v-btn to="/messages" xs12 sm6 dark class="red caption">BACK</v-btn>
-  </v-card>
+    <v-tab-item value="cus">
+      <v-card flat class="pa-4">
+        <customizedRecipients></customizedRecipients>
+      </v-card>
+    </v-tab-item>
+
+    <v-tab-item value="ent">
+      <v-card flat class="pa-4">
+        <enterRecipients></enterRecipients>
+      </v-card>
+    </v-tab-item>
+  </v-tabs>
 </v-container>
 </template>
-
-<script>
-import moment from "moment";
-let sms_url = "http://theelect-smsapi.herokuapp.com/index.php/api";
-import axios from "axios";
-export default {
-  layout: "dashboard",
-  data() {
-    return {
-      step: 1,
-      sender: "Tonye Cole",
-      recipients: "",
-      date: new Date().toISOString().substr(0, 10),
-      dateMenu: false,
-      body: "",
-      autoUpdate: true,
-
-      isUpdating: false,
-      group: "",
-      error: false,
-      error_message: '',
-      success: false,
-      success_message: ''
-
-    };
-  },
-  computed: {
-    sendDate() {
-      return this.date ? moment(this.date).format("MMMM Do YYYY") : "";
-    }
-  },
-  watch: {
-    isUpdating(val) {
-      if (val) {
-        setTimeout(() => (this.isUpdating = false), 3000);
-      }
-    }
-  },
-  methods: {
-    async sendMessage() {
-      try {
-        this.$toast.show('Sending...', {
-            icon: "fingerprint"
-          });
-        this.error = this.success = false;
-
-        let body = {
-          body: this.body,
-          recipients_type: 'custom',
-          scheduled: 0,
-          sender: this.sender,
-          recipients: this.recipients.split(',')
-        }
-        let response = await axios.post(`${sms_url}/message?api_token=2f66686b`, body);
-
-        let {
-          status,
-          data
-        } = response.data;
-
-        if (status == false) {
-          this.error = true;
-          this.step = 1;
-          this.error_message = data;
-
-        } else {
-          this.success = true;
-          this.step = 1;
-          this.success_message = 'Message has been queued successfully.'
-          this.$toast.success('Message has been queued successfully.', {
-            icon: "check"
-          });
-          setTimeout(() => this.$router.push(`/messages`), 2000)
-        }
-
-      } catch (ex) {
-        this.error = true;
-        this.step = 1;
-        this.error_message = ex.message.toString()
-      }
-    }
-
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .v-btn {
   min-width: 20px;
 }
 </style>
+
+<script>
+import allContacts from "~/components/messages/all-contacts"
+import enterRecipients from "~/components/messages/enter-recipients"
+import customizedRecipients from "~/components/messages/customized-recipients"
+export default {
+  layout: 'dashboard',
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    allContacts,
+    enterRecipients,
+    customizedRecipients
+  }
+}
+</script>

@@ -5,7 +5,8 @@ import { actions } from "./actions";
 const state = {
   lga: null,
   occupation: null,
-  age: null
+  age: null,
+  reach: null
 };
 
 export default {

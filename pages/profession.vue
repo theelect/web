@@ -13,7 +13,7 @@
       <doughnut-chart :height="300"></doughnut-chart>
     </v-card>
 
-    <v-card height="500" class="mt-4 pa-5">
+    <v-card class="mt-4 pa-5">
       <v-layout row wrap px-4 pt-4>
         <v-flex md8 class="subheading font-weight-bold">Profession</v-flex>
         <v-flex md4 class="subheading font-weight-bold">Population</v-flex>
@@ -22,19 +22,11 @@
       <v-divider class="my-4"></v-divider>
 
       <v-list dense>
-        <v-layout row wrap px-4 py-3 v-for="(occupation, index) in occupations.slice(0, 5)" :key="index">
+        <v-layout row wrap px-4 py-3 v-for="(occupation, index) in occupations" :key="index">
           <v-flex md8 class="">{{ occupation._id | capitalize }}</v-flex>
           <v-flex md4 class="">{{ occupation.count }}</v-flex>
         </v-layout>
       </v-list>
-
-      <v-container grid-list-md>
-        <v-layout justify-end>
-        <v-btn xs12 sm6 flat class="primary--text caption">Prev</v-btn>
-        <v-divider vertical></v-divider>
-        <v-btn xs12 sm6 flat class="primary--text caption">Next</v-btn>
-        </v-layout>
-      </v-container>
     </v-card>
   </v-container>
 </section>

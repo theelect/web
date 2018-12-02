@@ -27,14 +27,6 @@
           <v-flex md4 class="">{{ age[1] }}</v-flex>
         </v-layout>
       </v-list>
-
-      <v-container grid-list-md>
-        <v-layout justify-end>
-          <v-btn xs12 sm6 flat class="primary--text caption">Prev</v-btn>
-          <v-divider vertical></v-divider>
-          <v-btn xs12 sm6 flat class="primary--text caption">Next</v-btn>
-        </v-layout>
-      </v-container>
     </v-card>
   </v-container>
 </section>

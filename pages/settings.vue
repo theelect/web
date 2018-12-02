@@ -16,9 +16,9 @@
         <template slot="no-data">Loading...</template>
         <template slot="items" slot-scope="props">
           <tr>
-            <td>{{ capitalizeFirst(props.item.role) }}</td>
-            <td>{{ capitalizeFirst(props.item.first_name) }}</td>
-            <td>{{ capitalizeFirst(props.item.last_name) }}</td>
+            <td>{{ props.item.role }}</td>
+            <td>{{ props.item.first_name }}</td>
+            <td>{{ props.item.last_name }}</td>
             <td>{{ props.item.email }}</td>
             <td class="justify-center layout px-0">
               <v-flex mt-2 class="text-xs-center">

@@ -36,15 +36,15 @@
                 </v-flex>
                 <v-flex md10>
 
-              <div class="title">{{ capitalizeFirst(voter.first_name) + ' ' + capitalizeFirst(voter.last_name) }}</div>
+              <div class="title">{{ voter.first_name + ' ' + voter.last_name }}</div>
                 </v-flex>
               </v-layout>
               <div class="primary--text mt-2">{{ voter.phone }}</div>
-              <div class="grey--text mt-2"> {{ (voter.dob).substring(0, 10) }} / {{ capitalizeFirst(voter.profession) }}</div>
+              <div class="grey--text mt-2"> {{ voter.profession }}</div>
             </v-card-title>
             <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Vincent Hope</div>
             <v-card-text class="blue-grey lighten-4 px-4">
-              {{ capitalizeFirst(voter.lga) }} - {{ capitalizeFirst(voter.ward) }}
+              {{ voter.lga }} - {{ voter.ward }}
             </v-card-text>
           </v-card>
         </v-hover>

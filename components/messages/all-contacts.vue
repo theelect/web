@@ -21,7 +21,7 @@
 
 <script>
 import moment from "moment";
-let sms_url = "http://theelect-smsapi.herokuapp.com/index.php/api";
+let sms_url = "https://theelect-smsapi.herokuapp.com/index.php/api";
 import axios from "axios";
 export default {
   layout: "dashboard",

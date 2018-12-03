@@ -16,24 +16,16 @@
         <v-progress-linear slot="no-data" color="blue" indeterminate></v-progress-linear>
         <template slot="items" slot-scope="props">
           <tr>
-            <td>{{ props.item.role }}</td>
-            <td>{{ props.item.first_name }}</td>
-            <td>{{ props.item.last_name }}</td>
+            <td>{{ props.item.role | capitalize }}</td>
+            <td>{{ props.item.first_name | capitalize }}</td>
+            <td>{{ props.item.last_name | capitalize }}</td>
             <td>{{ props.item.email }}</td>
-            <td class="justify-center layout px-0">
-              <v-flex mt-2 class="text-xs-center">
-                <v-btn icon @click="editUser=true">
-                  <v-icon small class="primary--text">edit</v-icon>
-                </v-btn>
-              </v-flex>
-            </td>
           </tr>
         </template>
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">Your search for "{{ search }}" found no results.</v-alert>
       </v-data-table>
     </v-card>
   </v-container>
-  
+
   <v-dialog max-width="800" v-model="editUser">
     <v-card class="px-4 py-4">
       <v-container grid-list-md fluid>
@@ -119,12 +111,6 @@ export default {
         {
           text: "Email",
           value: "email"
-        },
-        {
-          text: "Actions",
-          value: "name",
-          sortable: false,
-          align: "center"
         }
       ],
       users: []
@@ -140,11 +126,13 @@ export default {
         this.users = response.data;
       })
   },
-  methods: {
-    capitalizeFirst: function (string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
-  },
+  }
 };
 </script>
 

@@ -15,7 +15,7 @@
       <v-card>
         <v-card-title></v-card-title>
         <v-data-table :headers="headers" :items="messages" :search="search">
-          <template slot="no-data" class="text-xs-center">Loading...</template>
+        <v-progress-linear slot="no-data" color="blue" indeterminate></v-progress-linear>
           <template slot="items" slot-scope="props">
             <tr>
               <td>{{ props.item.status }}</td>

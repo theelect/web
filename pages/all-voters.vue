@@ -18,7 +18,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 lg4 xl3 v-for="(voter, index) in voters" :key="index" mb-4>
         <v-hover>
-          <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="290">
+          <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="320" height="210">
             <v-layout class="justify-end">
               <v-badge v-if="voter.is_verified" class="mr-3" left color="green">
                 <span slot="badge"></span>
@@ -28,7 +28,7 @@
               </v-badge>
             </v-layout>
             <v-card-title class="d-block px-4">
-              <v-layout row wrap align-center align-content-center>
+              <v-layout mb-3 row wrap align-center align-content-center>
                 <v-flex md2>
                   <v-icon class="black--text">
                     account_circle
@@ -39,13 +39,15 @@
                   <div class="title">{{ voter.first_name | capitalize }}  {{ voter.last_name | capitalize }}</div>
                 </v-flex>
               </v-layout>
-              <div class="primary--text mt-2">{{ voter.phone }}</div>
-              <div class="grey--text mt-2"> {{ voter.dob | formatDate }} / {{ voter.profession | capitalize }}</div>
+              <div class="primary--text">{{ voter.phone }}</div>
+              <div v-if="voter.dob!=null || voter.profession!=null" class="grey--text mt-2"> {{ voter.dob | formatDate }} <span v-if="voter.dob!=null && voter.profession!=null">/</span> {{ voter.profession | capitalize }}</div>
+              <div v-else class="grey--text mt-2">Unknown DOB and Profession</div>
             </v-card-title>
-            <div class="smallest primary--text text-xs-right mr-4 mb-1 mt-2">Verified By: Vincent Hope</div>
-            <v-card-text class="blue-grey lighten-4 px-4">
-              {{ voter.lga | capitalize }} - {{ voter.ward | capitalize }}
+
+            <v-card-text v-if="voter.lga!=null || voter.ward!=null" class="blue-grey lighten-4 px-4 mt-4">
+              {{ voter.lga | capitalize }} <span v-if="voter.lga!=null && voter.ward!=null">-</span> {{ voter.ward | capitalize }}
             </v-card-text>
+            <v-card-text v-else class="blue-grey lighten-4 px-4 mt-4">Unknown LGA and Ward</v-card-text>
           </v-card>
         </v-hover>
       </v-flex>

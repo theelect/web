@@ -1,7 +1,7 @@
 var simplemaps_countrymap_mapdata={
   main_settings: {
    //General settings
-    width: "responsive", //"300",'700' or 'responsive'
+    width: "responsive", //'700' or 'responsive'
     background_color: "#FFFFFF",
     background_transparent: "yes",
     border_color: "#fffff",
@@ -225,139 +225,145 @@ var simplemaps_countrymap_mapdata={
       lat: 4.854,
       lng: "6.535",
       name: "Abua-Odua",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "1": {
       lat: 5.084,
       lng: 6.649,
       name: "Ahoada East",
-      description: "Voters: 1200"
+      description: "Voters: 6"
     },
     "2": {
       lat: 5.063,
       lng: 6.45,
       name: "Ahoada West",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "3": {
       lat: "4.778",
       lng: "6.771",
       name: "Akuku Toru",
-      description: "Voters: 1200"
+      description: "Voters: 1",
+      color: "red"
     },
     "4": {
       lat: 47.564,
       lng: 2.837,
       name: "Bonny",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "5": {
       lat: "4.7",
       lng: "6.69",
       name: "Degema",
-      description: "Voters: 1200"
+      description: "Voters: 10",
+      color: "red"
     },
     "6": {
       lat: "4.677",
       lng: "7.013",
-      description: "Voters: 1200",
+      description: "Voters: 0",
       name: "Eleme"
     },
     "7": {
       lat: 4.884,
       lng: 6.862,
       name: "Emohua",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "8": {
       lat: 5.018,
       lng: 7.068,
       name: "Etche",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "9": {
       lat: 4.653,
       lng: 7.29,
       name: "Gokana",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "10": {
       lat: 5.122,
       lng: 6.902,
       name: "Ikwerre",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "11": {
       lat: 31.371,
       lng: 74.379,
       name: "Khana",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "12": {
       lat: 4.86,
       lng: "7.128",
       name: "Obio/Akpor",
-      description: "Voters: 1200"
+      description: "Voters: 98",
+      color: "red"
     },
     "13": {
       lat: 5.347,
       lng: 6.659,
       name: "Ogba/Egbema/Ndoni",
-      description: "Voters: 1200"
+      description: "Voters: 7",
+      color: "red"
     },
     "14": {
       lat: 4.74,
       lng: 7.19,
       name: "Ogu/Bolo",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "15": {
       lat: 4.721,
       lng: 7.087,
       name: "Okrika",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "16": {
       lat: "5.1231",
       lng: "7.2437",
-      description: "Voters: 1200",
+      description: "Voters: 0",
       name: "Omuma"
     },
     "17": {
       lat: 4.641,
       lng: 7.561,
       name: "Opobo/Nekoro",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "18": {
       lat: 4.857,
       lng: 7.303,
       name: "Oyigbo",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "19": {
       lat: 4.814,
       lng: 7.044,
       name: "Port-Harcourt",
-      description: "Voters: 1200"
+      description: "Voters: 6",
+      color: "red"
     },
     "20": {
       lat: 5.824,
       lng: -7.402,
       name: "Tai",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     },
     "22": {
       lat: "4.5044",
       lng: "7.3733",
       name: "Andoni",
-      description: "Voters: 1200"
+      description: "Voters: 1",
+      color: "red"
     },
     "23": {
       lat: "4.7456",
       lng: "6.8668",
       name: "Asari Toru",
-      description: "Voters: 1200"
+      description: "Voters: 0"
     }
   },
   labels: {

@@ -19,6 +19,7 @@ const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpa
 const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
 const _e1af65dc = () => interopDefault(import('../pages/realtime-voters.vue' /* webpackChunkName: "pages/realtime-voters" */))
 const _1065e22e = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _dd37e6c6 = () => interopDefault(import('../pages/test.vue' /* webpackChunkName: "pages/test" */))
 const _98197b52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -146,6 +147,10 @@ export function createRouter() {
       path: "/settings",
       component: _1065e22e,
       name: "settings"
+    }, {
+      path: "/test",
+      component: _dd37e6c6,
+      name: "test"
     }, {
       path: "/",
       component: _98197b52,

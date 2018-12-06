@@ -95,7 +95,7 @@
           <v-divider></v-divider>
 
           <v-list dense>
-            <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.reverse().slice(0, 5)" :key="index">
+            <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
               <v-flex md8 class>{{ lga._id | capitalize }}</v-flex>
               <v-flex md4 class>{{ lga.count }}</v-flex>
             </v-layout>

@@ -3,7 +3,13 @@
   <v-container grid-list-md fluid>
     <v-layout row wrap>
       <v-flex xs12 md2>
-        <v-img :src="`/tonye.jpg`" max-height="240"></v-img>
+        <v-img :src="`/tonye.jpg`" max-height="240">
+
+          <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          </v-layout>
+
+        </v-img>
       </v-flex>
 
       <v-flex xs12 md5>
@@ -15,7 +21,7 @@
               <!-- </nuxt-link> -->
 
               <div class="body-2">Total Verified Voters</div>
-              <div class="display-2 mt-2">{{ pvcCount.total_verified }}</div>
+              <div class="display-2 mt-2">{{ verifiedVotersPercentage }}</div>
             </v-card>
           </v-flex>
 
@@ -66,7 +72,8 @@
 
           <div class="pa-3">
             <div id="map"></div>
-            <script src="/mapdata.js"></script>
+            
+<script src="/mapdata.js"></script>
             <script src="/countrymap.js"></script>
           </div>
         </v-card>
@@ -88,7 +95,7 @@
           <v-divider></v-divider>
 
           <v-list dense>
-            <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
+            <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.reverse().slice(0, 5)" :key="index">
               <v-flex md8 class>{{ lga._id | capitalize }}</v-flex>
               <v-flex md4 class>{{ lga.count }}</v-flex>
             </v-layout>
@@ -172,6 +179,10 @@ export default {
     },
     pvcCount() {
       return this.$store.getters.pvcCount
+    },
+    verifiedVotersPercentage() {
+      let percentage = (this.pvcCount.total_verified/this.pvc.total)*100
+      return percentage.toFixed(2) + '%'
     }
   }
 };

@@ -14,7 +14,7 @@ module.exports = {
       { hid: "description", name: "description", content: pkg.description }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       {
         rel: "stylesheet",
         href:
@@ -41,7 +41,8 @@ module.exports = {
   plugins: [
     "@/plugins/vuetify",
     { src: "~/plugins/localstorage.js", ssr: false },
-    { src: "~/plugins/axios", ssr: false }
+    { src: "~/plugins/axios", ssr: false },
+    { src: "~plugins/ga.js", ssr: false }
   ],
 
   /*

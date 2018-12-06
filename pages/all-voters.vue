@@ -36,7 +36,7 @@
                 </v-flex>
                 <v-flex md10>
 
-                  <div class="title">{{ voter.first_name | capitalize }}  {{ voter.last_name | capitalize }}</div>
+                  <div class="title">{{ voter.first_name | capitalize }} {{ voter.last_name | capitalize }}</div>
                 </v-flex>
               </v-layout>
               <div class="primary--text">{{ voter.phone }}</div>
@@ -68,18 +68,26 @@
 
 <script>
 import moment from 'moment'
+import * as URLS from "@/utils/urls";
 export default {
   layout: 'dashboard',
+  async asyncData({app}) {
+    let pvc = await app.$axios.$get(URLS.pvc, {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    let pvcCount = await app.$axios.$get(URLS.pvcCount, {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    return {pvc, pvcCount}
+  },
   computed: {
-    pvc() {
-      return this.$store.getters.pvc
-    },
     voters() {
       const voters = this.pvc.docs
       return voters
-    },
-    pvcCount() {
-      return this.$store.getters.pvcCount
     }
   },
   filters: {
@@ -91,7 +99,7 @@ export default {
     formatDate: function (date) {
       if (!date) return ''
       date = date.substr(0, 10)
-      return date ? moment(date).format('DD-MM-YYYY') : ''
+      return date ? moment(date).format('YYYY') : ''
     }
   }
 }

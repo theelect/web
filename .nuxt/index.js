@@ -17,6 +17,7 @@ import nuxt_plugin_axios_05fe9a67 from 'nuxt_plugin_axios_05fe9a67' // Source: .
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
 import nuxt_plugin_localstorage_47a6c111 from 'nuxt_plugin_localstorage_47a6c111' // Source: ../plugins/localstorage.js (ssr: false)
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ../plugins/axios (ssr: false)
+import nuxt_plugin_ga_fb0a2534 from 'nuxt_plugin_ga_fb0a2534' // Source: ../plugins/ga.js (ssr: false)
 
 // Component: <no-ssr>
 Vue.component(NoSSR.name, NoSSR)
@@ -158,6 +159,7 @@ async function createApp(ssrContext) {
     if (typeof nuxt_plugin_toast_5ba231d4 === 'function') await nuxt_plugin_toast_5ba231d4(app.context, inject)
     if (typeof nuxt_plugin_localstorage_47a6c111 === 'function') await nuxt_plugin_localstorage_47a6c111(app.context, inject)
     if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)
+    if (typeof nuxt_plugin_ga_fb0a2534 === 'function') await nuxt_plugin_ga_fb0a2534(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

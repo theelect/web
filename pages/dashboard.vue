@@ -72,6 +72,7 @@
 
           <div class="pa-3">
             <div id="map"></div>
+
             
 <script src="/mapdata.js"></script>
             <script src="/countrymap.js"></script>
@@ -95,7 +96,7 @@
           <v-divider></v-divider>
 
           <v-list dense>
-            <v-layout row wrap px-4 py-2 v-for="(lga, index) in lgas.slice(0, 5)" :key="index">
+            <v-layout row wrap px-4 py-2 v-for="(lga, index) in sortedLgas" :key="index">
               <v-flex md8 class>{{ lga._id | capitalize }}</v-flex>
               <v-flex md4 class>{{ lga.count }}</v-flex>
             </v-layout>
@@ -183,6 +184,10 @@ export default {
     verifiedVotersPercentage() {
       let percentage = (this.pvcCount.total_verified/this.pvc.total)*100
       return percentage.toFixed(2) + '%'
+    },
+    sortedLgas() {
+      let sortedLgas = this.lgas.sort((a,b) => (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0))
+      return sortedLgas.slice(0,5)
     }
   }
 };

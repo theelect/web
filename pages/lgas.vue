@@ -17,7 +17,7 @@
       <v-divider class="my-4"></v-divider>
 
       <v-list dense>
-        <v-layout row wrap px-4 py-3 v-for="(lga, index) in lgas" :key="index">
+        <v-layout row wrap px-4 py-3 v-for="(lga, index) in sortedLgas" :key="index">
           <v-flex md8 class="">{{ lga._id | capitalize }}</v-flex>
           <v-flex md4 class="">{{ lga.count }}</v-flex>
         </v-layout>
@@ -43,6 +43,9 @@ export default {
     },
     reach() {
       return this.$store.getters.reach
+    },
+    sortedLgas() {
+      return this.lgas.sort((a,b) => (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0))
     }
   },
   filters: {

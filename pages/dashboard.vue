@@ -145,6 +145,28 @@ export default {
       sent_messages_count : 0
     }
   },
+  async asyncData({app}) {
+    let lgas = await app.$axios.$get('/pvc/statistics?type=lga', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    let pvc = await app.$axios.$get('/pvc', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    let pvcCount = await app.$axios.$get('/pvc-count', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    return {lgas, pvc, pvcCount}
+  },
+  beforeCreate() {
+    this.$store.dispatch('pvcCount')
+    
+  },
   created : async function(){
     try{
 
@@ -172,15 +194,6 @@ export default {
     }
   },
   computed: {
-    pvc() {
-      return this.$store.getters.pvc
-    },
-    lgas() {
-      return this.$store.getters.lga
-    },
-    pvcCount() {
-      return this.$store.getters.pvcCount
-    },
     verifiedVotersPercentage() {
       let percentage = (this.pvcCount.total_verified/this.pvc.total)*100
       return percentage.toFixed(2) + '%'

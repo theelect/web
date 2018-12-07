@@ -37,10 +37,15 @@
 <script>
 export default {
   layout: 'dashboard',
+  async asyncData({app}) {
+    let lgas = await app.$axios.$get('/pvc/statistics?type=lga', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    return {lgas}
+  },
   computed: {
-    lgas() {
-      return this.$store.getters.lga
-    },
     reach() {
       return this.$store.getters.reach
     },

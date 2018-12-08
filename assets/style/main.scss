@@ -97,3 +97,11 @@ a {
   box-shadow: 2px 2px 3px #999;
   z-index: 3;
 }
+
+//Transition
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

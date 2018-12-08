@@ -95,7 +95,9 @@
   </v-toolbar>
 
   <v-content>
-    <nuxt class="my-container"></nuxt>
+    <transition name="fade">
+      <nuxt class="my-container"></nuxt>
+    </transition>
   </v-content>
 
 </v-app>

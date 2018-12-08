@@ -2,7 +2,9 @@
   <v-app light>
     <v-content class="primary">
       <v-container>
-        <nuxt />
+        <transition name="fade">
+          <nuxt />
+        </transition>
       </v-container>
     </v-content>
   </v-app>

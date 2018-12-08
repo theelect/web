@@ -20,6 +20,8 @@ module.exports = {
         href:
           "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
       }
+    ],
+    script: [
     ]
   },
 
@@ -75,5 +77,23 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {}
+  },
+
+
+  /*
+  ** Transition
+  */
+  layoutTransition: {
+    name: 'fade'
+  },
+
+
+
+  build: {
+    extend (config, ctx) {
+      config.externals = {
+        jquery: 'jQuery'
+      }
+    }
   }
 };

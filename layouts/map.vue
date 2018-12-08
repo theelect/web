@@ -1,4 +1,5 @@
 <template>
+<transition name="fade">
 <v-app light>
   <v-content class="constraint" style="position: relative">
     <nuxt-link to="/dashboard" class="my-float">
@@ -7,6 +8,7 @@
     <nuxt />
   </v-content>
 </v-app>
+</transition>
 </template>
 
 <script>

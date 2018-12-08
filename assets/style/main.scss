@@ -97,3 +97,19 @@ a {
   box-shadow: 2px 2px 3px #999;
   z-index: 3;
 }
+
+//Transition
+.fade-enter-active, .fade-leave-active {
+  transition: opacity.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+//Legend for Map
+.legend{color: black; width: 700px; font-family: arial; font-size: 14px;}  
+.legend_dashboard{color: black; width: 400px; font-family: arial; font-size: 14px;}   
+.legend_color {display: table; width: 100%; background: white; list-style: none; margin: 0px; padding: 0px; }
+.legend_color li{width: 20%;  height: 20px; display: table-cell;}
+.legend_label {display: table; width: 100%;  padding: 0px; padding-left: 10%; padding-right: 10%; list-style: none; margin: 0px; box-sizing: border-box;}
+.legend_label li{width: 25%;  height: 20px; display: table-cell; text-align: center;}

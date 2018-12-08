@@ -20,6 +20,8 @@ module.exports = {
         href:
           "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
       }
+    ],
+    script: [
     ]
   },
 
@@ -83,5 +85,15 @@ module.exports = {
   */
   layoutTransition: {
     name: 'fade'
+  },
+
+
+
+  build: {
+    extend (config, ctx) {
+      config.externals = {
+        jquery: 'jQuery'
+      }
+    }
   }
 };

@@ -12,8 +12,8 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_3ab704ac from 'nuxt_plugin_toast_3ab704ac' // Source: ./toast.js (ssr: false)
-import nuxt_plugin_axios_6e86b7fd from 'nuxt_plugin_axios_6e86b7fd' // Source: ./axios.js
+import nuxt_plugin_toast_5ba231d4 from 'nuxt_plugin_toast_5ba231d4' // Source: ./toast.js (ssr: false)
+import nuxt_plugin_axios_05fe9a67 from 'nuxt_plugin_axios_05fe9a67' // Source: ./axios.js
 import nuxt_plugin_vuetify_e5914fcc from 'nuxt_plugin_vuetify_e5914fcc' // Source: ../plugins/vuetify
 import nuxt_plugin_localstorage_47a6c111 from 'nuxt_plugin_localstorage_47a6c111' // Source: ../plugins/localstorage.js (ssr: false)
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ../plugins/axios (ssr: false)
@@ -152,11 +152,11 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_axios_6e86b7fd === 'function') await nuxt_plugin_axios_6e86b7fd(app.context, inject)
+  if (typeof nuxt_plugin_axios_05fe9a67 === 'function') await nuxt_plugin_axios_05fe9a67(app.context, inject)
   if (typeof nuxt_plugin_vuetify_e5914fcc === 'function') await nuxt_plugin_vuetify_e5914fcc(app.context, inject)
 
   if (process.client) {
-    if (typeof nuxt_plugin_toast_3ab704ac === 'function') await nuxt_plugin_toast_3ab704ac(app.context, inject)
+    if (typeof nuxt_plugin_toast_5ba231d4 === 'function') await nuxt_plugin_toast_5ba231d4(app.context, inject)
     if (typeof nuxt_plugin_localstorage_47a6c111 === 'function') await nuxt_plugin_localstorage_47a6c111(app.context, inject)
     if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)
     if (typeof nuxt_plugin_ga_fb0a2534 === 'function') await nuxt_plugin_ga_fb0a2534(app.context, inject)

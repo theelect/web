@@ -26,10 +26,17 @@
           <v-flex>
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Scheduled Messages</div>
-              <div class="mt-2">
+              
+              <div v-if="show">
+                <v-progress-linear :indeterminate="true"></v-progress-linear>
+              </div>
+              
+              <div v-if="!show" class="mt-2">
                 <span class="display-2 primary--text d-inline">{{scheduled_messages_count}}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
+
+
             </v-card>
           </v-flex>
         </v-layout>
@@ -50,10 +57,16 @@
           <v-flex>
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Sent</div>
-              <div class="mt-2">
+              
+              <div v-if="show">
+                <v-progress-linear :indeterminate="true"></v-progress-linear>
+              </div>
+
+              <div v-if="!show" class="mt-2">
                 <span class="display-2 primary--text d-inline">{{sent_messages_count}}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
+
             </v-card>
           </v-flex>
 
@@ -171,7 +184,8 @@ export default {
   data() {
     return {
       scheduled_messages_count : 0,
-      sent_messages_count : 0
+      sent_messages_count : 0,
+      show : true
     }
   },
   async asyncData({app}) {
@@ -204,6 +218,8 @@ export default {
   created : async function(){
     try{
 
+      this.show = true
+
       let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
         let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
 
@@ -213,6 +229,8 @@ export default {
         this.scheduled_messages_count = data.scheduled;
         this.sent_messages_count = data.sent;
       }
+
+      this.show = false
 
     }catch(ex){}
 	},

@@ -1,14 +1,5 @@
 <template>
 <v-app id="dashboard">
-  
-  <!-- Map Script -->
-  <script src="map/mapdata.js"></script>
-  <script src="map/custommap.js"></script>
-  <script src="map/update_map.js"></script>
-  <!-- End Map Script -->
-  
-
-
   <v-navigation-drawer class="primary" width="200" dark :clipped="$vuetify.breakpoint.lgAndUp" v-model="drawer" fixed app>
     <v-list>
       <template>

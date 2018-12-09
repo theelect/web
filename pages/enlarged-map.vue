@@ -17,7 +17,7 @@
       </ul>
     </div>
 
-    <div style="padding-left:10px" id="loaderDiv"> 
+    <div style="padding-left:10px" id="loadingDiv">
       loading...
     </div>
 
@@ -26,7 +26,6 @@
   
   <script src="map/mapdata.js"></script>
   <script src="map/custommap.js"></script>
-  <script src="map/jquery.min.js"></script>
   <script src="map/update_map.js"></script>
 </section>
 </template>

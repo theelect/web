@@ -99,14 +99,11 @@
           </v-layout>
 
           <div class="pa-3">
-            <div id="map"></div>
+              <div id="loaderDiv"> 
+                loading...
+              </div>
 
-              <!-- Map Script -->
-              <script src="map/mapdata.js"></script>
-              <script src="map/custommap.js"></script>
-              <script src="map/jquery.min.js"></script>
-              <script src="map/update_map.js"></script>
-              <!-- End Map Script -->
+              <div id="map"></div>
           </div>
         </v-card>
       </v-flex>

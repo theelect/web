@@ -17,7 +17,9 @@
       </ul>
     </div>
 
-
+    <div style="padding-left:10px" id="loaderDiv"> 
+      loading...
+    </div>
 
     <div id="map"></div>
   </div>

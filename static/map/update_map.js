@@ -1,5 +1,3 @@
-
-
 function get_color(x){
   
     var levels = [
@@ -28,19 +26,30 @@ function get_color(x){
     jQuery.ajax({
       dataType: "json",
       url: 'map/data.json',
+      async: true,
+      beforeSend: function() {
+        jQuery("#loaderDiv").show()
+      },
       success: function(lga){
         jQuery.each(lga, function(index, row){
           var id = row[0];
           var value = row[1];
           simplemaps_custommap_mapdata.state_specific[id]['color'] = get_color(value);
           simplemaps_custommap_mapdata.state_specific[id]['description'] = 'Population is '+value;
-          
         })
-        simplemaps_custommap.load();
+        //simplemaps_custommap.load();
+        
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){  
         console.log(errorThrown);
-      }
+      },
+      complete: function(){
+        //console.log('finish')
+        setTimeout(function(){
+          jQuery("#loaderDiv").hide()
+        }, 1200); 
+        
+      }, 
       
     });
     

@@ -16,9 +16,7 @@
         <v-layout column wrap>
           <v-flex>
             <v-card max-height="116" class="primary white--text px-4 pb-3 pt-2">
-              <!-- <nuxt-link to="/all-voters"> -->
               <div class="text-xs-right primary--text">More</div>
-              <!-- </nuxt-link> -->
 
               <div class="body-2">Total Verified Voters</div>
               <div class="display-2 mt-2">{{ verifiedVotersPercentage }}</div>
@@ -66,7 +64,7 @@
     <v-layout row wrap mt-4>
       <v-flex xs12 md6>
         <v-card class="pa-4" max-height="480">
-          
+
           <v-layout row wrap>
             <v-flex xs6>
               <div class="legend_dashboard">
@@ -85,25 +83,28 @@
                 </ul>
               </div>
             </v-flex>
-            
-            
-            
-            
+
             <v-flex xs6>
               <nuxt-link to="/enlarged-map">
                 <div class="primary--text text-xs-right">Expand</div>
               </nuxt-link>
             </v-flex>
 
-            
           </v-layout>
 
           <div class="pa-3">
-              <div id="loaderDiv"> 
-                loading...
-              </div>
+            <div id="loadingDiv">
+              loading...
+            </div>
+            
+            <div id="map"></div>
 
-              <div id="map"></div>
+            <!-- Map Script -->
+            
+            <script src="map/mapdata.js"></script>
+            <script src="map/custommap.js"></script>
+            <script src="map/update_map.js"></script>
+            <!-- End Map Script -->
           </div>
         </v-card>
       </v-flex>
@@ -175,6 +176,11 @@ export default {
   },
   async asyncData({app}) {
     let lgas = await app.$axios.$get('/pvc/statistics?type=lga', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    let wards = await app.$axios.$get('/pvc/statistics?type=ward', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }

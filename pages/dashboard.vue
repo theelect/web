@@ -113,7 +113,6 @@
             <div id="map"></div>
 
             <!-- Map Script -->
-            
             <script src="map/mapdata.js"></script>
             <script src="map/custommap.js"></script>
             <script src="map/update_map.js"></script>

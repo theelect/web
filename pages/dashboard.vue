@@ -96,17 +96,13 @@
             <div id="loadingDiv">
               loading...
             </div>
-            
+
             <div id="map"></div>
 
             <!-- Map Script -->
             
             <script src="map/mapdata.js"></script>
             <script src="map/custommap.js"></script>
-<<<<<<< HEAD
-=======
-            <script src="map/jquery.min.js"></script>
->>>>>>> 3a4116e8b1da2facfdaae908abcc77b22cedd8ed
             <script src="map/update_map.js"></script>
             <!-- End Map Script -->
           </div>

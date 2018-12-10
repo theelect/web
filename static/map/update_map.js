@@ -1,28 +1,40 @@
 
 
-function get_color(x){
+var dividers  = [];
+var levels, legend_html;
+function create_variables(){
   
-    var levels = [
-      {condition: "x < 20", color: "#a2c6f0"},
-      {condition: "x > 20 && x < 40", color: "#76abe9"},
-      {condition: "x > 40 && x < 60", color: "#4a90e2"},
-      {condition: "x > 60 && x < 100", color: "#2275d7"},
-      {condition: "x > 80", color: "#1b5dab"},
-    ];  
-    
-    var result;
-    var x = parseFloat(x);
-    jQuery.each(levels, function(index, row){
-      var in_range = eval(row['condition']);
-      if (in_range){
-        result = row['color'];
-        return false
-      }
-    })
-    
-    return result
-    
-  }
+ levels = [
+    {condition: "x < "+dividers[0], color: "#a2c6f0"},
+    {condition: "x >= "+dividers[0]+" && x < "+dividers[1], color: "#76abe9"},
+    {condition: "x >= "+dividers[1]+" && x < "+dividers[2], color: "#4a90e2"},
+    {condition: "x >= "+dividers[2]+" && x < "+dividers[3], color: "#2275d7"},
+    {condition: "x >= "+dividers[3], color: "#1b5dab"},
+  ];    
+  
+  legend_html = "<div class=\"legend\">\n    <ul class=\"legend_label\">\n      <li>" + dividers[0] + "</li><li>" + dividers[1] + "</li><li>" + dividers[2] + "</li><li>" + dividers[3] + "</li>\n    </ul>\n    <ul class=\"legend_color\">\n      <li style=\"background-color: #a2c6f0\"></li><li style=\"background-color: #76abe9\"></li><li style=\"background-color: #4a90e2\"></li><li style=\"background-color: #2275d7\"></li><li style=\"background-color: #1b5dab\"></li>\n    </ul>\n  </div>";
+ 
+}  
+
+function get_color(x){
+
+  var result;
+  var x = parseFloat(x);
+  jQuery.each(levels, function(index, row){
+    var in_range = eval(row['condition']);
+    if (in_range){
+      result = row['color'];
+      return false
+    }
+  })
+  
+  return result
+  
+}
+
+
+
+
   
   jQuery(document).ready(function(){
     jQuery.ajax({
@@ -35,6 +47,22 @@ function get_color(x){
         jQuery('#loadingDiv').show();
       },
       success: function(lga){
+        //create dividers
+        var max;
+        var min;
+        jQuery.each(lga, function(index, row){
+          var value = parseFloat(row[1]);
+          if (!max || value > max){max = value}
+          if (!min || value < min){min = value}
+        })
+        var inc = (max-min)/5.0;      
+        dividers[0] = Math.round(min+inc);
+        dividers[1] = Math.round(min+2*inc);
+        dividers[2] = Math.round(min+3*inc);
+        dividers[3] = Math.round(min+4*inc);
+        create_variables();
+
+
         jQuery.each(lga, function(index, row){
           var id = row[0];
           var value = row[1];
@@ -44,6 +72,9 @@ function get_color(x){
         })
         simplemaps_custommap.load();
         //console.log(lga)
+        var legend_target = $("#simplemaps_legend");
+        legend_target.html(legend_html); 
+
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){  
         console.log(errorThrown);

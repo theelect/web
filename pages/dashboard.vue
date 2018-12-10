@@ -89,21 +89,7 @@
 
           <v-layout row wrap>
             <v-flex xs6>
-              <div class="legend_dashboard">
-                <ul class="legend_label">
-                  <li>20</li>
-                  <li>40</li>
-                  <li>60</li>
-                  <li>80</li>
-                </ul>
-                <ul class="legend_color">
-                  <li style="background-color: #a2c6f0"></li>
-                  <li style="background-color: #76abe9"></li>
-                  <li style="background-color: #4a90e2"></li>
-                  <li style="background-color: #2275d7"></li>
-                  <li style="background-color: #1b5dab"></li>
-                </ul>
-              </div>
+              <div id="simplemaps_legend"></div> 
             </v-flex>
 
             <v-flex xs6>

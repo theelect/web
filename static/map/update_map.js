@@ -27,7 +27,10 @@ function get_color(x){
   jQuery(document).ready(function(){
     jQuery.ajax({
       dataType: "json",
-      url: 'map/data.json',
+      headers: {
+        'apiKey': 'i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD'
+      },
+      url: 'https://theelect.herokuapp.com/api/v1/lga/map',
       beforeSend: function() {
         jQuery('#loadingDiv').show();
       },
@@ -39,15 +42,16 @@ function get_color(x){
           simplemaps_custommap_mapdata.state_specific[id]['description'] = 'Population is '+value;
           
         })
-        //simplemaps_custommap.load();
+        simplemaps_custommap.load();
+        //console.log(lga)
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){  
         console.log(errorThrown);
       },
       complete: function() {
-        setTimeout(function(){
+        //setTimeout(function(){
           jQuery('#loadingDiv').hide();
-        }, 1200); 
+        //}, 1200); 
       }
       
     });

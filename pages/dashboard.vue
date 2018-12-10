@@ -106,9 +106,15 @@
           </v-layout>
 
           <div class="pa-3">
-            <div id="loadingDiv">
-              loading...
-            </div>
+            
+
+            <v-layout row wrap align-center justify-center fill-height>
+              <v-flex>
+                <div id="loadingDiv" class="subheading">
+                  Loading...
+                </div>
+              </v-flex>
+            </v-layout>
 
             <div id="map"></div>
 

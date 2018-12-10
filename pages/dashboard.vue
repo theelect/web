@@ -28,7 +28,7 @@
               <div class="body-2">Scheduled Messages</div>
               
               <div v-if="show">
-                <v-progress-linear :indeterminate="true"></v-progress-linear>
+                <v-progress-circular :indeterminate="true" color="primary"></v-progress-circular>
               </div>
               
               <div v-if="!show" class="mt-2">
@@ -59,7 +59,7 @@
               <div class="body-2">Sent</div>
               
               <div v-if="show">
-                <v-progress-linear :indeterminate="true"></v-progress-linear>
+                <v-progress-circular color="primary" :indeterminate="true"></v-progress-circular>
               </div>
 
               <div v-if="!show" class="mt-2">
@@ -168,6 +168,32 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <v-layout row wrap mt-4>
+      <v-flex xs12 md6>
+        <v-card height="480">
+          <nuxt-link to="/wards">
+            <div class="primary--text pr-4 pt-4 text-xs-right">Expand</div>
+          </nuxt-link>
+
+          <div class="pl-4 pt-4">TOP 5 WARDS</div>
+
+          <v-layout row wrap px-4 pt-4>
+            <v-flex md8 class="subheading font-weight-bold">Wards</v-flex>
+            <v-flex md4 class="subheading font-weight-bold">Total Verified</v-flex>
+          </v-layout>
+
+          <v-divider></v-divider>
+
+          <v-list dense>
+            <v-layout row wrap px-4 py-2 v-for="(ward, index) in sortedWards" :key="index">
+              <v-flex md8 class>{{ ward._id | capitalize }}</v-flex>
+              <v-flex md4 class>{{ ward.count }}</v-flex>
+            </v-layout>
+          </v-list>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </section>
 </template>
@@ -208,7 +234,7 @@ export default {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
     })
-    return {lgas, pvc, pvcCount}
+    return {lgas, pvc, pvcCount, wards}
   },
   beforeCreate() {
     this.$store.dispatch('pvcCount')
@@ -232,7 +258,7 @@ export default {
       this.show = false
 
     }catch(ex){}
-	},
+  },
   components: {
     BarChart,
     DoughnutChart
@@ -252,6 +278,10 @@ export default {
     sortedLgas() {
       let sortedLgas = this.lgas.sort((a,b) => (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0))
       return sortedLgas.slice(0,5)
+    },
+    sortedWards() {
+      let sortedWards = this.wards.sort((a,b) => (b.count > a.count) ? 1 : ((a.count > b.count) ? -1 : 0))
+      return sortedWards.slice(0,5)
     }
   }
 };

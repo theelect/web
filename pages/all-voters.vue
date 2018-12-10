@@ -1,19 +1,53 @@
 <template>
 <section>
   <v-container fluid>
-    <v-flex mb-5>
-      <v-btn class="primary my-btn" to="/dashboard" dark>
-        <v-icon large>arrow_left</v-icon>
-      </v-btn>
-      <div class="d-inline">
-        <div class="title d-inline ml-2">All Voters</div>
-        <div class="title d-inline grey--text ml-3">{{ pvc.total }}</div>
-      </div>
-      <div class="mt-2">
-        <div class="title d-inline ml-2">Verified Voters</div>
-        <div class="title d-inline green--text ml-3">{{ pvcCount.total_verified }}</div>
-      </div>
-    </v-flex>
+    <v-layout row wrap justify-space-between mb-5>
+
+      <v-flex>
+        <v-btn class="primary my-btn" to="/dashboard" dark>
+          <v-icon large>arrow_left</v-icon>
+        </v-btn>
+        <div class="d-inline">
+          <div class="title d-inline ml-2">All Voters</div>
+          <div class="title d-inline grey--text ml-3">{{ pvc.total }}</div>
+        </div>
+        <div class="mt-2">
+          <div class="title d-inline ml-2">Verified Voters</div>
+          <div class="title d-inline green--text ml-3">{{ pvcCount.total_verified }}</div>
+        </div>
+      </v-flex>
+
+      <v-spacer class="mr-4"></v-spacer>
+
+      <v-flex offset-md5>
+        <v-btn-toggle v-model="lgaProfession" class="mb-4">
+          <v-btn flat @change="lgaPopup=false" class="caption toggleBtn" value="lga">LGA</v-btn>
+          <v-btn flat class="caption toggleBtn" value="ward">Ward</v-btn>
+          <v-btn flat class="caption toggleBtn" value="profession">Profession</v-btn>
+        </v-btn-toggle>
+      </v-flex>
+    </v-layout>
+
+    <v-dialog v-model="lgaPopup" max-width="350">
+      <v-card class="pa-4">
+        <!-- <v-autocomplete v-model="local" :disabled="isUpdating" :items="locals" box chips color="blue-grey lighten-2" label="Select LGA(s)" item-text="name" item-value="name" multiple>
+          <template slot="selection" slot-scope="data">
+            <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)">{{ data.item.name }}</v-chip>
+          </template>
+          <template slot="item" slot-scope="data">
+            <template v-if="typeof data.item !== 'object'">
+              <v-list-tile-content v-text="data.item"></v-list-tile-content>
+            </template>
+            <template v-else>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </template>
+          </template>
+        </v-autocomplete> -->
+      </v-card>
+    </v-dialog>
 
     <v-layout row class="pt-2 mb-5">
       <v-btn-toggle v-model="cardTable">
@@ -75,7 +109,7 @@
       </v-flex>
     </v-layout>
 
-    <v-data-table :pagination.sync="pagination" v-if="!cardSwitch" :headers="headers" :items="voters">
+    <v-data-table hide-actions :pagination.sync="pagination" v-if="!cardSwitch" :headers="headers" :items="voters">
       <v-progress-linear slot="no-data" color="blue" indeterminate></v-progress-linear>
       <template slot="items" slot-scope="props">
         <tr>
@@ -89,6 +123,11 @@
         </tr>
       </template>
     </v-data-table>
+
+    <div class="text-xs-center mt-5">
+      <v-pagination v-model="page" :total-visible="8" circle :length="pLenght" @input="pageChange"></v-pagination>
+    </div>
+
   </v-container>
 </section>
 </template>
@@ -115,8 +154,11 @@ export default {
   data() {
     return {
       allVoters: 'all',
+      lgaProfession: 'lga',
+      lgaPopup: false,
       cardSwitch: true,
       cardTable: 'cards',
+      page: 1,
       pagination: {
         rowsPerPage: 10,
       },
@@ -153,15 +195,22 @@ export default {
     }
   },
   methods: {
+    async pageChange() {
+      this.pvc = await this.$axios.$get(`/pvc?page=${this.page}&perPage=18`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+    },
     async verifiedVoters() {
-      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=127&is_verified=true', {
+      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=18&is_verified=true', {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
     },
     async general() {
-      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=127', {
+      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=18', {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
@@ -171,7 +220,7 @@ export default {
   async asyncData({
     app
   }) {
-    let pvc = await app.$axios.$get(URLS.pvc, {
+    let pvc = await app.$axios.$get('/pvc?page=1&perPage=18', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
@@ -190,6 +239,10 @@ export default {
     voters() {
       const voters = this.pvc.docs
       return voters
+    },
+    pLenght() {
+      const pLenght = Math.round((this.pvc.total) / 18)
+      return pLenght
     }
   },
   filters: {

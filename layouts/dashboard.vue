@@ -111,6 +111,8 @@
 
 
 <script>
+require('static/map/jquery.min.js')
+
 export default {
   middleware: 'authenticated',
   data: () => ({

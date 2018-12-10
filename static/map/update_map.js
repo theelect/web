@@ -28,6 +28,9 @@ function get_color(x){
     jQuery.ajax({
       dataType: "json",
       url: 'map/data.json',
+      beforeSend: function() {
+        jQuery('#loadingDiv').show();
+      },
       success: function(lga){
         jQuery.each(lga, function(index, row){
           var id = row[0];
@@ -36,10 +39,15 @@ function get_color(x){
           simplemaps_custommap_mapdata.state_specific[id]['description'] = 'Population is '+value;
           
         })
-        simplemaps_custommap.load();
+        //simplemaps_custommap.load();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){  
         console.log(errorThrown);
+      },
+      complete: function() {
+        setTimeout(function(){
+          jQuery('#loadingDiv').hide();
+        }, 1200); 
       }
       
     });

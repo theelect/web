@@ -41,7 +41,7 @@ var simplemaps_custommap_mapdata={
     back_image: "no",
     initial_back: "no",
     initial_zoom: "7",
-    initial_zoom_solo: "no",
+    initial_zoom_solo: "yes",
     region_opacity: 1,
     region_hover_opacity: 0.6,
     zoom_out_incrementally: "yes",

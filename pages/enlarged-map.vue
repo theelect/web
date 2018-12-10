@@ -17,9 +17,13 @@
       </ul>
     </div>
 
-    <div style="padding-left:10px" id="loadingDiv">
-      loading...
-    </div>
+    <v-layout row wrap align-center justify-center fill-height>
+      <v-flex offset-xs2>
+        <div id="loadingDiv" class="title pa-5">
+          Loading...
+        </div>
+      </v-flex>
+    </v-layout>
 
     <div id="map"></div>
   </div>

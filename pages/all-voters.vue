@@ -21,31 +21,34 @@
 
       <v-flex offset-md5>
         <v-btn-toggle v-model="lgaProfession" class="mb-4">
-          <v-btn flat @change="lgaPopup=false" class="caption toggleBtn" value="lga">LGA</v-btn>
+          <v-btn flat @change="lgaPopup=true" class="caption toggleBtn" value="lga">LGA</v-btn>
           <v-btn flat class="caption toggleBtn" value="ward">Ward</v-btn>
           <v-btn flat class="caption toggleBtn" value="profession">Profession</v-btn>
         </v-btn-toggle>
       </v-flex>
     </v-layout>
 
-    <v-dialog v-model="lgaPopup" max-width="350">
-      <v-card class="pa-4">
-        <!-- <v-autocomplete v-model="local" :disabled="isUpdating" :items="locals" box chips color="blue-grey lighten-2" label="Select LGA(s)" item-text="name" item-value="name" multiple>
+    <v-dialog v-model="lgaPopup" max-width="500">
+      <v-card class="pa-5">
+
+        <div class="caption text-xs-left mb-2 blue-grey--text">FILTER BY LOCAL GOVERNMENT AREAS</div>
+        <v-autocomplete :disabled="isUpdating" v-model="lgaSelected" :items="lgas" solo-inverted chips color="blue-grey lighten-2" label="Select" item-text="name" item-value="name" multiple>
           <template slot="selection" slot-scope="data">
-            <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)">{{ data.item.name }}</v-chip>
+            <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)">
+              {{ data.item.name }}
+            </v-chip>
           </template>
           <template slot="item" slot-scope="data">
-            <template v-if="typeof data.item !== 'object'">
-              <v-list-tile-content v-text="data.item"></v-list-tile-content>
-            </template>
-            <template v-else>
+            <template>
               <v-list-tile-content>
                 <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
               </v-list-tile-content>
             </template>
           </template>
-        </v-autocomplete> -->
+        </v-autocomplete>
+
+        <v-btn dark class="primary" v-if="verified" @click="lgaSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary" v-else @click="lgaSubmit">Submit</v-btn>
       </v-card>
     </v-dialog>
 
@@ -125,7 +128,8 @@
     </v-data-table>
 
     <div class="text-xs-center mt-5">
-      <v-pagination v-model="page" :total-visible="8" circle :length="pLenght" @input="pageChange"></v-pagination>
+      <v-pagination v-model="pageVerified" v-if="verified" :total-visible="8" circle :length="pLenghtVerified" @input="pageChangeVerified"></v-pagination>
+      <v-pagination v-model="page" v-else :total-visible="8" circle :length="pLenght" @input="pageChange"></v-pagination>
     </div>
 
   </v-container>
@@ -159,6 +163,53 @@ export default {
       cardSwitch: true,
       cardTable: 'cards',
       page: 1,
+      verified: false,
+      pageVerified: 1,
+      lgaSelected: [],
+      isUpdating: false,
+      name: 'Midnight Crew',
+      people: [{
+          header: 'Group 1'
+        },
+        {
+          name: 'Sandra Adams',
+          group: 'Group 1'
+        },
+        {
+          name: 'Ali Connors',
+          group: 'Group 1'
+        },
+        {
+          name: 'Trevor Hansen',
+          group: 'Group 1'
+        },
+        {
+          name: 'Tucker Smith',
+          group: 'Group 1'
+        },
+        {
+          divider: true
+        },
+        {
+          header: 'Group 2'
+        },
+        {
+          name: 'Britta Holt',
+          group: 'Group 2'
+        },
+        {
+          name: 'Jane Smith ',
+          group: 'Group 2'
+        },
+        {
+          name: 'John Smith',
+          group: 'Group 2'
+        },
+        {
+          name: 'Sandra Williams',
+          group: 'Group 2'
+        }
+      ],
       pagination: {
         rowsPerPage: 10,
       },
@@ -196,31 +247,66 @@ export default {
   },
   methods: {
     async pageChange() {
-      this.pvc = await this.$axios.$get(`/pvc?page=${this.page}&perPage=18`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=${this.page}&perPage=18&lga=${this.lgaSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+    },
+    async pageChangeVerified() {
+      this.pvc = await this.$axios.$get(`/pvc?page=${this.pageVerified}&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
     },
     async verifiedVoters() {
-      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=18&is_verified=true', {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
+      this.verified = true
     },
     async general() {
-      this.pvc = await this.$axios.$get('/pvc?page=1&perPage=18', {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
+      this.verified = false
+    },
+    remove(item) {
+      const index = this.lgaSelected.indexOf(item.name)
+      if (index >= 0) this.lgaSelected.splice(index, 1)
+    },
+    async lgaSubmit() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.lgaPopup = false
+    },
+    async lgaSubmitVerified() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.lgaPopup = false
     }
   },
+
   async asyncData({
     app
   }) {
     let pvc = await app.$axios.$get('/pvc?page=1&perPage=18', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    let lgas = await app.$axios.$get('/lgas', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
@@ -232,6 +318,7 @@ export default {
     })
     return {
       pvc,
+      lgas,
       pvcCount
     }
   },
@@ -243,6 +330,10 @@ export default {
     pLenght() {
       const pLenght = Math.round((this.pvc.total) / 18)
       return pLenght
+    },
+    pLenghtVerified() {
+      const pLenghtVerified = Math.round((this.pvc.total_verified) / 18)
+      return pLenghtVerified
     }
   },
   filters: {
@@ -256,6 +347,13 @@ export default {
       date = date.substr(0, 10)
       return date ? moment(date).format('YYYY') : ''
     }
-  }
+  },
+  watch: {
+    isUpdating(val) {
+      if (val) {
+        setTimeout(() => (this.isUpdating = false), 3000)
+      }
+    }
+  },
 }
 </script>

@@ -28,7 +28,10 @@
               <div class="text-xs-right primary--text">More</div>
 
               <div class="body-2">Total Verified Voters</div>
-              <div class="display-2 mt-2">{{ verifiedVotersPercentage }}</div>
+              <div class="display-2 mt-2">
+                {{ pvcCount.total_verified }}
+                <span class="title">{{ verifiedVotersPercentage }}</span>
+              </div>
             </v-card>
           </v-flex>
 

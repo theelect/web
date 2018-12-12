@@ -22,19 +22,19 @@
       <v-flex offset-md5>
         <v-btn-toggle v-model="lgaProfession" class="mb-4">
           <v-btn flat @change="lgaPopup=true" class="caption toggleBtn" value="lga">LGA</v-btn>
-          <v-btn flat class="caption toggleBtn" value="ward">Ward</v-btn>
-          <v-btn flat class="caption toggleBtn" value="profession">Profession</v-btn>
+          <v-btn flat @change="agePopup=true" class="caption toggleBtn" value="ward">Age</v-btn>
+          <v-btn flat @change="professionPopup=true" class="caption toggleBtn" value="profession">Profession</v-btn>
         </v-btn-toggle>
       </v-flex>
     </v-layout>
 
     <v-dialog v-model="lgaPopup" max-width="500">
       <v-card class="pa-5">
-
         <div class="caption text-xs-left mb-2 blue-grey--text">FILTER BY LOCAL GOVERNMENT AREAS</div>
-        <v-autocomplete :disabled="isUpdating" v-model="lgaSelected" :items="lgas" solo-inverted chips color="blue-grey lighten-2" label="Select" item-text="name" item-value="name" multiple>
+        <v-autocomplete :disabled="isUpdating" v-model="lgaSelected" :items="lgas" solo-inverted chips color="blue-grey lighten-2" item-text="name" item-value="name" multiple>
+          <div class="caption" slot="label">Select the LGA(s) you wish to filter by</div>
           <template slot="selection" slot-scope="data">
-            <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)">
+            <v-chip :selected="data.selected" close class="chip--select-multi" @input="removeLga(data.item)">
               {{ data.item.name }}
             </v-chip>
           </template>
@@ -49,6 +49,57 @@
 
         <v-btn dark class="primary" v-if="verified" @click="lgaSubmitVerified">Submit</v-btn>
         <v-btn dark class="primary" v-else @click="lgaSubmit">Submit</v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="professionPopup" max-width="500">
+      <v-card class="pa-5">
+        <div class="caption text-xs-left mb-2 blue-grey--text">FILTER BY PROFESSIONS</div>
+        <v-autocomplete :disabled="isUpdating" v-model="professionSelected" :items="professions" solo-inverted chips color="blue-grey lighten-2" item-text="name" item-value="name" multiple>
+          <div class="caption" slot="label">Select the profession(s) you wish to filter by</div>
+          <template slot="selection" slot-scope="data">
+            <v-chip :selected="data.selected" close class="chip--select-multi" @input="removeProfession(data.item)">
+              {{ data.item }}
+            </v-chip>
+          </template>
+          <template slot="item" slot-scope="data">
+            <template v-if="typeof data.item !== 'object'">
+              <v-list-tile-content v-text="data.item"></v-list-tile-content>
+            </template>
+            <template v-else>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="data.item"></v-list-tile-title>
+              </v-list-tile-content>
+            </template>
+          </template>
+        </v-autocomplete>
+
+        <v-btn dark class="primary" v-if="verified" @click="professionSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary" v-else @click="professionSubmit">Submit</v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="agePopup" max-width="500">
+      <v-card class="pa-5">
+        <div class="caption text-xs-left mb-2 blue-grey--text">FILTER BY AGES</div>
+        <v-autocomplete :disabled="isUpdating" v-model="ageSelected" :items="ages" solo-inverted chips color="blue-grey lighten-2" item-text="age" item-value="age" multiple>
+          <div class="caption" slot="label">Select the age group(s) you wish to filter by</div>
+          <template slot="selection" slot-scope="data">
+            <v-chip :selected="data.selected" close class="chip--select-multi" @input="removeAge(data.item)">
+              {{ data.item.age }}
+            </v-chip>
+          </template>
+          <template slot="item" slot-scope="data">
+            <template>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="data.item.age"></v-list-tile-title>
+              </v-list-tile-content>
+            </template>
+          </template>
+        </v-autocomplete>
+
+        <v-btn dark class="primary" v-if="verified" @click="ageSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary" v-else @click="ageSubmit">Submit</v-btn>
       </v-card>
     </v-dialog>
 
@@ -160,54 +211,32 @@ export default {
       allVoters: 'all',
       lgaProfession: 'lga',
       lgaPopup: false,
+      professionPopup: false,
+      agePopup: false,
       cardSwitch: true,
       cardTable: 'cards',
       page: 1,
       verified: false,
       pageVerified: 1,
       lgaSelected: [],
+      professionSelected: [],
+      ageSelected: [],
       isUpdating: false,
       name: 'Midnight Crew',
-      people: [{
-          header: 'Group 1'
+      ages: [{
+          age: '18-30'
         },
         {
-          name: 'Sandra Adams',
-          group: 'Group 1'
+          age: '31-40'
         },
         {
-          name: 'Ali Connors',
-          group: 'Group 1'
+          age: '41-50'
         },
         {
-          name: 'Trevor Hansen',
-          group: 'Group 1'
+          age: '51-60'
         },
         {
-          name: 'Tucker Smith',
-          group: 'Group 1'
-        },
-        {
-          divider: true
-        },
-        {
-          header: 'Group 2'
-        },
-        {
-          name: 'Britta Holt',
-          group: 'Group 2'
-        },
-        {
-          name: 'Jane Smith ',
-          group: 'Group 2'
-        },
-        {
-          name: 'John Smith',
-          group: 'Group 2'
-        },
-        {
-          name: 'Sandra Williams',
-          group: 'Group 2'
+          age: '61-100'
         }
       ],
       pagination: {
@@ -247,21 +276,21 @@ export default {
   },
   methods: {
     async pageChange() {
-      this.pvc = await this.$axios.$get(`/pvc?page=${this.page}&perPage=18&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=${this.page}&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
     },
     async pageChangeVerified() {
-      this.pvc = await this.$axios.$get(`/pvc?page=${this.pageVerified}&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=${this.pageVerified}&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
     },
     async verifiedVoters() {
-      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
@@ -269,19 +298,27 @@ export default {
       this.verified = true
     },
     async general() {
-      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
       this.verified = false
     },
-    remove(item) {
+    removeLga(item) {
       const index = this.lgaSelected.indexOf(item.name)
       if (index >= 0) this.lgaSelected.splice(index, 1)
     },
+    removeProfession(item) {
+      const index = this.professionSelected.indexOf(item)
+      if (index >= 0) this.professionSelected.splice(index, 1)
+    },
+    removeAge(item) {
+      const index = this.ageSelected.indexOf(item.age)
+      if (index >= 0) this.ageSelected.splice(index, 1)
+    },
     async lgaSubmit() {
-      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
@@ -289,13 +326,45 @@ export default {
       this.lgaPopup = false
     },
     async lgaSubmitVerified() {
-      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}`, {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         }
       })
       this.lgaPopup = false
-    }
+    },
+    async professionSubmit() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.professionPopup = false
+    },
+    async professionSubmitVerified() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.professionPopup = false
+    },
+    async ageSubmit() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.agePopup = false
+    },
+    async ageSubmitVerified() {
+      this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      })
+      this.agePopup = false
+    },
   },
 
   async asyncData({
@@ -311,6 +380,11 @@ export default {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
     })
+    let professions = await app.$axios.$get('/pvc/occupation', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
     let pvcCount = await app.$axios.$get(URLS.pvcCount, {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -319,7 +393,8 @@ export default {
     return {
       pvc,
       lgas,
-      pvcCount
+      pvcCount,
+      professions
     }
   },
   computed: {

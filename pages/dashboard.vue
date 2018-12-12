@@ -1,13 +1,12 @@
 <template>
 <section>
 
-<!-- Map Script -->
+  <!-- Map Script -->
+  
 <script src="map/mapdata.js"></script>
-<script src="map/custommap.js"></script>
-<script src="map/update_map.js"></script>
-<!-- End Map Script -->
-
-
+  <script src="map/custommap.js"></script>
+  <script src="map/update_map.js"></script>
+  <!-- End Map Script -->
 
   <v-container grid-list-md fluid>
     <v-layout row wrap>
@@ -38,16 +37,15 @@
           <v-flex>
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Scheduled Messages</div>
-              
+
               <div v-if="show">
                 <v-progress-circular :indeterminate="true" color="primary"></v-progress-circular>
               </div>
-              
+
               <div v-if="!show" class="mt-2">
                 <span class="display-2 primary--text d-inline">{{scheduled_messages_count}}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
-
 
             </v-card>
           </v-flex>
@@ -69,7 +67,7 @@
           <v-flex>
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Sent</div>
-              
+
               <div v-if="show">
                 <v-progress-circular color="primary" :indeterminate="true"></v-progress-circular>
               </div>
@@ -92,7 +90,7 @@
 
           <v-layout row wrap>
             <v-flex xs6>
-              <div id="simplemaps_legend"></div> 
+              <div id="simplemaps_legend"></div>
             </v-flex>
 
             <v-flex xs6>
@@ -104,7 +102,6 @@
           </v-layout>
 
           <div class="pa-3">
-            
 
             <v-layout row wrap align-center justify-center fill-height>
               <v-flex>

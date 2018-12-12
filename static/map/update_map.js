@@ -70,7 +70,7 @@ function get_color(x){
           simplemaps_custommap_mapdata.state_specific[id]['description'] = 'Population is '+value;
           
         })
-        simplemaps_custommap.load();
+        
         //console.log(lga)
         var legend_target = $("#simplemaps_legend");
         legend_target.html(legend_html); 
@@ -82,6 +82,7 @@ function get_color(x){
       complete: function() {
         //setTimeout(function(){
           jQuery('#loadingDiv').hide();
+          simplemaps_custommap.load();
         //}, 1200); 
       }
       

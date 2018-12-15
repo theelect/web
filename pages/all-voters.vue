@@ -208,6 +208,10 @@ export default {
   layout: 'dashboard',
   data() {
     return {
+      pvc: {},
+      lgas: [],
+      professions: [],
+      pvcCount: [],
       allVoters: 'all',
       lgaProfession: 'lga',
       lgaPopup: false,
@@ -367,35 +371,30 @@ export default {
     },
   },
 
-  async asyncData({
-    app
-  }) {
-    let pvc = await app.$axios.$get('/pvc?page=1&perPage=18', {
+  created : async function(){
+    this.$axios.$get('/pvc?page=1&perPage=18', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-    })
-    let lgas = await app.$axios.$get('/lgas', {
+    }).then(response => (this.pvc = response))
+
+    this.$axios.$get('/lgas', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-    })
-    let professions = await app.$axios.$get('/pvc/occupation', {
+    }).then(response => (this.lgas = response))
+
+    this.$axios.$get('/pvc/occupation', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-    })
-    let pvcCount = await app.$axios.$get(URLS.pvcCount, {
+    }).then(response => (this.professions = response))
+
+    this.$axios.$get('/pvc-count', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-    })
-    return {
-      pvc,
-      lgas,
-      pvcCount,
-      professions
-    }
+    }).then(response => (this.pvcCount = response))
   },
   computed: {
     voters() {

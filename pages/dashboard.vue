@@ -206,37 +206,38 @@ export default {
     return {
       scheduled_messages_count : 0,
       sent_messages_count : 0,
-      show : true
+      show : true,
+      pvc: {},
+      pvcCount: {},
+      lgas: [],
+      wards: []
     }
   },
-  async asyncData({app}) {
-    let lgas = await app.$axios.$get('/pvc/statistics?type=lga', {
-      headers: {
-        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-      }
-    })
-    let wards = await app.$axios.$get('/pvc/statistics?type=ward', {
-      headers: {
-        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-      }
-    })
-    let pvc = await app.$axios.$get('/pvc', {
-      headers: {
-        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-      }
-    })
-    let pvcCount = await app.$axios.$get('/pvc-count', {
-      headers: {
-        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-      }
-    })
-    return {lgas, pvc, pvcCount, wards}
-  },
-  beforeCreate() {
-    this.$store.dispatch('pvcCount')
-    
-  },
   created : async function(){
+    this.$axios.$get('/pvc', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.pvc = response))
+
+    this.$axios.$get('/pvc-count', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.pvcCount = response))
+
+    this.$axios.$get('/pvc/statistics?type=lga', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.lgas = response))
+    
+    this.$axios.$get('/pvc/statistics?type=ward', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.wards = response))
+    
     try{
 
       this.show = true
@@ -254,6 +255,9 @@ export default {
       this.show = false
 
     }catch(ex){}
+
+    await this.$store.dispatch('occupationDetails')
+    await this.$store.dispatch('ageDetails')
   },
   components: {
     BarChart,

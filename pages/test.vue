@@ -1,238 +1,274 @@
 <template>
-<v-container grid-list-md>
-  <v-toolbar flat color="white">
-    <v-toolbar-title>My CRUD</v-toolbar-title>
-    <v-divider class="mx-2" inset vertical></v-divider>
-    <v-spacer></v-spacer>
-    <v-dialog v-model="dialog" max-width="500px">
-      <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
-      <v-card>
-        <v-card-title>
-          <span class="headline">{{ formTitle }}</span>
-        </v-card-title>
+<v-card>
+  <v-container fluid grid-list-xl>
+    <v-layout align-center wrap>
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT LGA(s)</div>
+        <v-select v-model="selectedLgas" :items="lga" box chips multiple>
+          <template slot="selection" slot-scope="{ item, index }">
+            <v-chip v-if="index === 0">
+              <span>{{ item }}</span>
+            </v-chip>
+            <span v-if="index === 1" class="grey--text caption" >(+{{ selectedLgas.length - 1 }} others)</span>
+          </template>
+          <div slot="label" class="caption">Select LGA(s)</div>
+          <v-list-tile slot="prepend-item" ripple @click="toggle">
+            <v-list-tile-action>
+              <v-icon :color="selectedLgas.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Select All</v-list-tile-title>
+          </v-list-tile>
+          <v-divider slot="prepend-item" class="mt-2"></v-divider>
+        </v-select>
+      </v-flex>
 
-        <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-text>
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT WARDS(s)</div>
+        <v-select v-model="selectedWards" :items="ward" box chips multiple>
+          <template slot="selection" slot-scope="{ item, index }">
+            <v-chip v-if="index === 0">
+              <span>{{ item }}</span>
+            </v-chip>
+            <span v-if="index === 1" class="grey--text caption" >(+{{ selectedWards.length - 1 }} others)</span>
+          </template>
+          <div slot="label" class="caption">Select WARDS(s)</div>
+          <v-list-tile slot="prepend-item" ripple @click="toggleWards">
+            <v-list-tile-action>
+              <v-icon :color="selectedWards.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Select All</v-list-tile-title>
+          </v-list-tile>
+          <v-divider slot="prepend-item" class="mt-2"></v-divider>
+        </v-select>
+      </v-flex>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-          <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-toolbar>
-  <v-data-table :headers="headers" :items="desserts" class="elevation-1">
-    <template slot="items" slot-scope="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="justify-center layout px-0">
-        <v-icon small class="mr-2" @click="editItem(props.item)">
-          edit
-        </v-icon>
-        <v-icon small @click="deleteItem(props.item)">
-          delete
-        </v-icon>
-      </td>
-    </template>
-    <template slot="no-data">
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
-    </template>
-  </v-data-table>
-</v-container>
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT AGE GROUP(s)</div>
+        <v-select v-model="selectedAges" :items="ages" box chips multiple>
+          <template slot="selection" slot-scope="{ item, index }">
+            <v-chip v-if="index === 0">
+              <span>{{ item }}</span>
+            </v-chip>
+            <span v-if="index === 1" class="grey--text caption" >(+{{ selectedAges.length - 1 }} others)</span>
+          </template>
+          <div slot="label" class="caption">SELECT AGE GROUP(s)</div>
+          <v-list-tile slot="prepend-item" ripple @click="toggleAges">
+            <v-list-tile-action>
+              <v-icon :color="selectedAges.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Select All</v-list-tile-title>
+          </v-list-tile>
+          <v-divider slot="prepend-item" class="mt-2"></v-divider>
+        </v-select>
+      </v-flex>
+
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT GENDER(s)</div>
+        <v-select v-model="selectedGenders" :items="genders" box chips multiple>
+          <div slot="label" class="caption">SELECT GENDER(s)</div>
+        </v-select>
+      </v-flex>
+
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT DOB(s)</div>
+        <v-select v-model="selectedDobs" :items="dobs" box chips multiple>
+          <template slot="selection" slot-scope="{ item, index }">
+            <v-chip v-if="index === 0">
+              <span>{{ item }}</span>
+            </v-chip>
+            <span v-if="index === 1" class="grey--text caption" >(+{{ selectedDobs.length - 1 }} others)</span>
+          </template>
+          <div slot="label" class="caption">SELECT DOB(s)</div>
+          <v-list-tile slot="prepend-item" ripple @click="toggleDobs">
+            <v-list-tile-action>
+              <v-icon :color="selectedDobs.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Select All</v-list-tile-title>
+          </v-list-tile>
+          <v-divider slot="prepend-item" class="mt-2"></v-divider>
+        </v-select>
+      </v-flex>
+
+      <v-flex xs12 sm6>
+        <div class="mb-2 blue-grey--text caption">SELECT PROFESSION(s)</div>
+        <v-select v-model="selectedProfessions" :items="professions" box chips multiple>
+          <template slot="selection" slot-scope="{ item, index }">
+            <v-chip v-if="index === 0">
+              <span>{{ item }}</span>
+            </v-chip>
+            <span v-if="index === 1" class="grey--text caption" >(+{{ selectedProfessions.length - 1 }} others)</span>
+          </template>
+          <div slot="label" class="caption">SELECT DOB(s)</div>
+          <v-list-tile slot="prepend-item" ripple @click="toggleProfessions">
+            <v-list-tile-action>
+              <v-icon :color="selectedProfessions.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Select All</v-list-tile-title>
+          </v-list-tile>
+          <v-divider slot="prepend-item" class="mt-2"></v-divider>
+        </v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</v-card>
 </template>
 
 <script>
 export default {
   layout: 'dashboard',
   data: () => ({
-    dialog: false,
-    headers: [{
-        text: 'Dessert (100g serving)',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      {
-        text: 'Calories',
-        value: 'calories'
-      },
-      {
-        text: 'Fat (g)',
-        value: 'fat'
-      },
-      {
-        text: 'Carbs (g)',
-        value: 'carbs'
-      },
-      {
-        text: 'Protein (g)',
-        value: 'protein'
-      },
-      {
-        text: 'Actions',
-        value: 'name',
-        sortable: false
-      }
-    ],
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    }
+    lgas: [],
+    professions: [],
+    ages: ['18-30', '31-40', '41-50', '51-60', '61-100'],
+    genders: ['Male', 'Female'],
+    dobs: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    selectedDobs: [],
+    selectedGenders: [],
+    selectedAges: [],
+    selectedLgas: [],
+    selectedWards: [],
+    selectedProfessions: []    
   }),
+  created: async function () {
+    this.$axios.$get('/lgas', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.lgas = response))
 
+    this.$axios.$get('/pvc/occupation', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.professions = response))
+  },
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
+    lga() {
+      const filteredLga = []
+      this.lgas.forEach(element => {
+        filteredLga.push(element.name)
+      });
+      return filteredLga
+    },
+    ward() {
+      const filteredWard = []
+      this.lgas.forEach(element => {
+        filteredWard.push(element.wards)
+      });
 
-  watch: {
-    dialog(val) {
-      val || this.close()
-    }
-  },
+      return [].concat.apply([], filteredWard)
+    },
+    likesAllLgas() {
+      return this.selectedLgas.length === this.lga.length
+    },
+    likesSomeLgas() {
+      return this.selectedLgas.length > 0 && !this.likesAllLgas
+    },
+    icon() {
+      if (this.likesAllLgas) return 'mdi-close-box'
+      if (this.likesSomeLgas) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
 
-  created() {
-    this.initialize()
+    likesAllWards() {
+      return this.selectedWards.length === this.ward.length
+    },
+    likesSomeWards() {
+      return this.selectedWards.length > 0 && !this.likesAllWards
+    },
+    icon() {
+      if (this.likesAllWards) return 'mdi-close-box'
+      if (this.likesSomeWards) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllAges() {
+      return this.selectedAges.length === this.ward.length
+    },
+    likesSomeAges() {
+      return this.selectedAges.length > 0 && !this.likesAllAges
+    },
+    icon() {
+      if (this.likesAllAges) return 'mdi-close-box'
+      if (this.likesSomeAges) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllDobs() {
+      return this.selectedDobs.length === this.dobs.length
+    },
+    likesSomeDobs() {
+      return this.selectedDobs.length > 0 && !this.likesAllDobs
+    },
+    icon() {
+      if (this.likesAllDobs) return 'mdi-close-box'
+      if (this.likesSomeDobs) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllProfessions() {
+      return this.selectedProfessions.length === this.professions.length
+    },
+    likesSomeProfessions() {
+      return this.selectedProfessions.length > 0 && !this.likesAllProfessions
+    },
+    icon() {
+      if (this.likesAllProfessions) return 'mdi-close-box'
+      if (this.likesSomeProfessions) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    }
   },
 
   methods: {
-    initialize() {
-      this.desserts = [{
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7
+    toggle() {
+      this.$nextTick(() => {
+        if (this.likesAllLgas) {
+          this.selectedLgas = []
+        } else {
+          this.selectedLgas = this.lga.slice()
         }
-      ]
+      })
+    },
+    toggleWards() {
+      this.$nextTick(() => {
+        if (this.likesAllWards) {
+          this.selectedWards = []
+        } else {
+          this.selectedWards = this.ward.slice()
+        }
+      })
     },
 
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    toggleAges() {
+      this.$nextTick(() => {
+        if (this.likesAllAges) {
+          this.selectedAges = []
+        } else {
+          this.selectedAges = this.ages.slice()
+        }
+      })
     },
 
-    deleteItem(item) {
-      const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+    toggleDobs() {
+      this.$nextTick(() => {
+        if (this.likesAllDobs) {
+          this.selectedDobs = []
+        } else {
+          this.selectedDobs = this.dobs.slice()
+        }
+      })
     },
 
-    close() {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
-      }
-      this.close()
+    toggleProfessions() {
+      this.$nextTick(() => {
+        if (this.likesAllProfessions) {
+          this.selectedProfessions = []
+        } else {
+          this.selectedProfessions = this.professions.slice()
+        }
+      })
     }
   }
+
 }
 </script>

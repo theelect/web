@@ -1,192 +1,165 @@
 <template>
-  <v-container fluid>
-    <v-stepper v-model="step" vertical>
-      <v-stepper-step editable :complete="step > 1" step="1">
-        Recipients
-        <small>Who are you sending this message to?</small>
-      </v-stepper-step>
+<v-container fluid>
+  <v-stepper v-model="step" vertical>
+    <v-stepper-step editable :complete="step > 1" step="1">
+      Recipients
+      <small>Who are you sending this message to?</small>
+    </v-stepper-step>
 
-      <v-stepper-content step="1">
-        <v-card flat class="mb-5">
-          <v-container grid-list-md>
-            <v-layout row wrap>
-							<v-flex xs12 sm12 v-if="error">
-								<v-alert :value="true" type="error">{{error_message}}</v-alert>
-							</v-flex>
-							<v-flex xs12 sm12 v-if="success">
-								<v-alert :value="true" type="success">{{success_message}}</v-alert>
-							</v-flex>
-              <v-flex xs12 sm6>
-                <v-autocomplete v-model="local" :disabled="isUpdating" :items="locals" box chips color="blue-grey lighten-2" label="Select LGA(s)" item-text="name" item-value="name" multiple>
-                  <template slot="selection" slot-scope="data">
-                    <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)">{{ data.item.name }}</v-chip>
-                  </template>
-                  <template slot="item" slot-scope="data">
-                    <template v-if="typeof data.item !== 'object'">
-                      <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                    </template>
-                    <template v-else>
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                        <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </template>
-                  </template>
-                </v-autocomplete>
-              </v-flex>
+    <v-stepper-content step="1">
+      <v-card flat class="mb-2">
+        <v-container fluid grid-list-xl>
+          <v-layout align-center wrap>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT LGA(s)</div>
+              <v-select v-model="selectedLgas" :items="lga" box chips multiple>
+                <template slot="selection" slot-scope="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedLgas.length - 1 }} others)</span>
+                </template>
+                <div slot="label" class="caption">Select LGA(s)</div>
+                <v-list-tile slot="prepend-item" ripple @click="toggle">
+                  <v-list-tile-action>
+                    <v-icon :color="selectedLgas.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Select All</v-list-tile-title>
+                </v-list-tile>
+                <v-divider slot="prepend-item" class="mt-2"></v-divider>
+              </v-select>
+            </v-flex>
 
-              <v-flex xs12 sm6>
-                <v-autocomplete v-model="ward" :disabled="isUpdating" :items="wards" box chips color="blue-grey lighten-2" label="Select Wards(s)" tem-text="name" item-value="name" multiple>
-                  <template slot="selection" slot-scope="data">
-                    <v-chip :selected="data.selected" close class="chip--select-multi" @input="remove(data.item)" >{{ data.item.name }}</v-chip>
-                  </template>
-                  <template slot="item" slot-scope="data">
-                    <template v-if="typeof data.item !== 'object'">
-                      <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                    </template>
-                    <template v-else>
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                        <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </template>
-                  </template>
-                </v-autocomplete>
-              </v-flex>
-            </v-layout>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT WARDS(s)</div>
+              <v-select v-model="selectedWards" :items="ward" box chips multiple>
+                <template slot="selection" slot-scope="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedWards.length - 1 }} others)</span>
+                </template>
+                <div slot="label" class="caption">Select WARDS(s)</div>
+                <v-list-tile slot="prepend-item" ripple @click="toggleWards">
+                  <v-list-tile-action>
+                    <v-icon :color="selectedWards.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Select All</v-list-tile-title>
+                </v-list-tile>
+                <v-divider slot="prepend-item" class="mt-2"></v-divider>
+              </v-select>
+            </v-flex>
 
-            <v-layout row wrap>
-              <v-flex xs12 md6>
-                <v-card class="elevation-3">
-                  <v-layout row>
-                    <v-card flat class="blue-grey lighten-1 white--text text-xs-center pa-5" width="100" height="150">
-                      <div class="layout justify-center align-center body-2">Age</div>
-                    </v-card>
-                    <v-card flat class="py-2 px-3" height="120">
-                      <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in ages" :key="row.id">
-                          <v-checkbox color="red" v-model="age" v-bind:value="row.id">
-                            <div class="caption" slot="label">{{ row.name }}</div>
-                          </v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                    </v-card>
-                  </v-layout>
-                </v-card>
-              </v-flex>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT AGE GROUP(s)</div>
+              <v-select v-model="selectedAges" :items="ages" box chips multiple>
+                <template slot="selection" slot-scope="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedAges.length - 1 }} others)</span>
+                </template>
+                <div slot="label" class="caption">SELECT AGE GROUP(s)</div>
+                <v-list-tile slot="prepend-item" ripple @click="toggleAges">
+                  <v-list-tile-action>
+                    <v-icon :color="selectedAges.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Select All</v-list-tile-title>
+                </v-list-tile>
+                <v-divider slot="prepend-item" class="mt-2"></v-divider>
+              </v-select>
+            </v-flex>
 
-              <v-flex xs12 md6>
-                <v-card class="elevation-3">
-                  <v-layout row>
-                    <v-card flat class="blue-grey lighten-1 white--text text-xs-center pa-5" width="100" height="150" >
-                      <div class="layout justify-center align-center body-2">Gender</div>
-                    </v-card>
-                    <v-card flat class="py-2 px-3" height="120">
-                      <v-layout row wrap>
-                        <v-flex xs6 v-for="row in genders" :key="row">
-                          <v-checkbox color="primary" v-model="gender" v-bind:value="row">
-                            <div class="caption" slot="label">{{ row }}</div>
-                          </v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                    </v-card>
-                  </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT GENDER(s)</div>
+              <v-select v-model="selectedGenders" :items="genders" box chips multiple>
+                <div slot="label" class="caption">SELECT GENDER(s)</div>
+              </v-select>
+            </v-flex>
 
-            <v-layout row wrap mt-4>
-              <v-flex xs12 md6>
-                <v-card class="elevation-3">
-                  <v-layout row>
-                    <v-card flat class="blue-grey lighten-1 white--text text-xs-center pa-5" width="100" height="300">
-                      <div class="layout justify-center align-center body-2">Date of Birth (Month)</div>
-                    </v-card>
-                    <v-card flat class="py-2 px-3" height="120">
-                      <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in months" :key="row.id">
-                          <v-checkbox color="green" v-model="month" v-bind:value="row.id">
-                            <div class="caption" slot="label">{{ row.name }}</div>
-                          </v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                    </v-card>
-                  </v-layout>
-                </v-card>
-              </v-flex>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT DOB(s)</div>
+              <v-select v-model="selectedDobs" :items="dobs" box chips multiple>
+                <template slot="selection" slot-scope="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedDobs.length - 1 }} others)</span>
+                </template>
+                <div slot="label" class="caption">SELECT DOB(s)</div>
+                <v-list-tile slot="prepend-item" ripple @click="toggleDobs">
+                  <v-list-tile-action>
+                    <v-icon :color="selectedDobs.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Select All</v-list-tile-title>
+                </v-list-tile>
+                <v-divider slot="prepend-item" class="mt-2"></v-divider>
+              </v-select>
+            </v-flex>
 
-              <v-flex xs12 md6>
-                <v-card class="elevation-3">
-                  <v-layout row>
-                    <v-card flat class="blue-grey lighten-1 white--text text-xs-center pa-5" width="100" height="300">
-                      <div class="layout justify-center align-center body-2">Profession</div>
-                    </v-card>
-                    <v-card flat class="py-2 px-3" height="120">
-                      <v-layout row wrap>
-                        <v-flex xs6 sm4 v-for="row in occupations" :key="row.id">
-                          <v-checkbox color="pink" v-model="occupation" v-bind:value="row.id">
-                            <div class="caption" slot="label">{{ row.name }}</div>
-                          </v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                    </v-card>
-                  </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
-
-        <v-container grid-list-md>
-          <v-btn @click="submit" xs12 sm6 class="primary caption">CONTINUE</v-btn>
+            <v-flex xs12 sm6>
+              <div class="mb-2 blue-grey--text caption">SELECT PROFESSION(s)</div>
+              <v-select v-model="selectedProfessions" :items="professions" box chips multiple>
+                <template slot="selection" slot-scope="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedProfessions.length - 1 }} others)</span>
+                </template>
+                <div slot="label" class="caption">SELECT DOB(s)</div>
+                <v-list-tile slot="prepend-item" ripple @click="toggleProfessions">
+                  <v-list-tile-action>
+                    <v-icon :color="selectedProfessions.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-title>Select All</v-list-tile-title>
+                </v-list-tile>
+                <v-divider slot="prepend-item" class="mt-2"></v-divider>
+              </v-select>
+            </v-flex>
+          </v-layout>
         </v-container>
-      </v-stepper-content>
+      </v-card>
 
-      <v-stepper-step :complete="step > 2" step="2">Content</v-stepper-step>
+      <v-container grid-list-xl>
+        <v-btn @click="step = 2" xs12 sm6 class="primary caption">CONTINUE</v-btn>
+      </v-container>
+    </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <v-card flat class="mb-5">
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex xs12 sm12>
-                <div class="caption blue-grey--text">GROUP</div>
-                <v-text-field disabled v-model="group"></v-text-field>
-              </v-flex>
+    <v-stepper-step :complete="step > 2" step="2">Content</v-stepper-step>
 
-              <v-flex xs12 sm4>
-                <div class="caption blue-grey--text">SCHEDULED DATE</div>
-                <v-menu v-model="dateMenu" :close-on-content-click="false" full-width max-width="290">
-                  <v-text-field append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
-                  <v-date-picker v-model="date" @change="dateMenu = false"></v-date-picker>
-                </v-menu>
-              </v-flex>
+    <v-stepper-content step="2">
+      <v-card flat class="mb-5">
+        <v-container grid-list-xl>
+          <v-layout row wrap>
+            <v-flex xs12 sm6>
+              <div class="caption blue-grey--text">SCHEDULED DATE</div>
+              <v-menu v-model="dateMenu" :close-on-content-click="false" full-width max-width="290">
+                <v-text-field box append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
+                <v-date-picker v-model="date" @change="dateMenu = false"></v-date-picker>
+              </v-menu>
+            </v-flex>
 
-              <v-flex xs12 sm4>
-                <div class="caption blue-grey--text">SENDER'S NAME</div>
-                <v-text-field v-model="sender"></v-text-field>
-              </v-flex>
-
-              <v-flex xs12 sm4>
-                <div class="caption blue-grey--text">RECIPIENTS</div>
-                <v-text-field disabled v-model="recipients"></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-
-          <v-container>
-            <v-textarea v-model="body" auto-grow box color="primary" rows="8" counter>
-              <div class="caption" slot="label">Message</div>
-            </v-textarea>
-          </v-container>
-        </v-card>
-
-        <v-container grid-list-md>
-          <v-btn xs12 sm6 class="primary caption" @click="sendMessage">SEND MESSAGE</v-btn>
-          <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
+            <v-flex xs12 sm6>
+              <div class="caption blue-grey--text">SENDER'S NAME</div>
+              <v-text-field disabled box v-model="sender"></v-text-field>
+            </v-flex>
+          </v-layout>
         </v-container>
-      </v-stepper-content>
-    </v-stepper>
-  </v-container>
+
+        <v-container>
+          <v-textarea v-model="message" auto-grow box color="primary" rows="8" counter>
+            <div class="caption" slot="label">Message</div>
+          </v-textarea>
+        </v-container>
+      </v-card>
+
+      <v-container grid-list-md>
+        <v-btn xs12 sm6 class="primary caption" @click="sendMessage">SEND MESSAGE</v-btn>
+        <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
+      </v-container>
+    </v-stepper-content>
+  </v-stepper>
+</v-container>
 </template>
 
 <style lang="scss" scoped>
@@ -197,128 +170,180 @@
 
 <script>
 import moment from "moment";
-let sms_url = "https://theelect-smsapi.herokuapp.com/index.php/api";
-import axios from "axios";
-
 export default {
-  layout: "dashboard",
-  data() {
+  layout: 'dashboard',
+  data: () => ({
+    message: '',
+    step: 1,
+    lgas: [],
+    professions: [],
+    ages: ['18-30', '31-40', '41-50', '51-60', '61-100'],
+    genders: ['male', 'female'],
+    dobs: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
+    selectedDobs: [],
+    selectedGenders: [],
+    selectedAges: [],
+    selectedLgas: [],
+    selectedWards: [],
+    selectedProfessions: [],
+    sender: 'Tonye Cole',
+    date: new Date().toISOString().substr(0, 10),
+    dateMenu: false,    
+  }),
+  created: async function () {
+    this.$axios.$get('/lgas', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.lgas = response))
 
-    return {
-
-      step: 1,
-      sender: "Tonye Cole",
-      recipients: "",
-      date: new Date().toISOString().substr(0, 10),
-      dateMenu: false,
-      body: "",
-      autoUpdate: true,
-      age: [],
-      gender: [],
-      month: [],
-      occupation: [],
-      local: [],
-      locals: [],
-      ward: [],
-      wards: [],
-      ages: [],
-      genders: ["Male", "Female"],
-      months: [],
-			occupations: [],
-			
-			isUpdating: false,
-			group : "",
-			error : false,
-			error_message : '',
-			success : false,
-			success_message : ''
-		
-		};
-  },
-  created: async function() {
-		let defaults = await axios.get(`${sms_url}/contacts-defaults`);
-		
-		this.locals = defaults.data.data.locals;
-		this.wards = defaults.data.data.wards;
-		this.ages = defaults.data.data.ages;
-		this.months = defaults.data.data.months;
-		this.occupations = defaults.data.data.occupations;
+    this.$axios.$get('/pvc/occupation', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.professions = response))
   },
   computed: {
     sendDate() {
       return this.date ? moment(this.date).format("MMMM Do YYYY") : "";
-    }
-  },
-  watch: {
-    isUpdating(val) {
-      if (val) {
-        setTimeout(() => (this.isUpdating = false), 3000);
-      }
+    },
+    lga() {
+      const filteredLga = []
+      this.lgas.forEach(element => {
+        filteredLga.push(element.name)
+      });
+      return filteredLga
+    },
+    ward() {
+      const filteredWard = []
+      this.lgas.forEach(element => {
+        filteredWard.push(element.wards)
+      });
+
+      return [].concat.apply([], filteredWard)
+    },
+    likesAllLgas() {
+      return this.selectedLgas.length === this.lga.length
+    },
+    likesSomeLgas() {
+      return this.selectedLgas.length > 0 && !this.likesAllLgas
+    },
+    icon() {
+      if (this.likesAllLgas) return 'mdi-close-box'
+      if (this.likesSomeLgas) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllWards() {
+      return this.selectedWards.length === this.ward.length
+    },
+    likesSomeWards() {
+      return this.selectedWards.length > 0 && !this.likesAllWards
+    },
+    icon() {
+      if (this.likesAllWards) return 'mdi-close-box'
+      if (this.likesSomeWards) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllAges() {
+      return this.selectedAges.length === this.ward.length
+    },
+    likesSomeAges() {
+      return this.selectedAges.length > 0 && !this.likesAllAges
+    },
+    icon() {
+      if (this.likesAllAges) return 'mdi-close-box'
+      if (this.likesSomeAges) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllDobs() {
+      return this.selectedDobs.length === this.dobs.length
+    },
+    likesSomeDobs() {
+      return this.selectedDobs.length > 0 && !this.likesAllDobs
+    },
+    icon() {
+      if (this.likesAllDobs) return 'mdi-close-box'
+      if (this.likesSomeDobs) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+
+    likesAllProfessions() {
+      return this.selectedProfessions.length === this.professions.length
+    },
+    likesSomeProfessions() {
+      return this.selectedProfessions.length > 0 && !this.likesAllProfessions
+    },
+    icon() {
+      if (this.likesAllProfessions) return 'mdi-close-box'
+      if (this.likesSomeProfessions) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
     }
   },
 
   methods: {
-    remove(item) {
-      const index = this.friends.indexOf(item.name);
-      if (index >= 0) this.friends.splice(index, 1);
+    async sendMessage() {
+      const data = {
+        message: this.message
+      }
+      await this.$axios.$post(`/sms?gender=${this.selectedGenders}&lga=${this.selectedLgas}&ward=${this.selectedWards}&profession=${this.selectedProfessions}`, data, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        },
+      }).then(function (response) {})
     },
 
-    async submit() {
+    toggle() {
+      this.$nextTick(() => {
+        if (this.likesAllLgas) {
+          this.selectedLgas = []
+        } else {
+          this.selectedLgas = this.lga.slice()
+        }
+      })
+    },
+    toggleWards() {
+      this.$nextTick(() => {
+        if (this.likesAllWards) {
+          this.selectedWards = []
+        } else {
+          this.selectedWards = this.ward.slice()
+        }
+      })
+    },
 
-			this.group = `Ages ${this.age.join(', ')}, Genders ${this.genders.join(', ')}, Professions ${this.occupation.join(', ')}`;
-			this.step = 2;
-      
-		},
+    toggleAges() {
+      this.$nextTick(() => {
+        if (this.likesAllAges) {
+          this.selectedAges = []
+        } else {
+          this.selectedAges = this.ages.slice()
+        }
+      })
+    },
 
-		async sendMessage(){
+    toggleDobs() {
+      this.$nextTick(() => {
+        if (this.likesAllDobs) {
+          this.selectedDobs = []
+        } else {
+          this.selectedDobs = this.dobs.slice()
+        }
+      })
+    },
 
-			try{
-
-				this.error = this.success = false;
-				
-				let body = {
-
-					body : this.body,
-					recipients_type : 'customize',
-					scheduled : 1,
-					schedule_date : this.date,
-					sender : this.sender,
-					ages : this.age,
-					gender : this.gender,
-					locals : this.local,
-					wards : this.ward,
-					occupations : this.occupation,
-					months : this.month
-				}
-
-				let response = await axios.post(`${sms_url}/message?api_token=2f66686b`, body);
-				
-				let {status, data} = response.data;
-				
-				if(status == false){
-
-					this.error = true;
-					this.step = 1;
-					this.error_message = data;
-				
-				}else{
-
-					this.success = true;
-					this.step = 1;
-					this.success_message = 'Message has been queued successfully.'
-
-					setTimeout(() => this.$router.push(`/messages`), 2000)
-				}
-				
-			}catch(ex){
-
-				this.error = true;
-				this.step = 1;
-				this.error_message = ex.message.toString()
-			}
-
-		}
-	
+    toggleProfessions() {
+      this.$nextTick(() => {
+        if (this.likesAllProfessions) {
+          this.selectedProfessions = []
+        } else {
+          this.selectedProfessions = this.professions.slice()
+        }
+      })
+    }
   }
-};
+
+}
 </script>

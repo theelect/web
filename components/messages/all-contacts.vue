@@ -39,7 +39,7 @@ export default {
       }).then(function (response) {})
     }
   },
-  created : async function(){
+  beforeCreate : async function(){
     await this.$store.dispatch('reach')
   },
   computed: {

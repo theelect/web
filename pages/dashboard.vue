@@ -1,13 +1,5 @@
 <template>
 <section>
-
-  <!-- Map Script -->
-  
-<script src="map/mapdata.js"></script>
-  <script src="map/custommap.js"></script>
-  <script src="map/update_map.js"></script>
-  <!-- End Map Script -->
-
   <v-container grid-list-md fluid>
     <v-layout row wrap>
       <v-flex xs12 md2>
@@ -191,6 +183,15 @@
       </v-flex>
     </v-layout>
   </v-container>
+
+
+  <!-- Map Script -->
+  <script src="map/mapdata.js" defer></script>
+  <script src="map/custommap.js" defer></script>
+  <script src="map/update_map.js" defer></script>
+  <!-- End Map Script -->
+
+
 </section>
 </template>
 

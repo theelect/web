@@ -2,8 +2,8 @@
 <section>
   <v-container fluid>
     <v-layout mb-5>
-      <div class="headline" style="margin-right:5px;">Messages</div>
-      <div class="headline primary--text">Dummy for now</div>
+      <div class="headline" style="margin-right:5px;">Messages:</div>
+      <div class="headline primary--text ml-2">{{ stats.total_sent_sms }}</div>
       <v-layout class="justify-end">
         <v-btn to="/new-message" class="primary caption">
           <v-icon>add</v-icon>NEW MESSAGE
@@ -110,6 +110,7 @@ export default {
         }
       ],
       messages: [],
+      stats: {},
       messages_count: 0,
       editedIndex: -1,
       editedItem: {
@@ -132,6 +133,12 @@ export default {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
     }).then(response => (this.messages = response))
+
+    this.$axios.$get('/sms-stats', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.stats = response))
   },
   methods: {
     editItem(item) {

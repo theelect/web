@@ -73,7 +73,7 @@
               </div>
 
               <div v-if="!show" class="mt-2">
-                <span class="display-2 primary--text d-inline">{{sent_messages_count}}</span>
+                <span class="display-2 primary--text d-inline">{{ smsStats.total_sent_this_month }}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
 
@@ -204,6 +204,7 @@ export default {
   name: "charts",
   data() {
     return {
+      smsStats: {},
       scheduled_messages_count : 0,
       sent_messages_count : 0,
       show : true,
@@ -214,6 +215,12 @@ export default {
     }
   },
   created : async function(){
+    this.$axios.$get('/sms-stats', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    }).then(response => (this.smsStats = response))
+
     this.$axios.$get('/pvc', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"

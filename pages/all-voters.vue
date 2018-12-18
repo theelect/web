@@ -25,6 +25,10 @@
           <v-btn flat @change="agePopup=true" class="caption toggleBtn" value="ward">Age</v-btn>
           <v-btn flat @change="professionPopup=true" class="caption toggleBtn" value="profession">Profession</v-btn>
         </v-btn-toggle>
+
+        <div v-if="lgaSelected.length > 0" class="caption primary--text"><span class="black--text font-weight-bold mr-2">LGA:</span> {{ displayedLgaSelected }} <span class="ml-2" v-if="lgaSelected.length > 4">(+{{ lgaSelected.length - 4}})</span></div>
+        <div v-if="ageSelected.length > 0" class="caption primary--text"><span class="black--text font-weight-bold mr-2">AGE:</span> {{ displayedAgeSelected }} <span class="ml-2" v-if="ageSelected.length > 4">(+{{ ageSelected.length - 4}})</span></div>
+        <div v-if="professionSelected.length > 0" class="caption primary--text"><span class="black--text font-weight-bold mr-2">PROFESSION:</span> {{ displayedProfessionSelected }} <span class="ml-2" v-if="professionSelected.length > 4">(+{{ professionSelected.length - 4}})</span></div>
       </v-flex>
     </v-layout>
 
@@ -371,7 +375,7 @@ export default {
     },
   },
 
-  created : async function(){
+  created: async function () {
     this.$axios.$get('/pvc?page=1&perPage=18', {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -408,6 +412,30 @@ export default {
     pLenghtVerified() {
       const pLenghtVerified = Math.round((this.pvc.total_verified) / 18)
       return pLenghtVerified
+    },
+    displayedLgaSelected() {
+      if (this.lgaSelected.length > 3) {
+        let filtered = this.lgaSelected.slice(0, 4)
+        return filtered
+      } else {
+        return this.lgaSelected
+      }
+    },
+    displayedAgeSelected() {
+      if (this.ageSelected.length > 3) {
+        let filtered = this.ageSelected.slice(0, 4)
+        return filtered
+      } else {
+        return this.ageSelected
+      }
+    },
+    displayedProfessionSelected() {
+      if (this.professionSelected.length > 3) {
+        let filtered = this.professionSelected.slice(0, 4)
+        return filtered
+      } else {
+        return this.professionSelected
+      }
     }
   },
   filters: {

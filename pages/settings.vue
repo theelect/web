@@ -20,18 +20,25 @@
             <td>{{ props.item.first_name | capitalize }}</td>
             <td>{{ props.item.last_name | capitalize }}</td>
             <td>{{ props.item.email }}</td>
+            <td class="justify-center layout px-0">
+              <v-flex mt-2 class="text-xs-center">
+                <v-btn icon @click="editUser=true">
+                  <v-icon small class="primary--text">edit</v-icon>
+                </v-btn>
+              </v-flex>
+            </td>
           </tr>
         </template>
       </v-data-table>
     </v-card>
   </v-container>
 
-  <v-dialog max-width="800" v-model="editUser">
+  <v-dialog max-width="450" v-model="editUser">
     <v-card class="px-4 py-4">
-      <v-container grid-list-md fluid>
+      <v-container grid-list-xl fluid>
         <div class="title mb-4">Settings - Edit User</div>
         <v-layout row>
-          <v-flex offset-md11 offset-xs8 offset-sm10>
+          <v-flex>
             <v-switch color="primary" v-model="activateSwitch">
               <div class="caption" slot="label">Enable</div>
             </v-switch>
@@ -40,29 +47,15 @@
 
         <v-flex class="">
           <v-layout row wrap>
-            <v-flex sm6 xs12>
+            <v-flex xs12>
               <v-text-field solo>
                 <div slot="label" class="caption">FIRST NAME</div>
               </v-text-field>
             </v-flex>
 
-            <v-flex sm6 xs12>
+            <v-flex xs12>
               <v-text-field solo>
                 <div slot="label" class="caption">LAST NAME</div>
-              </v-text-field>
-            </v-flex>
-          </v-layout>
-
-          <v-layout row wrap mt-4>
-            <v-flex sm6 xs12>
-              <v-text-field solo type="password">
-                <div slot="label" class="caption">PASSWORD</div>
-              </v-text-field>
-            </v-flex>
-
-            <v-flex sm6 xs12>
-              <v-text-field solo color="primary">
-                <div slot="label" class="caption">USERNAME</div>
               </v-text-field>
             </v-flex>
           </v-layout>
@@ -72,8 +65,8 @@
             <v-radio color="primary" label="View" value="view"></v-radio>
           </v-radio-group>
 
-          <v-container grid-list-md>
-            <v-layout row wrap justify-end mt-4>
+          <v-container grid-list-xl>
+            <v-layout row wrap mt-4>
               <v-btn xs12 sm6 class="primary caption">SAVE</v-btn>
               <v-btn xs12 sm6 dark @click="editUser=false" class="red caption spaced-btn">CANCEL</v-btn>
             </v-layout>
@@ -111,6 +104,12 @@ export default {
         {
           text: "Email",
           value: "email"
+        },
+        {
+          text: "Actions",
+          value: "name",
+          sortable: false,
+          align: "center"
         }
       ],
       users: []

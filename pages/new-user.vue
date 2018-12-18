@@ -43,7 +43,7 @@
 
         <v-radio-group v-model="role" row class="mt-5">
           <v-radio color="primary" label="Admin" value="admin"></v-radio>
-          <!-- <v-radio color="primary" label="View" value="view"></v-radio> -->
+          <v-radio color="primary" label="View" value="view"></v-radio>
         </v-radio-group>
 
         <v-container grid-list-md>

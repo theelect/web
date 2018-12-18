@@ -3,7 +3,7 @@
   <v-container fluid>
     <v-layout mb-5>
       <div class="headline" style="margin-right:5px;">Messages</div>
-      <div class="headline primary--text">({{messages_count}})</div>
+      <div class="headline primary--text">Dummy for now</div>
       <v-layout class="justify-end">
         <v-btn to="/new-message" class="primary caption">
           <v-icon>add</v-icon>NEW MESSAGE
@@ -17,11 +17,11 @@
           <v-layout row wrap>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">RECIPIENTS</div>
-              <div v-text="editedItem.recipients" class="font-weight-bold title"></div>
+              <div v-text="editedItem.number_of_recipient" class="font-weight-bold title"></div>
             </v-flex>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SCHEDULED DATE</div>
-              <div v-text="editedItem.date" class="font-weight-bold title"></div>
+              <div class="font-weight-bold title">{{ editedItem.createdAt | formatDate }}</div>
             </v-flex>
           </v-layout>
 
@@ -38,7 +38,7 @@
 
           <v-flex mt-5>
             <div class="caption blue-grey--text mb-2">MESSAGE</div>
-            <div class="" v-text="editedItem.body"></div>
+            <div class="" v-text="editedItem.message"></div>
           </v-flex>
 
           <v-layout mt-5>
@@ -50,14 +50,14 @@
 
     <v-card>
       <v-card-title></v-card-title>
-      <v-data-table :headers="headers" :items="messages" :search="search">
+      <v-data-table :headers="headers" :items="messages">
         <v-progress-linear slot="no-data" color="blue" indeterminate></v-progress-linear>
         <template slot="items" slot-scope="props">
           <tr>
             <td>{{ props.item.status }}</td>
-            <td>{{ props.item.recipients }}</td>
-            <td>{{ props.item.body }}</td>
-            <td style="width:12%">{{ props.item.date }}</td>
+            <td>{{ props.item.number_of_recipient }}</td>
+            <td>{{ props.item.message }}</td>
+            <td style="width:12%">{{ props.item.createdAt | formatDate }}</td>
             <td class="justify-center layout px-0">
               <v-icon small class="mr-2 primary--text" @click="editItem(props.item)">
                 visibility
@@ -65,7 +65,6 @@
             </td>
           </tr>
         </template>
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">Your search for "{{ search }}" found no results.</v-alert>
       </v-data-table>
     </v-card>
 
@@ -74,8 +73,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import moment from "moment";
 export default {
 
   layout: 'dashboard',
@@ -129,29 +127,11 @@ export default {
     }
   },
   created: async function () {
-    try {
-      let payload = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer 2f66686b'
-        }
+    this.$axios.$get('/sms', {
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-      let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/all', payload);
-
-      let {
-        status,
-        data
-      } = response.data;
-
-      if (status != false) {
-
-        this.messages = data;
-        this.messages_count = data.length;
-      }
-
-    } catch (ex) {
-      console.error(ex);
-    }
+    }).then(response => (this.messages = response))
   },
   methods: {
     editItem(item) {
@@ -159,8 +139,20 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     }
-  }
+  },
 
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+    formatDate: function (date) {
+      if (!date) return ''
+      date = date.substr(0, 10)
+      return date ? moment(date).format('MMM Do YYYY') : ''
+    }
+  }
 }
 </script>
 

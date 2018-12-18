@@ -14,6 +14,7 @@ const _2db8a6a2 = () => interopDefault(import('../pages/message-detail.vue' /* w
 const _b6212a52 = () => interopDefault(import('../pages/messages.vue' /* webpackChunkName: "pages/messages" */))
 const _7e40cc38 = () => interopDefault(import('../pages/new-contact.vue' /* webpackChunkName: "pages/new-contact" */))
 const _47c65c9f = () => interopDefault(import('../pages/new-message.vue' /* webpackChunkName: "pages/new-message" */))
+const _221a5233 = () => interopDefault(import('../pages/new-password.vue' /* webpackChunkName: "pages/new-password" */))
 const _e936a93a = () => interopDefault(import('../pages/new-user.vue' /* webpackChunkName: "pages/new-user" */))
 const _0aa481c7 = () => interopDefault(import('../pages/profession.vue' /* webpackChunkName: "pages/profession" */))
 const _7da4186e = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
@@ -128,6 +129,10 @@ export function createRouter() {
       path: "/new-message",
       component: _47c65c9f,
       name: "new-message"
+    }, {
+      path: "/new-password",
+      component: _221a5233,
+      name: "new-password"
     }, {
       path: "/new-user",
       component: _e936a93a,

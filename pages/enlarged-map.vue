@@ -14,9 +14,9 @@
     <div id="map"></div>
   </div>
   
-  <script src="map/mapdata.js"></script>
-  <script src="map/custommap.js"></script>
-  <script src="map/update_map.js"></script>
+  <script src="map/mapdata.js" defer></script>
+  <script src="map/custommap.js" defer></script>
+  <script src="map/update_map.js" defer></script>
 </section>
 </template>
 

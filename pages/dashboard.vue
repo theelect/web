@@ -1,13 +1,5 @@
 <template>
 <section>
-
-  <!-- Map Script -->
-  
-<script src="map/mapdata.js"></script>
-  <script src="map/custommap.js"></script>
-  <script src="map/update_map.js"></script>
-  <!-- End Map Script -->
-
   <v-container grid-list-md fluid>
     <v-layout row wrap>
       <v-flex xs12 md2>
@@ -38,12 +30,13 @@
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Scheduled Messages</div>
 
-              <div v-if="show">
+              <!-- <div v-if="show">
                 <v-progress-circular :indeterminate="true" color="primary"></v-progress-circular>
-              </div>
+              </div> -->
 
-              <div v-if="!show" class="mt-2">
-                <span class="display-2 primary--text d-inline">{{scheduled_messages_count}}</span>
+              <!-- <div v-if="!show" class="mt-2"> -->
+              <div class="mt-2">
+                <span class="display-2 primary--text d-inline">{{ smsStats.total_scheduled_sms }}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
 
@@ -68,11 +61,12 @@
             <v-card max-height="116" class="px-4 py-4">
               <div class="body-2">Sent</div>
 
-              <div v-if="show">
+              <!-- <div v-if="show">
                 <v-progress-circular color="primary" :indeterminate="true"></v-progress-circular>
-              </div>
+              </div> -->
 
-              <div v-if="!show" class="mt-2">
+              <!-- <div v-if="!show" class="mt-2"> -->
+              <div class="mt-2">
                 <span class="display-2 primary--text d-inline">{{ smsStats.total_sent_this_month }}</span>
                 <span class="grey--text d-inline ml-5">This Month</span>
               </div>
@@ -191,13 +185,21 @@
       </v-flex>
     </v-layout>
   </v-container>
+
+
+  <!-- Map Script -->
+  <script src="map/mapdata.js" defer></script>
+  <script src="map/custommap.js" defer></script>
+  <script src="map/update_map.js" defer></script>
+  <!-- End Map Script -->
+
+
 </section>
 </template>
 
 <script>
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
-import axios from 'axios';
 export default {
   middleware: "authenticated",
   layout: "dashboard",
@@ -245,23 +247,23 @@ export default {
       }
     }).then(response => (this.wards = response))
     
-    try{
+    // try{
 
-      this.show = true
+    //   this.show = true
 
-      let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
-        let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
+    //   let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
+    //     let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
 
-        let {status, data} = response.data;
+    //     let {status, data} = response.data;
 
-      if(status != false){
-        this.scheduled_messages_count = data.scheduled;
-        this.sent_messages_count = data.sent;
-      }
+    //   if(status != false){
+    //     this.scheduled_messages_count = data.scheduled;
+    //     this.sent_messages_count = data.sent;
+    //   }
 
-      this.show = false
+    //   this.show = false
 
-    }catch(ex){}
+    // }catch(ex){}
 
     await this.$store.dispatch('occupationDetails')
     await this.$store.dispatch('ageDetails')

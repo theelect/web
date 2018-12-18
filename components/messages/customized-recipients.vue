@@ -138,13 +138,15 @@
             </v-radio-group>
           </div>
 
-          <div>{{ date }}</div>
+          <!-- <div>{{ date }}</div> -->
 
           <v-layout row wrap>
             <v-flex xs12 sm6 v-if="is_scheduled">
               <div class="caption blue-grey--text">SCHEDULED DATE</div>
               <v-menu v-model="dateMenu" :close-on-content-click="false" full-width max-width="290">
-                <v-text-field box append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
+                <v-text-field box append-icon="event" slot="activator" :value="sendDate" readonly>
+                  <div class="caption" slot="label">Select a schedule date</div>
+                </v-text-field>
                 <v-date-picker v-model="date" @change="dateMenu = false"></v-date-picker>
               </v-menu>
             </v-flex>
@@ -199,7 +201,7 @@ export default {
     selectedWards: [],
     selectedProfessions: [],
     sender: 'Tonye Cole',
-    date: new Date().toISOString().substr(0, 10),
+    date: '',
     dateMenu: false,
   }),
   created: async function () {

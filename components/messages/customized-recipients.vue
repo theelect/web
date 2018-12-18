@@ -128,10 +128,20 @@
     <v-stepper-step :complete="step > 2" step="2">Content</v-stepper-step>
 
     <v-stepper-content step="2">
-      <v-card flat class="mb-5">
+      <v-card flat class="mb-4">
         <v-container grid-list-xl>
+          <div class="mb-4">
+            <div class="caption blue-grey--text">MESSAGE TYPE</div>
+            <v-radio-group v-model="smsType" row>
+              <v-radio label="Immediate" @change="is_scheduled=false" value="immediate" color="primary"></v-radio>
+              <v-radio label="Scheduled" @change="is_scheduled=true" value="scheduled" color="primary"></v-radio>
+            </v-radio-group>
+          </div>
+
+          <div>{{ date }}</div>
+
           <v-layout row wrap>
-            <v-flex xs12 sm6>
+            <v-flex xs12 sm6 v-if="is_scheduled">
               <div class="caption blue-grey--text">SCHEDULED DATE</div>
               <v-menu v-model="dateMenu" :close-on-content-click="false" full-width max-width="290">
                 <v-text-field box append-icon="event" slot="activator" :value="sendDate" readonly></v-text-field>
@@ -174,6 +184,8 @@ export default {
   layout: 'dashboard',
   data: () => ({
     message: '',
+    smsType: 'immediate',
+    is_scheduled: false,
     step: 1,
     lgas: [],
     professions: [],
@@ -188,7 +200,7 @@ export default {
     selectedProfessions: [],
     sender: 'Tonye Cole',
     date: new Date().toISOString().substr(0, 10),
-    dateMenu: false,    
+    dateMenu: false,
   }),
   created: async function () {
     this.$axios.$get('/lgas', {
@@ -286,7 +298,9 @@ export default {
   methods: {
     async sendMessage() {
       const data = {
-        message: this.message
+        message: this.message,
+        is_scheduled: this.is_scheduled,
+        schedule_date: this.date
       }
       await this.$axios.$post(`/sms?gender=${this.selectedGenders}&lga=${this.selectedLgas}&ward=${this.selectedWards}&profession=${this.selectedProfessions}`, data, {
         headers: {

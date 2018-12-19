@@ -14,15 +14,26 @@
     <div id="map"></div>
   </div>
   
-  <script src="map/mapdata.js" defer></script>
-  <script src="map/custommap.js" defer></script>
-  <script src="map/update_map.js" defer></script>
+  <span v-if="loadscripts">
+    <script src="map/mapdata.js" defer></script>
+    <script src="map/custommap.js" defer></script>
+    <script src="map/update_map.js" defer></script>
+  </span>
+
 </section>
 </template>
 
 <script>
 export default {
-  layout: 'map'
+  layout: 'map',
+  data() {
+    return {
+      loadscripts: false
+    }
+  },
+  async mounted () {
+    this.loadscripts = true
+  }
 }
 </script>
 

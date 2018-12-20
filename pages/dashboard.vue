@@ -188,9 +188,11 @@
 
 
   <!-- Map Script -->
-  <script src="map/mapdata.js" defer></script>
-  <script src="map/custommap.js" defer></script>
-  <script src="map/update_map.js" defer></script>
+  <span v-if="loadscripts">
+    <script  src="map/mapdata.js" defer></script>
+    <script  src="map/custommap.js" defer></script>
+    <script  src="map/update_map.js" defer></script>
+  </span>
   <!-- End Map Script -->
 
 
@@ -213,8 +215,12 @@ export default {
       pvc: {},
       pvcCount: {},
       lgas: [],
-      wards: []
+      wards: [],
+      loadscripts: false
     }
+  },
+  async mounted () {
+    this.loadscripts = true
   },
   created : async function(){
     this.$axios.$get('/sms-stats', {

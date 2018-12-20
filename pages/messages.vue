@@ -84,6 +84,7 @@ export default {
       dialog: false,
       timeSort: 'day',
       statusSort: 'all',
+      scheduleStatus: null,
       search: '',
       headers: [{
           text: 'Status',
@@ -132,7 +133,7 @@ export default {
       headers: {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
-    }).then(response => (this.messages = response))
+    }).then(response => (this.messages = response, this.scheduleStatus = response.is_scheduled))
 
     this.$axios.$get('/sms-stats', {
       headers: {

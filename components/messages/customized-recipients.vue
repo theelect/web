@@ -78,26 +78,6 @@
             </v-flex>
 
             <v-flex xs12 sm6>
-              <div class="mb-2 blue-grey--text caption">SELECT DOB(s)</div>
-              <v-select v-model="selectedDobs" :items="dobs" box chips multiple>
-                <template slot="selection" slot-scope="{ item, index }">
-                  <v-chip v-if="index === 0">
-                    <span>{{ item }}</span>
-                  </v-chip>
-                  <span v-if="index === 1" class="grey--text caption" >(+{{ selectedDobs.length - 1 }} others)</span>
-                </template>
-                <div slot="label" class="caption">SELECT DOB(s)</div>
-                <v-list-tile slot="prepend-item" ripple @click="toggleDobs">
-                  <v-list-tile-action>
-                    <v-icon :color="selectedDobs.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
-                  </v-list-tile-action>
-                  <v-list-tile-title>Select All</v-list-tile-title>
-                </v-list-tile>
-                <v-divider slot="prepend-item" class="mt-2"></v-divider>
-              </v-select>
-            </v-flex>
-
-            <v-flex xs12 sm6>
               <div class="mb-2 blue-grey--text caption">SELECT PROFESSION(s)</div>
               <v-select v-model="selectedProfessions" :items="professions" box chips multiple>
                 <template slot="selection" slot-scope="{ item, index }">
@@ -106,7 +86,7 @@
                   </v-chip>
                   <span v-if="index === 1" class="grey--text caption" >(+{{ selectedProfessions.length - 1 }} others)</span>
                 </template>
-                <div slot="label" class="caption">SELECT DOB(s)</div>
+                <div slot="label" class="caption">SELECT PROFESSION(s)</div>
                 <v-list-tile slot="prepend-item" ripple @click="toggleProfessions">
                   <v-list-tile-action>
                     <v-icon :color="selectedProfessions.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
@@ -130,15 +110,14 @@
     <v-stepper-content step="2">
       <v-card flat class="mb-4">
         <v-container grid-list-xl>
+
           <div class="mb-4">
             <div class="caption blue-grey--text">MESSAGE TYPE</div>
             <v-radio-group v-model="smsType" row>
-              <v-radio label="Immediate" @change="is_scheduled=false" value="immediate" color="primary"></v-radio>
+              <v-radio label="Immediate" @change="immediate" value="immediate" color="primary"></v-radio>
               <v-radio label="Scheduled" @change="is_scheduled=true" value="scheduled" color="primary"></v-radio>
             </v-radio-group>
           </div>
-
-          <!-- <div>{{ date }}</div> -->
 
           <v-layout row wrap>
             <v-flex xs12 sm6 v-if="is_scheduled">
@@ -166,7 +145,8 @@
       </v-card>
 
       <v-container grid-list-md>
-        <v-btn xs12 sm6 class="primary caption" @click="sendMessage">SEND MESSAGE</v-btn>
+        <v-btn v-if="is_scheduled" xs12 sm6 class="primary caption" @click="sendMessage">SEND MESSAGE</v-btn>
+        <v-btn v-else xs12 sm6 class="primary caption" @click="sendMessageImmediate">SEND MESSAGE</v-btn>
         <v-btn @click="step = 1" xs12 sm6 dark class="red caption">BACK</v-btn>
       </v-container>
     </v-stepper-content>
@@ -193,8 +173,6 @@ export default {
     professions: [],
     ages: ['18-30', '31-40', '41-50', '51-60', '61-100'],
     genders: ['male', 'female'],
-    dobs: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
-    selectedDobs: [],
     selectedGenders: [],
     selectedAges: [],
     selectedLgas: [],
@@ -220,6 +198,10 @@ export default {
   computed: {
     sendDate() {
       return this.date ? moment(this.date).format("MMMM Do YYYY") : "";
+    },
+    mydate() {
+      let mydate = moment(this.date).toISOString()
+      return mydate
     },
     lga() {
       const filteredLga = []
@@ -272,18 +254,6 @@ export default {
       return 'mdi-checkbox-blank-outline'
     },
 
-    likesAllDobs() {
-      return this.selectedDobs.length === this.dobs.length
-    },
-    likesSomeDobs() {
-      return this.selectedDobs.length > 0 && !this.likesAllDobs
-    },
-    icon() {
-      if (this.likesAllDobs) return 'mdi-close-box'
-      if (this.likesSomeDobs) return 'mdi-minus-box'
-      return 'mdi-checkbox-blank-outline'
-    },
-
     likesAllProfessions() {
       return this.selectedProfessions.length === this.professions.length
     },
@@ -302,13 +272,40 @@ export default {
       const data = {
         message: this.message,
         is_scheduled: this.is_scheduled,
-        schedule_date: this.date
+        schedule_date: this.mydate
       }
-      await this.$axios.$post(`/sms?gender=${this.selectedGenders}&lga=${this.selectedLgas}&ward=${this.selectedWards}&profession=${this.selectedProfessions}`, data, {
+      await this.$axios.$post(`/sms?gender=${this.selectedGenders}&lga=${this.selectedLgas}&ward=${this.selectedWards}&profession=${this.selectedProfessions}&age=${this.selectedAges}`, data, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         },
-      }).then(function (response) {})
+      }).then(response => (
+        this.$toast.success(response.message, {
+          icon: "check"
+        })
+      ))
+
+    },
+
+    async sendMessageImmediate() {
+      const data = {
+        is_scheduled: this.is_scheduled,
+        message: this.message
+      }
+      await this.$axios.$post(`/sms?gender=${this.selectedGenders}&lga=${this.selectedLgas}&ward=${this.selectedWards}&profession=${this.selectedProfessions}&age=${this.selectedAges}`, data, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        },
+      }).then(response => (
+        this.$toast.success(response.message, {
+          icon: "check"
+        })
+      ))
+
+    },
+
+    immediate() {
+      this.is_scheduled = false
+      this.date = ''
     },
 
     toggle() {
@@ -336,16 +333,6 @@ export default {
           this.selectedAges = []
         } else {
           this.selectedAges = this.ages.slice()
-        }
-      })
-    },
-
-    toggleDobs() {
-      this.$nextTick(() => {
-        if (this.likesAllDobs) {
-          this.selectedDobs = []
-        } else {
-          this.selectedDobs = this.dobs.slice()
         }
       })
     },

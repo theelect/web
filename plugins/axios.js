@@ -9,9 +9,6 @@ export default function({ $axios, store, app }) {
     return token;
   };
   $axios.setHeader("Authorization", getToken());
-  $axios.onRequest(config => {
-    console.log("Making request to " + config.url);
-  });
 
   $axios.onError(error => {
     const code = parseInt(error.response && error.response.status);
@@ -19,7 +16,6 @@ export default function({ $axios, store, app }) {
       app.$toast.error(error.response.data.message, {
         icon: "error_outline"
       });
-      console.log(error.response.data.message);
     }
   });
 }

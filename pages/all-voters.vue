@@ -130,7 +130,7 @@
     </v-layout>
 
     <v-layout v-if="cardSwitch" row wrap>
-      <v-flex xs12 sm6 lg4 xl3 v-for="(voter, index) in voters" :key="index" mb-4>
+      <v-flex xs12 sm6 lg4 v-for="(voter, index) in voters" :key="index" mb-4>
         <v-hover>
           <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="320" height="210">
             <v-layout class="justify-end">
@@ -406,12 +406,22 @@ export default {
       return voters
     },
     pLenght() {
-      const pLenght = Math.round((this.pvc.total) / 18)
-      return pLenght
+      if (this.pvc.total != null) {
+        const pLenght = Math.round((this.pvc.total) / 18)
+        return pLenght
+      } else {
+        const pLenght = 0
+        return pLenght
+      }
     },
     pLenghtVerified() {
-      const pLenghtVerified = Math.round((this.pvc.total_verified) / 18)
-      return pLenghtVerified
+      if (this.pvc.total != null) {
+        const pLenghtVerified = Math.round((this.pvc.total_verified) / 18)
+        return pLenghtVerified
+      } else {
+        const pLenghtVerified = 0
+        return pLenghtVerified
+      }
     },
     displayedLgaSelected() {
       if (this.lgaSelected.length > 3) {

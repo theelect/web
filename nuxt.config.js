@@ -17,12 +17,10 @@ module.exports = {
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+        href: "https://fonts.googleapis.com/css?family=Aleo|Material+Icons"
       }
     ],
-    script: [
-    ]
+    script: []
   },
 
   /*
@@ -79,21 +77,18 @@ module.exports = {
     extend(config, ctx) {}
   },
 
-
   /*
   ** Transition
   */
   layoutTransition: {
-    name: 'fade'
+    name: "fade"
   },
 
-
-
   build: {
-    extend (config, ctx) {
+    extend(config, ctx) {
       config.externals = {
-        jquery: 'jQuery'
-      }
+        jquery: "jQuery"
+      };
     }
   }
 };

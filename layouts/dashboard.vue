@@ -95,11 +95,10 @@
   </v-toolbar>
 
   <v-content>
-    <transition name="fade">
-      <nuxt class="my-container"></nuxt>
-    </transition>
+      <transition name="slide-fade">
+        <nuxt class="my-container"></nuxt>
+      </transition>
   </v-content>
-
 
 </v-app>
 </template>
@@ -109,7 +108,6 @@
   text-transform: unset;
 }
 </style>
-
 
 <script>
 require('static/map/jquery.min.js')
@@ -121,7 +119,9 @@ export default {
   }),
   methods: {
     logout() {
-      this.$toast.show('Logging out...', {icon: "fingerprint"});
+      this.$toast.show('Logging out...', {
+        icon: "fingerprint"
+      });
       this.$store.dispatch('logout')
       this.$router.push('/')
     }

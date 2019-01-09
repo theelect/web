@@ -11,12 +11,12 @@ export default {
   mounted () {
     // Overwriting base render method with actual data.
     this.renderChart({
-      labels: Object.keys(this.$store.getters.age),
+      labels: Object.keys(this.age),
       datasets: [
         {
           label: 'Voters',
           backgroundColor: '#4881F9',
-          data: Object.values(this.$store.getters.age)
+          data: Object.values(this.age)
         }
       ]
     })

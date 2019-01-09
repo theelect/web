@@ -13,7 +13,7 @@
     <v-card>
       <v-card-title></v-card-title>
       <v-data-table :headers="headers" :items="users">
-        <v-progress-linear slot="no-data" color="blue" indeterminate></v-progress-linear>
+        <v-progress-linear id="noData" slot="no-data" color="blue" indeterminate></v-progress-linear>
         <template slot="items" slot-scope="props">
           <tr>
             <td>{{ props.item.role | capitalize }}</td>
@@ -137,13 +137,16 @@ export default {
   },
   mounted() {
     this.$axios.get('https://theelect.herokuapp.com/api/v1/users', {
-        headers: {
-          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-        }
-      })
-      .then(response => {
-        this.users = response.data;
-      })
+      headers: {
+        apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+      }
+    })
+    .then(response => {
+      this.users = response.data;
+    })
+
+    // setTimeout(() => (document.getElementById('noData').style.display = 'none'), 20000)    
+
   },
   filters: {
     capitalize: function (value) {

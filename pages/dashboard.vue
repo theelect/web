@@ -15,31 +15,35 @@
       <v-flex xs12 md5>
         <v-layout column wrap>
           <v-flex>
-            <v-card max-height="116" class="primary white--text px-4 pb-3 pt-2">
-              <div class="text-xs-right primary--text">More</div>
+            <v-card height="116" class="primary white--text px-4 pb-3 pt-2">
+              <v-flex v-if="pvcCount.total_verified != null">
+                <div class="text-xs-right primary--text">More</div>
 
-              <div class="body-2">Total Verified Voters</div>
-              <div class="display-2 mt-2">
-                {{ pvcCount.total_verified }}
-                <span class="title">{{ verifiedVotersPercentage }}</span>
-              </div>
+                <div class="body-2">Total Verified Voters</div>
+                <div class="display-2 mt-2">
+                  {{ pvcCount.total_verified }}
+                  <span class="title">{{ verifiedVotersPercentage }}</span>
+                </div>
+              </v-flex>
+              <v-layout v-else fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-layout>
             </v-card>
           </v-flex>
 
           <v-flex>
-            <v-card max-height="116" class="px-4 py-4">
-              <div class="body-2">Scheduled Messages</div>
+            <v-card height="116" class="px-4 py-4">
+              <v-flex v-if="smsStats.total_scheduled_sms != null">
+                <div class="body-2">Scheduled Messages</div>
+                <div class="mt-2">
+                  <span class="display-2 primary--text d-inline">{{ smsStats.total_scheduled_sms }}</span>
+                  <span class="grey--text d-inline ml-5">This Month</span>
+                </div>
+              </v-flex>
 
-              <!-- <div v-if="show">
-                <v-progress-circular :indeterminate="true" color="primary"></v-progress-circular>
-              </div> -->
-
-              <!-- <div v-if="!show" class="mt-2"> -->
-              <div class="mt-2">
-                <span class="display-2 primary--text d-inline">{{ smsStats.total_scheduled_sms }}</span>
-                <span class="grey--text d-inline ml-5">This Month</span>
-              </div>
-
+              <v-layout v-else fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-layout>
             </v-card>
           </v-flex>
         </v-layout>
@@ -48,29 +52,34 @@
       <v-flex xs12 md5>
         <v-layout column wrap>
           <v-flex>
-            <v-card max-height="116" class="primary white--text px-4 pb-3 pt-2">
-              <nuxt-link to="/all-voters">
-                <div class="text-xs-right white--text">More</div>
-              </nuxt-link>
-              <div class="body-2">Total Voters</div>
-              <div class="display-2 mt-2">{{ pvc.total }}</div>
+            <v-card height="116" class="primary white--text px-4 pb-3 pt-2">
+              <v-flex v-if="pvc.total != null">
+                <nuxt-link to="/all-voters">
+                  <div class="text-xs-right white--text">More</div>
+                </nuxt-link>
+                <div class="body-2">Total Voters</div>
+                <div class="display-2 mt-2">{{ pvc.total }}</div>
+              </v-flex>
+
+              <v-layout v-else fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-layout>
             </v-card>
           </v-flex>
 
           <v-flex>
-            <v-card max-height="116" class="px-4 py-4">
-              <div class="body-2">Sent</div>
+            <v-card height="116" class="px-4 py-4">
+              <v-flex v-if="smsStats.total_sent_this_month != null">
+                <div class="body-2">Sent</div>
+                <div class="mt-2">
+                  <span class="display-2 primary--text d-inline">{{ smsStats.total_sent_this_month }}</span>
+                  <span class="grey--text d-inline ml-5">This Month</span>
+                </div>
+              </v-flex>
 
-              <!-- <div v-if="show">
-                <v-progress-circular color="primary" :indeterminate="true"></v-progress-circular>
-              </div> -->
-
-              <!-- <div v-if="!show" class="mt-2"> -->
-              <div class="mt-2">
-                <span class="display-2 primary--text d-inline">{{ smsStats.total_sent_this_month }}</span>
-                <span class="grey--text d-inline ml-5">This Month</span>
-              </div>
-
+              <v-layout v-else fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-layout>
             </v-card>
           </v-flex>
 
@@ -186,15 +195,14 @@
     </v-layout>
   </v-container>
 
-
   <!-- Map Script -->
   <span v-if="loadscripts">
-    <script  src="map/mapdata.js" defer></script>
+
+<script  src="map/mapdata.js" defer></script>
     <script  src="map/custommap.js" defer></script>
     <script  src="map/update_map.js" defer></script>
   </span>
   <!-- End Map Script -->
-
 
 </section>
 </template>

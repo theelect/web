@@ -112,3 +112,20 @@ a {
 .legend_color li{width: 20%;  height: 20px; display: table-cell;}
 .legend_label {display: table; width: 100%;  padding: 0px; padding-left: 10%; padding-right: 10%; list-style: none; margin: 0px; box-sizing: border-box;}
 .legend_label li{width: 25%;  height: 20px; display: table-cell; text-align: center;}
+
+.slide-fade-enter-active {
+  transition: all 2s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateX(10px);
+  opacity: 0;
+}

@@ -99,19 +99,56 @@ a {
 }
 
 //Transition
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity.5s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
 //Legend for Map
-.legend{color: black; width: 450px; font-family: arial; font-size: 14px;} 
-.legend_color {display: table; width: 100%; background: white; list-style: none; margin: 0px; padding: 0px; }
-.legend_color li{width: 20%;  height: 20px; display: table-cell;}
-.legend_label {display: table; width: 100%;  padding: 0px; padding-left: 10%; padding-right: 10%; list-style: none; margin: 0px; box-sizing: border-box;}
-.legend_label li{width: 25%;  height: 20px; display: table-cell; text-align: center;}
+.legend {
+  color: black;
+  width: 450px;
+  font-family: arial;
+  font-size: 14px;
+}
+
+.legend_color {
+  display: table;
+  width: 100%;
+  background: white;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.legend_color li {
+  width: 20%;
+  height: 20px;
+  display: table-cell;
+}
+
+.legend_label {
+  display: table;
+  width: 100%;
+  padding: 0px;
+  padding-left: 10%;
+  padding-right: 10%;
+  list-style: none;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.legend_label li {
+  width: 25%;
+  height: 20px;
+  display: table-cell;
+  text-align: center;
+}
 
 .slide-fade-enter-active {
   transition: all 2s ease;
@@ -127,5 +164,23 @@ a {
 /* .slide-fade-leave-active below version 2.1.8 */
   {
   transform: translateX(10px);
+  opacity: 0;
+}
+
+
+.slide-up-enter-active {
+  transition: all 6s ease;
+}
+
+.slide-up-leave-active {
+  transition: all 6s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-up-enter,
+.slide-up-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateY(10px);
   opacity: 0;
 }

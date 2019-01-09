@@ -129,6 +129,12 @@
       </v-btn-toggle>
     </v-layout>
 
+    <v-dialog persistent v-model="loader" max-width="140">
+      <v-card>
+        <v-img :src="`/loader.gif`"></v-img>
+      </v-card>
+    </v-dialog>
+
     <v-layout v-if="cardSwitch" row wrap>
       <v-flex xs12 sm6 lg4 v-for="(voter, index) in voters" :key="index" mb-4>
         <v-hover>
@@ -158,7 +164,7 @@
               <div v-else class="grey--text mt-2">Unknown DOB and Profession</div>
             </v-card-title>
 
-            <v-card-text v-if="voter.lga!=null || voter.ward!=null" class="blue-grey lighten-4 px-4 mt-4">
+            <v-card-text v-if="voter.lga!=null || voter.ward!=null" class="text-truncate blue-grey lighten-4 px-4 mt-4">
               {{ voter.lga | capitalize }} <span v-if="voter.lga!=null && voter.ward!=null">-</span> {{ voter.ward | capitalize }}
             </v-card-text>
             <v-card-text v-else class="blue-grey lighten-4 px-4 mt-4">Unknown LGA and Ward</v-card-text>
@@ -213,6 +219,7 @@ export default {
   data() {
     return {
       pvc: {},
+      loader: false,
       lgas: [],
       professions: [],
       pvcCount: [],
@@ -298,6 +305,8 @@ export default {
       })
     },
     async verifiedVoters() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -306,6 +315,8 @@ export default {
       this.verified = true
     },
     async general() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -326,6 +337,8 @@ export default {
       if (index >= 0) this.ageSelected.splice(index, 1)
     },
     async lgaSubmit() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -334,6 +347,8 @@ export default {
       this.lgaPopup = false
     },
     async lgaSubmitVerified() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -342,6 +357,8 @@ export default {
       this.lgaPopup = false
     },
     async professionSubmit() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -350,6 +367,8 @@ export default {
       this.professionPopup = false
     },
     async professionSubmitVerified() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -358,6 +377,8 @@ export default {
       this.professionPopup = false
     },
     async ageSubmit() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -366,6 +387,8 @@ export default {
       this.agePopup = false
     },
     async ageSubmitVerified() {
+      this.loader = true
+      setTimeout(() => (this.loader = false), 2000)
       this.pvc = await this.$axios.$get(`/pvc?page=1&perPage=18&is_verified=true&lga=${this.lgaSelected}&profession=${this.professionSelected}&age=${this.ageSelected}`, {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
@@ -463,7 +486,7 @@ export default {
   watch: {
     isUpdating(val) {
       if (val) {
-        setTimeout(() => (this.isUpdating = false), 3000)
+        setTimeout(() => (this.isUpdating = false), 2000)
       }
     }
   },

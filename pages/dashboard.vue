@@ -196,12 +196,12 @@
   </v-container>
 
   <!-- Map Script -->
-  <span v-if="loadscripts">
+  <!-- <span v-if="loadscripts"> -->
 
-<script  src="map/mapdata.js" defer></script>
-    <script  src="map/custommap.js" defer></script>
-    <script  src="map/update_map.js" defer></script>
-  </span>
+<script  src="/map/mapdata.js" defer></script>
+    <script  src="/map/custommap.js" defer></script>
+    <script  src="/map/update_map.js" defer></script>
+  <!-- </span> -->
   <!-- End Map Script -->
 
 </section>
@@ -211,6 +211,17 @@
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
 export default {
+  // head() {
+  //   return {
+  //     script: [
+  //       { src: "/map/jquery.min.js" },
+  //       { src: "/map/update_map.js" },
+  //       { src: "/map/custommap.js" },
+  //       { src: "/map/mapdata.js" },
+  //       { src: "/map/mapinfo.js" }
+  //     ]
+  //   }
+  // },
   middleware: "authenticated",
   layout: "dashboard",
   name: "charts",

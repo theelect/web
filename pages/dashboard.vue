@@ -211,17 +211,6 @@
 import BarChart from "~/components/charts/BarChart";
 import DoughnutChart from "~/components/charts/DoughnutChart";
 export default {
-  // head() {
-  //   return {
-  //     script: [
-  //       { src: "/map/jquery.min.js" },
-  //       { src: "/map/update_map.js" },
-  //       { src: "/map/custommap.js" },
-  //       { src: "/map/mapdata.js" },
-  //       { src: "/map/mapinfo.js" }
-  //     ]
-  //   }
-  // },
   middleware: "authenticated",
   layout: "dashboard",
   name: "charts",
@@ -271,24 +260,6 @@ export default {
         apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
       }
     }).then(response => (this.wards = response))
-    
-    // try{
-
-    //   this.show = true
-
-    //   let payload = { headers : {'Content-Type' : 'application/json', 'Authorization' : 'Bearer 2f66686b'} }
-    //     let response = await axios.get('https://theelect-smsapi.herokuapp.com/index.php/api/messages/count/analysis', payload);
-
-    //     let {status, data} = response.data;
-
-    //   if(status != false){
-    //     this.scheduled_messages_count = data.scheduled;
-    //     this.sent_messages_count = data.sent;
-    //   }
-
-    //   this.show = false
-
-    // }catch(ex){}
 
     await this.$store.dispatch('occupationDetails')
     await this.$store.dispatch('ageDetails')

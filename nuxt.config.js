@@ -20,7 +20,13 @@ module.exports = {
         href: "https://fonts.googleapis.com/css?family=Aleo|Material+Icons"
       }
     ],
-    script: []
+    script: [
+      { src: "/map/jquery.min.js" },
+      { src: "/map/update_map.js" },
+      { src: "/map/custommap.js" },
+      { src: "/map/mapdata.js" },
+      { src: "/map/mapinfo.js" }
+    ]
   },
 
   /*

@@ -12,7 +12,7 @@ import _1a3b0da6 from '../layouts/map.vue'
 const layouts = { "_dashboard": _5fa3735e,"_default": _6f6c098b,"_map": _1a3b0da6 }
 
 export default {
-  head: {"title":"Tonye Cole","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"The-Elect App"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Aleo|Material+Icons"}],"script":[],"style":[]},
+  head: {"title":"Tonye Cole","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"The-Elect App"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Aleo|Material+Icons"}],"script":[{"src":"\u002Fmap\u002Fjquery.min.js"},{"src":"\u002Fmap\u002Fupdate_map.js"},{"src":"\u002Fmap\u002Fcustommap.js"},{"src":"\u002Fmap\u002Fmapdata.js"},{"src":"\u002Fmap\u002Fmapinfo.js"}],"style":[]},
 
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })

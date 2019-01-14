@@ -51,7 +51,7 @@
     <v-card>
       <v-card-title></v-card-title>
       <v-data-table :headers="headers" :items="messages">
-        <v-progress-linear id="noData" slot="no-data" color="blue" indeterminate></v-progress-linear>
+        <!-- <v-progress-linear id="noData" slot="no-data" color="blue" indeterminate></v-progress-linear> -->
         <template slot="items" slot-scope="props">
           <tr>
             <td>{{ props.item.status }}</td>

@@ -4,8 +4,16 @@ import { Bar } from 'vue-chartjs'
 export default {
   extends: Bar,
   computed: {
-    age() {
+    ageGot() {
       return this.$store.getters.age
+    },
+
+    age() {
+      if (this.ageGot) {
+        return this.ageGot
+      }else {
+        return {}
+      }
     }
   },
   mounted () {

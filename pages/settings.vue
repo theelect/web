@@ -13,9 +13,9 @@
     <v-card>
       <v-card-title></v-card-title>
       <v-data-table :headers="headers" :items="users">
-        <v-progress-linear id="noData" slot="no-data" color="blue" indeterminate></v-progress-linear>
+        <!-- <v-progress-linear id="noData" slot="no-data" color="blue" indeterminate></v-progress-linear> -->
         <template slot="items" slot-scope="props">
-          <tr>
+          <tr v-if="users != {}">
             <td>{{ props.item.role | capitalize }}</td>
             <td>{{ props.item.first_name | capitalize }}</td>
             <td>{{ props.item.last_name | capitalize }}</td>

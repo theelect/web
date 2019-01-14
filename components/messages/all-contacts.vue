@@ -97,8 +97,15 @@ export default {
     await this.$store.dispatch('reach')
   },
   computed: {
-    reach() {
+    stats() {
       return this.$store.getters.reach
+    },
+    reach() {
+      if (this.stats) {
+        return this.$store.getters.reach
+      }else {
+        return null
+      }
     },
     sendDate() {
       return this.date ? moment(this.date).format("MMMM Do YYYY") : "";

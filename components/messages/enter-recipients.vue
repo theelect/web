@@ -63,11 +63,11 @@ export default {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         },
-      }).then(response => (
-        this.$toast.success(response.message, {
+      }).then(response => {
+        this.$toast.success('Message sent successfully', {
           icon: "check"
         })
-      ))
+      })
     },
 
     async sendMessageImmediate() {
@@ -79,11 +79,11 @@ export default {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         },
-      }).then(response => (
-        this.$toast.success(response.message, {
+      }).then(response => {
+        this.$toast.success('Message sent successfully', {
           icon: "check"
         })
-      ))
+      })
     },
 
     immediate() {

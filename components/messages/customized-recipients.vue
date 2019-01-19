@@ -278,11 +278,11 @@ export default {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         },
-      }).then(response => (
+      }).then(response => {
         this.$toast.success(response.message, {
           icon: "check"
         })
-      ))
+      })
 
     },
 
@@ -295,11 +295,11 @@ export default {
         headers: {
           apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
         },
-      }).then(response => (
+      }).then(response => {
         this.$toast.success(response.message, {
           icon: "check"
         })
-      ))
+      })
 
     },
 

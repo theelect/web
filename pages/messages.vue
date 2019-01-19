@@ -21,7 +21,7 @@
             </v-flex>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SCHEDULED DATE</div>
-              <div class="font-weight-bold title">{{ editedItem.createdAt | formatDate }}</div>
+              <div class="font-weight-bold title">{{ editedItem.scheduledDate | formatDate }}</div>
             </v-flex>
           </v-layout>
 
@@ -48,6 +48,17 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="editDialog" max-width="550px">
+      <v-card class="pa-5">
+        <div class="caption blue-grey--text mt-2">MESSAGE BODY</div>
+        <v-textarea class="mb-4" v-model="editedItem.message" auto-grow box color="primary" rows="6" counter>
+          <div class="caption" slot="label">Message</div>
+        </v-textarea>
+
+        <v-btn color="primary" class="caption" @click="updateMessage">Update</v-btn>
+      </v-card>
+    </v-dialog>
+
     <v-card>
       <v-card-title></v-card-title>
       <v-data-table :headers="headers" :items="messages">
@@ -59,8 +70,14 @@
             <td>{{ props.item.message }}</td>
             <td style="width:12%">{{ props.item.createdAt | formatDate }}</td>
             <td class="justify-center layout px-0">
-              <v-icon small class="mr-2 primary--text" @click="editItem(props.item)">
+              <v-icon small class="mr-2 primary--text" @click="viewItem(props.item)">
                 visibility
+              </v-icon>
+              <v-icon :disabled="!props.item.is_scheduled" small class="mr-2" color="green" @click="editItem(props.item)">
+                edit
+              </v-icon>
+              <v-icon :disabled="!props.item.is_scheduled" small color="red" @click="deleteItem(props.item)">
+                delete
               </v-icon>
             </td>
           </tr>
@@ -81,6 +98,7 @@ export default {
   data() {
 
     return {
+      editDialog: false,
       dialog: false,
       timeSort: 'day',
       statusSort: 'all',
@@ -142,10 +160,56 @@ export default {
     }).then(response => (this.stats = response))
   },
   methods: {
-    editItem(item) {
+    viewItem(item) {
       this.editedIndex = this.messages.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
+    },
+
+    editItem(item) {
+      this.editedIndex = this.messages.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.editDialog = true
+    },
+
+    deleteItem(item) {
+      this.editedIndex = this.messages.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      alert('Are you sure you want to delete this message?')
+      this.$axios.delete(`/sms/scheduled/${this.editedItem._id}`, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      }).then(response => {
+        this.$toast.success('Message successfully deleted', {
+          icon: "check"
+        });
+        location.reload();
+      }).catch(e => {
+        console.log(e);
+      })
+    },
+
+    async updateMessage() {
+      this.$toast.show('Updating scheduled message...', {
+        icon: "fingerprint"
+      });
+      const data = {
+        message: this.editedItem.message
+      }
+      await this.$axios.patch(`/sms/scheduled/${this.editedItem._id}`, data, {
+        headers: {
+          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+        }
+      }).then(response => {
+        this.$toast.success('Successfully updated the message', {
+          icon: "check"
+        });
+        this.editDialog = false;
+        location.reload();
+      }).catch(e => {
+        console.log(e);
+      })
     }
   },
 

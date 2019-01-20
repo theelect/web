@@ -67,6 +67,7 @@ export default {
         this.$toast.success('Message sent successfully', {
           icon: "check"
         })
+        this.$router.push('/messages')
       })
     },
 
@@ -83,6 +84,7 @@ export default {
         this.$toast.success('Message sent successfully', {
           icon: "check"
         })
+        this.$router.push('/messages')
       })
     },
 

@@ -36,7 +36,7 @@
   <v-dialog max-width="450" v-model="editUser">
     <v-card class="px-4 py-4">
       <v-container grid-list-xl fluid>
-        <div class="title mb-4">Settings - Edit User</div>
+        <div class="font-weight-bold primary--text title text-xs-center mb-4">EDIT USER</div>
         <v-layout row>
           <v-flex>
             <v-switch color="primary" v-model="userToEdit.is_active">
@@ -61,17 +61,23 @@
           </v-layout>
 
           <v-radio-group v-model="userToEdit.role" row class="mt-5">
-            <v-radio color="primary" label="Admin" value="admin"></v-radio>
-            <v-radio color="primary" label="View" value="view"></v-radio>
-            <v-radio color="primary" label="WC" value="wc"></v-radio>
+            <v-radio color="primary" value="admin">
+              <div slot="label" class="caption">Admin</div>
+            </v-radio>
+            <v-radio color="primary" value="view">
+              <div slot="label" class="caption">View</div>
+            </v-radio>
+            <v-radio color="primary" value="wc">
+              <div slot="label" class="caption">WC</div>
+            </v-radio>
           </v-radio-group>
 
-          <v-container grid-list-xl>
-            <v-layout row wrap mt-4>
-              <v-btn xs12 sm6 @click="save(userToEdit)" class="primary caption">SAVE</v-btn>
-              <v-btn xs12 sm6 dark @click="cancelEdit" class="red caption spaced-btn">CANCEL</v-btn>
+          <!-- <v-container fluid grid-list-xl> -->
+            <v-layout mx-1 mt-4>
+              <v-btn block xs12 sm6 @click="save(userToEdit)" class="primary caption">SAVE</v-btn>
+              <v-btn block xs12 sm6 dark @click="cancelEdit" class="red caption spaced-btn">CANCEL</v-btn>
             </v-layout>
-          </v-container>
+          <!-- </v-container> -->
         </v-flex>
       </v-container>
     </v-card>

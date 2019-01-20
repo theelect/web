@@ -1,13 +1,13 @@
 <template>
 <v-container fluid>
   <v-card class="pa-5">
-    <div class="mb-5">
+    <v-flex v-if="reach" class="mb-5">
       <div class="caption blue-grey--text">RECIPIENTS</div>
       <div class="title my-3">Male: <span class="font-weight-regular primary--text">{{ reach.gender.male }}</span></div>
       <div class="title my-3">Female: <span class="font-weight-regular primary--text">{{ reach.gender.female }}</span></div>
       <div class="title my-3">LGAs: <span class="font-weight-regular primary--text">{{ reach.lga }}</span></div>
       <div class="title">Total Reach: <span class="font-weight-regular primary--text">{{ reach.total }}</span></div>
-    </div>
+    </v-flex>
 
     <div class="mb-4">
       <div class="caption blue-grey--text">MESSAGE TYPE</div>
@@ -68,6 +68,7 @@ export default {
         this.$toast.success(response.message, {
           icon: "check"
         });
+        this.$router.push('/messages')
       })
 
     },
@@ -85,6 +86,7 @@ export default {
         this.$toast.success(response.message, {
           icon: "check"
         })
+        this.$router.push('/messages')
       })
     },
 
@@ -101,11 +103,12 @@ export default {
       return this.$store.getters.reach
     },
     reach() {
-      if (this.stats) {
-        return this.$store.getters.reach
-      }else {
-        return null
-      }
+      // if (this.stats) {
+      //   return this.$store.getters.reach
+      // }else {
+      //   return null
+      // }
+      return this.$store.getters.reach
     },
     sendDate() {
       return this.date ? moment(this.date).format("MMMM Do YYYY") : "";

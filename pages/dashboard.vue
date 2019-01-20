@@ -170,7 +170,7 @@
 
     <v-layout row wrap mt-4>
       <v-flex xs12 md12>
-        <v-card height="480">
+        <v-card height="400">
           <nuxt-link to="/wards">
             <div class="primary--text pr-4 pt-4 text-xs-right">Expand</div>
           </nuxt-link>

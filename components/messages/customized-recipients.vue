@@ -282,6 +282,7 @@ export default {
         this.$toast.success(response.message, {
           icon: "check"
         })
+        this.$router.push('/messages')
       })
 
     },
@@ -299,6 +300,7 @@ export default {
         this.$toast.success(response.message, {
           icon: "check"
         })
+        this.$router.push('/messages')
       })
 
     },

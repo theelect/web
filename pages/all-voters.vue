@@ -51,8 +51,8 @@
           </template>
         </v-autocomplete>
 
-        <v-btn dark class="primary" v-if="verified" @click="lgaSubmitVerified">Submit</v-btn>
-        <v-btn dark class="primary" v-else @click="lgaSubmit">Submit</v-btn>
+        <v-btn dark class="primary caption" v-if="verified" @click="lgaSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary caption" v-else @click="lgaSubmit">Submit</v-btn>
       </v-card>
     </v-dialog>
 
@@ -78,8 +78,8 @@
           </template>
         </v-autocomplete>
 
-        <v-btn dark class="primary" v-if="verified" @click="professionSubmitVerified">Submit</v-btn>
-        <v-btn dark class="primary" v-else @click="professionSubmit">Submit</v-btn>
+        <v-btn dark class="primary caption" v-if="verified" @click="professionSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary caption" v-else @click="professionSubmit">Submit</v-btn>
       </v-card>
     </v-dialog>
 
@@ -102,8 +102,8 @@
           </template>
         </v-autocomplete>
 
-        <v-btn dark class="primary" v-if="verified" @click="ageSubmitVerified">Submit</v-btn>
-        <v-btn dark class="primary" v-else @click="ageSubmit">Submit</v-btn>
+        <v-btn dark class="primary caption" v-if="verified" @click="ageSubmitVerified">Submit</v-btn>
+        <v-btn dark class="primary caption" v-else @click="ageSubmit">Submit</v-btn>
       </v-card>
     </v-dialog>
 
@@ -138,7 +138,7 @@
     <v-layout v-if="cardSwitch" row wrap>
       <v-flex xs12 sm6 lg4 v-for="(voter, index) in voters" :key="index" mb-4>
         <v-hover>
-          <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="320" height="210">
+          <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto pt-4" width="320">
             <v-layout class="justify-end">
               <v-badge v-if="voter.is_verified" class="mr-3" left color="green">
                 <span slot="badge"></span>

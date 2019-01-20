@@ -14,35 +14,37 @@
     <v-dialog v-model="dialog" max-width="450px">
       <v-card class="pa-4">
         <v-container grid-list-md>
+        <div class="mb-5 text-xs-center font-weight-bold primary--text">VIEW MESSAGE DETAIL</div>
+
           <v-layout row wrap>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">RECIPIENTS</div>
-              <div v-text="editedItem.number_of_recipient" class="font-weight-bold title"></div>
+              <div v-text="editedItem.number_of_recipient" class="font-weight-bold"></div>
             </v-flex>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SCHEDULED DATE</div>
-              <div class="font-weight-bold title">{{ editedItem.scheduledDate | formatDate }}</div>
+              <div class="font-weight-bold">{{ editedItem.scheduledDate | formatDate }}</div>
             </v-flex>
           </v-layout>
 
           <v-layout row wrap mt-5>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">SENDER'S NAME</div>
-              <div class="font-weight-bold title">Tonye Cole</div>
+              <div class="font-weight-bold">Tonye Cole</div>
             </v-flex>
             <v-flex xs12 md6>
               <div class="caption blue-grey--text mb-2">STATUS</div>
-              <div class="font-weight-bold title" v-text="editedItem.status"></div>
+              <div class="font-weight-bold" v-text="editedItem.status"></div>
             </v-flex>
           </v-layout>
 
           <v-flex mt-5>
             <div class="caption blue-grey--text mb-2">MESSAGE</div>
-            <div class="" v-text="editedItem.message"></div>
+            <div class="pa-4 blue-grey lighten-5" v-text="editedItem.message"></div>
           </v-flex>
 
           <v-layout mt-5>
-            <v-btn @click="dialog=false" dark class="red caption">CLOSE</v-btn>
+            <v-btn block @click="dialog=false" dark class="red caption">CLOSE</v-btn>
           </v-layout>
         </v-container>
       </v-card>
@@ -50,12 +52,13 @@
 
     <v-dialog v-model="editDialog" max-width="550px">
       <v-card class="pa-5">
+        <div class="mb-4 text-xs-center font-weight-bold primary--text">EDIT SCHEDULED MESSAGE</div>
         <div class="caption blue-grey--text mt-2">MESSAGE BODY</div>
         <v-textarea class="mb-4" v-model="editedItem.message" auto-grow box color="primary" rows="6" counter>
           <div class="caption" slot="label">Message</div>
         </v-textarea>
 
-        <v-btn color="primary" class="caption" @click="updateMessage">Update</v-btn>
+        <v-btn block color="primary" class="caption" @click="updateMessage">Update Message</v-btn>
       </v-card>
     </v-dialog>
 
@@ -175,19 +178,21 @@ export default {
     deleteItem(item) {
       this.editedIndex = this.messages.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      alert('Are you sure you want to delete this message?')
-      this.$axios.delete(`/sms/scheduled/${this.editedItem._id}`, {
-        headers: {
-          apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
-        }
-      }).then(response => {
-        this.$toast.success('Message successfully deleted', {
-          icon: "check"
-        });
-        location.reload();
-      }).catch(e => {
-        console.log(e);
-      })
+      // alert('Are you sure you want to delete this message?')
+      if (confirm("Are you sure you want to delete this message?")) {
+        this.$axios.delete(`/sms/scheduled/${this.editedItem._id}`, {
+          headers: {
+            apiKey: "i871KgLg8Xm6FRKHGWCdBpaDHGEGjDJD"
+          }
+        }).then(response => {
+          this.$toast.success('Message successfully deleted', {
+            icon: "check"
+          });
+          location.reload();
+        }).catch(e => {
+          console.log(e);
+        })
+      }
     },
 
     async updateMessage() {

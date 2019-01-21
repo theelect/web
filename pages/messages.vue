@@ -14,7 +14,7 @@
     <v-dialog v-model="dialog" max-width="450px">
       <v-card class="pa-4">
         <v-container grid-list-md>
-        <div class="mb-5 text-xs-center font-weight-bold primary--text">VIEW MESSAGE DETAIL</div>
+          <div class="mb-5 text-xs-center font-weight-bold primary--text">VIEW MESSAGE DETAIL</div>
 
           <v-layout row wrap>
             <v-flex xs12 md6>
@@ -53,7 +53,15 @@
     <v-dialog v-model="editDialog" max-width="550px">
       <v-card class="pa-5">
         <div class="mb-4 text-xs-center font-weight-bold primary--text">EDIT SCHEDULED MESSAGE</div>
-        <div class="caption blue-grey--text mt-2">MESSAGE BODY</div>
+
+        <div><span class="font-weight-bold">Scheduled Date: </span>{{ editedItem.scheduledDate | formatDate }} <span @click="menu1 = true" class="ml-4 change primary--text">Change</span></div>
+        <div v-if="date != ''" class="mt-2"><span class="font-weight-bold">New Scheduled Date: </span>{{ date | formatDate }}</div>
+
+        <v-dialog v-model="menu1" max-width="290">
+          <v-date-picker v-model="date" :show-current="false" @change="menu1 = false"></v-date-picker>
+        </v-dialog>
+
+        <div class="caption blue-grey--text mt-4">MESSAGE BODY</div>
         <v-textarea class="mb-4" v-model="editedItem.message" auto-grow box color="primary" rows="6" counter>
           <div class="caption" slot="label">Message</div>
         </v-textarea>
@@ -101,6 +109,8 @@ export default {
   data() {
 
     return {
+      date: '',
+      menu1: false,
       editDialog: false,
       dialog: false,
       timeSort: 'day',
@@ -200,6 +210,7 @@ export default {
         icon: "fingerprint"
       });
       const data = {
+        schedule_date: this.mydate,
         message: this.editedItem.message
       }
       await this.$axios.patch(`/sms/scheduled/${this.editedItem._id}`, data, {
@@ -233,6 +244,16 @@ export default {
       date = date.substr(0, 10)
       return date ? moment(date).format('MMM Do YYYY') : ''
     }
+  },
+
+  computed: {
+    mydate() {
+      let mydate = moment(this.date).toISOString()
+      return mydate
+    },
+    computedDateFormattedMomentjs() {
+      return this.date ? moment(this.date).format('dddd, MMMM Do YYYY') : ''
+    }
   }
 }
 </script>
@@ -240,5 +261,9 @@ export default {
 <style lang="scss" scoped>
 .multiple-btn {
   width: 100px;
+}
+
+.change {
+  cursor: pointer;
 }
 </style>
